@@ -7,7 +7,7 @@
     android:background="@color/happy">
 
     <ImageButton
-        android:id="@+id/explain_close_ib"
+        android:id="@+id/happy_close_ib"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"

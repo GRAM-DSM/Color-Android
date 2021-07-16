@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/angry">
+    android:background="@color/sad">
 
     <ImageButton
-        android:id="@+id/angry_close_ib"
+        android:id="@+id/sad_close_ib"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
@@ -31,49 +31,58 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/your_color_angry"
+        android:id="@+id/your_color_sad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
         android:fontFamily="@font/font_nanum_gothic_bold"
-        android:text="@string/angry"
+        android:text="@string/sad"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/your_color" />
 
     <TextView
-        android:id="@+id/explain_angry"
+        android:id="@+id/explain_sad"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/noto_serif_kr_regular"
-        android:text="@string/explain_angry"
+        android:text="@string/explain_sad"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/your_color_angry" />
+        app:layout_constraintTop_toBottomOf="@+id/your_color_sad" />
 
     <TextView
-        android:id="@+id/explain_angry2"
+        android:id="@+id/explain_sad2"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginLeft="60dp"
         android:fontFamily="@font/noto_serif_kr_regular"
-        android:text="@string/explain_angry2"
+        android:text="@string/explain_sad2"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/explain_angry" />
+        app:layout_constraintTop_toBottomOf="@+id/explain_sad" />
 
     <ImageButton
-        android:id="@+id/angry_next_ib"
+        android:id="@+id/sad_prev_ib"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/ic_sad_prev"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/sad_next_ib"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:background="@null"
-        android:src="@drawable/ic_angry_next"
+        android:src="@drawable/ic_sad_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
