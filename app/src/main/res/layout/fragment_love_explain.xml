@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bored">
+    android:background="@color/love">
 
     <ImageButton
-        android:id="@+id/bored_close_ib"
+        android:id="@+id/love_close_ib"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
@@ -31,48 +31,48 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/your_color_bored"
+        android:id="@+id/your_color_love"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
         android:fontFamily="@font/font_nanum_gothic_bold"
-        android:text="@string/bored"
+        android:text="@string/love"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/your_color" />
 
     <TextView
-        android:id="@+id/explain_bored"
+        android:id="@+id/explain_love"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/noto_serif_kr_regular"
-        android:text="@string/explain_bored"
+        android:text="@string/explain_love"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/your_color_bored" />
+        app:layout_constraintTop_toBottomOf="@+id/your_color_love" />
 
     <TextView
-        android:id="@+id/explain_bored2"
+        android:id="@+id/explain_love2"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginLeft="60dp"
         android:fontFamily="@font/noto_serif_kr_regular"
-        android:text="@string/explain_bored2"
+        android:text="@string/explain_love2"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/explain_bored" />
+        app:layout_constraintTop_toBottomOf="@+id/explain_love" />
 
     <ImageButton
         android:id="@+id/bored_prev_ib"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        android:src="@drawable/ic_bored_prev"
+        android:src="@drawable/ic_love_prev"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:background="@null"
-        android:src="@drawable/ic_bored_next"
+        android:src="@drawable/ic_love_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
