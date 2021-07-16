@@ -5,23 +5,16 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.text.style.UnderlineSpan
 import androidx.core.content.res.ResourcesCompat
 import com.example.color_android.R
-import com.example.color_android.view.sign.LoginFragment
+import com.example.color_android.view.sign.LoginActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_login.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragmentManager = supportFragmentManager
-        val fragment = LoginFragment()
-
-        val transaction= fragmentManager.beginTransaction()
-//        transaction.replace(R.id.main_Frame, fragment).commitAllowingStateLoss()
         val colorText = main_explain_tv.text
         val content1 = SpannableString(colorText)
 
