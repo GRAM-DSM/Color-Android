@@ -1,4 +1,5 @@
 <resources>
+<!-- Auth -->
     <string name="app_name">Color-Android</string>
     <string name="your_colors">How\'s\nYour\nColor\nToday?</string>
     <string name="no_account">계정이 없으신가요?</string>
@@ -10,4 +11,28 @@
     <string name="sign_insert_pass">비밀번호를 입력하세요 (8 ~ 16자)</string>
     <string name="pass_overlap">비밀번호를 다시 입력하세요</string>
     <string name="sign_insert_email">이메일을 입력하세요</string>
+<!-- Auth -->
+
+<!--  Color Explain  -->
+    <string name="explain_your_color">당신의컬러</string>
+    <string name="angry">ANGRY</string>
+    <string name="happy">HAPPY</string>
+    <string name="sad">SAD</string>
+    <string name="bored">BORED</string>
+    <string name="love">LOVE</string>
+    <string name="shame">SHAME</string>
+    <string name="explain_angry">오늘 화나는 일이 있었다면\n빨간색을 선택하세요.</string>
+    <string name="explain_angry2">글을 쓰다보면\n어느새 화가 풀려있을 거예요.</string>
+    <string name="explain_happy">오늘 즐거운 일이 있었다면\n노란색을 선택하세요.</string>
+    <string name="explain_happy2">즐거움을 나누면\n더 즐거울 거예요.</string>
+    <string name="explain_sad">오늘 슬픈 일이 있었다면\n파란색을 선택하세요.</string>
+    <string name="explain_sad2">즐거움은 나누면 배가 되고,\n슬픔은 반이 될 거예요.</string>
+    <string name="explain_bored">오늘 하루 심심했다면\n회색을 선택하세요.</string>
+    <string name="explain_bored2">심심한 사람들과\n재미를 찾아보세요.</string>
+    <string name="explain_love">오늘 하루 설렌 일이 있었다면\n분홍색을 선택하세요.</string>
+    <string name="explain_love2">당신의 인생에 찾아온\n소설같은 이야기를 공유하세요.</string>
+    <string name="explain_shame">오늘 수치스러운 일이 있었다면\n남색을 선택하세요.</string>
+    <string name="explain_shame2">당신의 수치스러운 일이\n누군가에게 웃음을 줄지도 몰라요.</string>
+    <!--  Color Explain  -->
+
 </resources>
