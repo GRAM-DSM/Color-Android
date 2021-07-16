@@ -1,8 +1,6 @@
-package com.example.color_android.view
+package com.example.color_android.view.sign
 
-import android.graphics.Paint
 import android.os.Bundle
-import android.text.Html
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -28,7 +26,7 @@ class LoginFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         val colorText = explain_tv.text
-        val signUpText = sign_up_tv.text
+        val signUpText = sign_tv.text
         val content1 = SpannableString(colorText)
         val content2 = SpannableString(signUpText)
 
@@ -39,6 +37,6 @@ class LoginFragment : Fragment() {
         content1.setSpan(ForegroundColorSpan(ResourcesCompat.getColor(resources, R.color.bored, null)), 15, 16, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
         content2.setSpan(UnderlineSpan(), 0, signUpText.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
         explain_tv.text = content1
-        sign_up_tv.text = content2
+        sign_tv.text = content2
     }
 }

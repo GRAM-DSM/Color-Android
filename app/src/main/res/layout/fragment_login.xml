@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LoginFragment">
+    tools:context=".view.sign.LoginFragment">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -47,6 +47,7 @@
         android:layout_width="285dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
+        android:paddingBottom="15dp"
         android:hint="@string/login_insert_email"
         android:textSize="12sp"
         android:inputType="textEmailAddress"
@@ -59,6 +60,7 @@
         android:layout_width="285dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="43dp"
+        android:paddingBottom="15dp"
         android:hint="@string/login_insert_pass"
         android:textSize="12sp"
         android:inputType="textPassword"

@@ -1,8 +1,9 @@
-package com.example.color_android
+package com.example.color_android.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.color_android.view.LoginFragment
+import com.example.color_android.R
+import com.example.color_android.view.sign.LoginFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
