@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="54dp"
         android:layout_marginTop="120dp"
-        android:fontFamily="@font/font_nanum_gothic"
+        android:fontFamily="@font/font_nanum_gothic_bold"
         android:lineSpacingExtra="10dp"
         android:text="@string/expression_color"
         android:textColor="@color/black"
@@ -54,6 +54,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ImageButton
+        android:id="@+id/sign_overlap_ib"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@null"
+        android:src="@drawable/ic_name_overlap"
+        app:layout_constraintBottom_toBottomOf="@+id/sign_name_et"
+        app:layout_constraintEnd_toEndOf="@+id/sign_name_et"
+        app:layout_constraintTop_toTopOf="@+id/sign_name_et" />
 
     <EditText
         android:id="@+id/sign_pass_et"
@@ -96,6 +108,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pass_overlap_et" />
+
+    <ImageButton
+        android:id="@+id/sign_send_ib"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@null"
+        android:src="@drawable/ic_send_code"
+        app:layout_constraintBottom_toBottomOf="@+id/sign_email_et"
+        app:layout_constraintEnd_toEndOf="@+id/sign_email_et"
+        app:layout_constraintTop_toTopOf="@+id/sign_email_et" />
 
     <EditText
         android:id="@+id/sign_code_et"
