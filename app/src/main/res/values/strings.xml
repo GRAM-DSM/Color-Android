@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Color-Android</string>
+    <string name="your_colors">How\'s\nYour\nColor\nToday?</string>
+    <string name="no_account">계정이 없으신가요?</string>
+    <string name="login_insert_email">이메일을 입력하세요</string>
+    <string name="login_insert_pass">비밀번호를 입력하세요</string>
+    <string name="expression_color">당신의 컬러를\n표현해 볼까요?</string>
+    <string name="sign_code_example">Your color</string>
+    <string name="sign_insert_name">닉네임을 입력하세요(마이페이지에서 변경 가능)</string>
+    <string name="sign_insert_pass">비밀번호를 입력하세요 (8 ~ 16자)</string>
+    <string name="pass_overlap">비밀번호를 다시 입력하세요</string>
+    <string name="sign_insert_email">이메일을 입력하세요</string>
 </resources>

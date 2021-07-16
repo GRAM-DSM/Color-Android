@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="angry">#FF7473</color>
+    <color name="happy">#FDD692</color>
+    <color name="sad">#3998DD</color>
+    <color name="bored">#BDBDBD</color>
+    <color name="love">#FEC9C9</color>
+    <color name="shame">#353866</color>
+    <color name="sign_text_color">#727272</color>
+    <color name="sign_up_background">#F5F5F5</color>
 </resources>
