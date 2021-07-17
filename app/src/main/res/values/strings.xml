@@ -1,5 +1,5 @@
 <resources>
-<!-- Auth -->
+    <!-- Auth -->
     <string name="app_name">Color-Android</string>
     <string name="your_colors">How\'s\nYour\nColor\nToday?</string>
     <string name="no_account">계정이 없으신가요?</string>
@@ -11,9 +11,9 @@
     <string name="sign_insert_pass">비밀번호를 입력하세요 (8 ~ 16자)</string>
     <string name="pass_overlap">비밀번호를 다시 입력하세요</string>
     <string name="sign_insert_email">이메일을 입력하세요</string>
-<!-- Auth -->
+    <!-- Auth -->
 
-<!--  Color Explain  -->
+    <!--  Color Explain  -->
     <string name="explain_your_color">당신의컬러</string>
     <string name="angry">ANGRY</string>
     <string name="happy">HAPPY</string>
@@ -35,4 +35,6 @@
     <string name="explain_shame2">당신의 수치스러운 일이\n누군가에게 웃음을 줄지도 몰라요.</string>
     <!--  Color Explain  -->
 
+    <!--  Feed  -->
+    <string name="hash_color">#Color</string>
 </resources>

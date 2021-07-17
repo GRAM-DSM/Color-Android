@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <array name="bottom_bar_colors">
+        <item>#FDD692</item>
+        <item>#3998DD</item>
+        <item>#BDBDBD</item>
+        <item>#FEC9C9</item>
+        <item>#353866</item>
+    </array>
+</resources>

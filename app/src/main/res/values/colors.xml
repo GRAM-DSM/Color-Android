@@ -15,4 +15,5 @@
     <color name="shame">#353866</color>
     <color name="sign_text_color">#727272</color>
     <color name="sign_up_background">#F5F5F5</color>
+    <color name="tab_layout">#F0F1F8</color>
 </resources>

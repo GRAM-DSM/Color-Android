@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <font-family xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <font android:font="@font/noto_serif_kr_regular"
+    <font android:font="@font/sign_painter_house_script"
         android:fontStyle="normal"
         android:fontWeight="400"
-        app:font="@font/noto_serif_kr_regular"
+        app:font="@font/sign_painter_house_script"
         app:fontStyle="normal"
         app:fontWeight="400" />
 </font-family>
