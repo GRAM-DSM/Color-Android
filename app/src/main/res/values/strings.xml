@@ -37,4 +37,9 @@
 
     <!--  Feed  -->
     <string name="hash_color">#Color</string>
+    <string name="feed_name">정현왕자님</string>
+    <string name="feed_date">2021년 7월 14일</string>
+    <string name="feed_content">나는 강남에 빌딩있는데 이 인생 패배자들아 ㅗㅗ</string>
+    <string name="like_cnt">123</string>
+    <string name="comment_cnt">35</string>
 </resources>
