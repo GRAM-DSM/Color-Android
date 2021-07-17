@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:src="@drawable/ic_sign_up_code"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -55,14 +55,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <ImageButton
-        android:id="@+id/sign_overlap_ib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/sign_overlap_tv"
+        android:layout_width="45dp"
+        android:layout_height="20dp"
+        android:gravity="center"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
-        android:background="@null"
-        android:src="@drawable/ic_name_overlap"
+        android:text="@string/check_overlap"
+        android:textColor="@color/white"
+        android:textSize="8sp"
+        android:fontFamily="@font/font_nanum_gothic"
+        android:background="@drawable/code_button"
+        android:backgroundTint="@color/love"
         app:layout_constraintBottom_toBottomOf="@+id/sign_name_et"
         app:layout_constraintEnd_toEndOf="@+id/sign_name_et"
         app:layout_constraintTop_toTopOf="@+id/sign_name_et" />
@@ -109,14 +114,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pass_overlap_et" />
 
-    <ImageButton
-        android:id="@+id/sign_send_ib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/sign_send_tv"
+        android:layout_width="45"
+        android:layout_height="20"
+        android:gravity="center"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
-        android:background="@null"
-        android:src="@drawable/ic_send_code"
+        android:text="@string/send_code"
+        android:textSize="8sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/font_nanum_gothic"
+        android:background="@drawable/code_button"
+        android:backgroundTint="@color/love"
         app:layout_constraintBottom_toBottomOf="@+id/sign_email_et"
         app:layout_constraintEnd_toEndOf="@+id/sign_email_et"
         app:layout_constraintTop_toTopOf="@+id/sign_email_et" />
@@ -139,13 +149,18 @@
         app:layout_constraintStart_toStartOf="@+id/sign_code_iv"
         app:layout_constraintTop_toTopOf="@+id/sign_code_iv" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/sign_up_btn"
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:gravity="center"
         android:layout_marginBottom="50dp"
-        android:background="@null"
-        android:src="@drawable/ic_sign_btn"
+        android:text="@string/register_text"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/font_nanum_gothic"
+        android:background="@drawable/sign_button"
+        android:backgroundTint="@color/love"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

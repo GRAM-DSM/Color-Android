@@ -31,8 +31,12 @@
         android:id="@+id/circleMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:src="@drawable/ic_angry_main"
+        android:background="@null"
         app:buttonColors="@array/bottom_bar_colors"
-        app:layout_constraintBottom_toTopOf="@+id/angry_tab_layout"
+        app:buttonIcons="@array/bottom_bar_icons"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

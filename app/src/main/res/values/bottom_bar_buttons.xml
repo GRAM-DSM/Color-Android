@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="bottom_bar_colors">
-        <item>#FDD692</item>
-        <item>#3998DD</item>
         <item>#BDBDBD</item>
-        <item>#FEC9C9</item>
         <item>#353866</item>
+        <item>#FEC9C9</item>
+        <item>#FFFFFF</item>
+        <item>#3998DD</item>
+
+
+    </array>
+
+    <array name="bottom_bar_icons">
+        <item>@drawable/ic_happy_main</item>
+        <item>@drawable/ic_sad_main</item>
+        <item>@drawable/ic_shame_main</item>
+        <item>@drawable/ic_happy_main</item>
+        <item>@drawable/ic_happy_main</item>
+
+
+
     </array>
 </resources>

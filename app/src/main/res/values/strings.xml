@@ -2,6 +2,8 @@
     <!-- Auth -->
     <string name="app_name">Color-Android</string>
     <string name="your_colors">How\'s\nYour\nColor\nToday?</string>
+    <string name="login_text">Color 표현하기</string>
+    <string name="register_text">#Color와 함께하기</string>
     <string name="no_account">계정이 없으신가요?</string>
     <string name="login_insert_email">이메일을 입력하세요</string>
     <string name="login_insert_pass">비밀번호를 입력하세요</string>
@@ -11,6 +13,8 @@
     <string name="sign_insert_pass">비밀번호를 입력하세요 (8 ~ 16자)</string>
     <string name="pass_overlap">비밀번호를 다시 입력하세요</string>
     <string name="sign_insert_email">이메일을 입력하세요</string>
+    <string name="check_overlap">중복 확인</string>
+    <string name="send_code">코드 전송</string>
     <!-- Auth -->
 
     <!--  Color Explain  -->
