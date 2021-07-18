@@ -15,6 +15,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        layoutSetting()
+
+
+    }
+
+    private fun layoutSetting(){
         val colorText = explain_tv.text
         val signUpText = sign_tv.text
         val content1 = SpannableString(colorText)
