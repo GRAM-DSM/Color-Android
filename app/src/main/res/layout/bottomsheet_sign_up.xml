@@ -116,8 +116,8 @@
 
     <TextView
         android:id="@+id/sign_send_tv"
-        android:layout_width="45"
-        android:layout_height="20"
+        android:layout_width="45dp"
+        android:layout_height="20dp"
         android:gravity="center"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
