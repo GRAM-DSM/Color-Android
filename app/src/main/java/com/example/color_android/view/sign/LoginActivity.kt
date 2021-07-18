@@ -5,15 +5,23 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.databinding.DataBindingUtil
 import com.example.color_android.R
+import com.example.color_android.databinding.ActivityLoginBinding
+import com.example.color_android.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var dataBinding : ActivityLoginBinding
+    private val viewModel : LoginViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        dataBinding.lifecycleOwner = this
+        dataBinding.viewModel = viewModel
 
         layoutSetting()
 
