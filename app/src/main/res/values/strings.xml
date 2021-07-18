@@ -46,4 +46,12 @@
     <string name="feed_content">나는 강남에 빌딩있는데 이 인생 패배자들아 ㅗㅗ</string>
     <string name="like_cnt">123</string>
     <string name="comment_cnt">35</string>
+    <!--  Feed  -->
+
+    <!--  Write  -->
+    <string name="write_how_you_feel">당신의 기분은 어떠신가요?</string>
+    <string name="write_et_hint">오늘 하루 당신의 이야기를 들려주세요</string>
+    <string name="write_hash_tag">해시태그</string>
+    <string name="write_post">게시</string>
+    <string name="write_hash_tag_hint">#해시태그</string>
 </resources>
