@@ -1,6 +1,6 @@
 package com.example.color_android.network
 
-import com.example.color_android.model.*
+import com.example.color_android.data.*
 import retrofit2.Response
 import retrofit2.http.*
 

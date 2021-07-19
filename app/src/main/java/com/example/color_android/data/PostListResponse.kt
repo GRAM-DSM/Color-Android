@@ -1,4 +1,4 @@
-package com.example.color_android.model
+package com.example.color_android.data
 
 data class PostListResponse(
     val total_pages : String,
