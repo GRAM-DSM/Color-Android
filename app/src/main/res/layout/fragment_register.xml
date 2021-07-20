@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.color_android.viewmodel.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/sign_up_background">
+
+        <ImageButton
+            android:id="@+id/sign_close_ib"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:src="@drawable/ic_close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="54dp"
+            android:layout_marginTop="120dp"
+            android:fontFamily="@font/font_nanum_gothic_bold"
+            android:lineSpacingExtra="10dp"
+            android:text="@string/expression_color"
+            android:textColor="@color/black"
+            android:textSize="28dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/sign_code_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ic_sign_up_code"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_email_et" />
+
+        <EditText
+            android:id="@+id/sign_name_et"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="@string/sign_insert_name"
+            android:maxLines="1"
+            android:paddingBottom="15dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/sign_overlap_tv"
+            android:layout_width="45dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/code_button"
+            android:backgroundTint="@color/love"
+            android:fontFamily="@font/font_nanum_gothic"
+            android:gravity="center"
+            android:text="@string/check_overlap"
+            android:textColor="@color/white"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/sign_name_et"
+            app:layout_constraintEnd_toEndOf="@+id/sign_name_et"
+            app:layout_constraintTop_toTopOf="@+id/sign_name_et" />
+
+        <EditText
+            android:id="@+id/sign_pass_et"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="@string/sign_insert_pass"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:paddingBottom="15dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_name_et" />
+
+        <EditText
+            android:id="@+id/pass_overlap_et"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="@string/pass_overlap"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:paddingBottom="15dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_pass_et" />
+
+        <EditText
+            android:id="@+id/sign_email_et"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="@string/sign_insert_email"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:paddingBottom="15dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pass_overlap_et" />
+
+        <TextView
+            android:id="@+id/sign_send_tv"
+            android:layout_width="45dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/code_button"
+            android:backgroundTint="@color/love"
+            android:fontFamily="@font/font_nanum_gothic"
+            android:gravity="center"
+            android:text="@string/send_code"
+            android:textColor="@color/white"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/sign_email_et"
+            app:layout_constraintEnd_toEndOf="@+id/sign_email_et"
+            app:layout_constraintTop_toTopOf="@+id/sign_email_et" />
+
+        <EditText
+            android:id="@+id/sign_code_et"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:fontFamily="@font/font_nanum_gothic"
+            android:gravity="center"
+            android:hint="@string/sign_code_example"
+            android:inputType="textPersonName"
+            android:maxLength="7"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/sign_code_iv"
+            app:layout_constraintEnd_toEndOf="@+id/sign_code_iv"
+            app:layout_constraintStart_toStartOf="@+id/sign_code_iv"
+            app:layout_constraintTop_toTopOf="@+id/sign_code_iv" />
+
+        <TextView
+            android:id="@+id/sign_up_btn"
+            android:layout_width="350dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/sign_button"
+            android:backgroundTint="@color/love"
+            android:fontFamily="@font/font_nanum_gothic"
+            android:gravity="center"
+            android:text="@string/register_text"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_code_iv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

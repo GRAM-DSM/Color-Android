@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="m">
-        <activity android:name=".view.sign.LoginActivity">
+        <activity android:name=".view.sign.SignActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

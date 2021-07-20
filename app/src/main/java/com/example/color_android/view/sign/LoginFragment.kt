@@ -5,27 +5,37 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.MainThread
 import androidx.core.content.res.ResourcesCompat
-import androidx.databinding.DataBindingUtil
 import com.example.color_android.R
-import com.example.color_android.databinding.ActivityLoginBinding
-import com.example.color_android.viewmodel.LoginViewModel
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var dataBinding : ActivityLoginBinding
-    private val viewModel : LoginViewModel by viewModels()
+class LoginFragment : Fragment() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-        dataBinding.lifecycleOwner = this
-        dataBinding.viewModel = viewModel
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_login, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        sign_tv.setOnClickListener{
+            (activity as SignActivity).replaceFragment(RegisterFragment())
+        }
 
         layoutSetting()
-
-
     }
 
     private fun layoutSetting(){

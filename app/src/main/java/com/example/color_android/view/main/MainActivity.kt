@@ -7,7 +7,6 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import androidx.core.content.res.ResourcesCompat
 import com.example.color_android.R
-import com.example.color_android.view.sign.LoginActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

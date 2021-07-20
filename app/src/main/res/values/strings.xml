@@ -54,4 +54,6 @@
     <string name="write_hash_tag">해시태그</string>
     <string name="write_post">게시</string>
     <string name="write_hash_tag_hint">#해시태그</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

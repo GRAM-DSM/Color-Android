@@ -4,7 +4,7 @@ import android.content.Intent
 import android.util.Log
 import com.example.color_android.util.ColorApplication
 import com.example.color_android.util.SharedPreferencesHelper
-import com.example.color_android.view.sign.LoginActivity
+import com.example.color_android.view.sign.SignActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,7 +24,7 @@ class TokenAuthenticator : Interceptor {
                         ColorApplication.context.startActivity(
                             Intent(
                                 ColorApplication.context,
-                                LoginActivity::class.java
+                                SignActivity::class.java
                             ).apply {
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                             })
