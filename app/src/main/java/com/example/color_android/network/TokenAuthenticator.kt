@@ -4,7 +4,7 @@ import android.content.Intent
 import android.util.Log
 import com.example.color_android.util.ColorApplication
 import com.example.color_android.util.SharedPreferencesHelper
-import com.example.color_android.view.sign.SignActivity
+import com.example.color_android.ui.sign.SignActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package com.example.color_android.view.explain
+package com.example.color_android.ui.explain
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

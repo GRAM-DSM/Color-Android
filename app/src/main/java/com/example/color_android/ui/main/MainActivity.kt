@@ -1,4 +1,4 @@
-package com.example.color_android.view.main
+package com.example.color_android.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

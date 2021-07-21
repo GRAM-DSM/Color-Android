@@ -1,7 +1,7 @@
 package com.example.color_android.data.repository
 
-import com.example.color_android.data.EmailCertifyRequest
-import com.example.color_android.data.RegisterRequest
+import com.example.color_android.data.model.sign.EmailCertifyRequest
+import com.example.color_android.data.model.sign.RegisterRequest
 import com.example.color_android.network.RetrofitClient
 
 class RegisterRepository : BaseRepository(){

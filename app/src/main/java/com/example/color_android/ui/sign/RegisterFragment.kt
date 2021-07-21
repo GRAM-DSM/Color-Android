@@ -1,4 +1,4 @@
-package com.example.color_android.view.sign
+package com.example.color_android.ui.sign
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -25,5 +25,7 @@ class RegisterFragment : Fragment() {
         sign_close_ib.setOnClickListener{
             (activity as SignActivity).replaceFragment(LoginFragment())
         }
+
+        sign_name_et
     }
 }

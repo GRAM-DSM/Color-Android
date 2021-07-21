@@ -1,4 +1,4 @@
-package com.example.color_android.data
+package com.example.color_android.data.model
 
 data class LoginResponse(
     val access_token: String,

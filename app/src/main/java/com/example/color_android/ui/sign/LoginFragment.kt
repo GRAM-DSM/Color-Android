@@ -1,4 +1,4 @@
-package com.example.color_android.view.sign
+package com.example.color_android.ui.sign
 
 import android.os.Bundle
 import android.text.Spannable
@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.MainThread
 import androidx.core.content.res.ResourcesCompat
 import com.example.color_android.R
 import kotlinx.android.synthetic.main.fragment_login.*

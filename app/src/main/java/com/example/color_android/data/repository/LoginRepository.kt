@@ -1,7 +1,7 @@
 package com.example.color_android.data.repository
 
-import com.example.color_android.data.LoginRequest
-import com.example.color_android.data.LoginResponse
+import com.example.color_android.data.model.sign.LoginRequest
+import com.example.color_android.data.model.sign.LoginResponse
 import com.example.color_android.network.RetrofitClient
 import com.example.color_android.util.SharedPreferencesHelper
 
