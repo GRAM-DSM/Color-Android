@@ -1,4 +1,4 @@
-package com.example.color_android.data.model
+package com.example.color_android.data.model.sign
 
 data class RegisterRequest(
     val email: String,

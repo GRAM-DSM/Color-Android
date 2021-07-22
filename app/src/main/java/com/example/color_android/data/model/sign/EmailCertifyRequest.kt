@@ -1,4 +1,4 @@
-package com.example.color_android.data.model
+package com.example.color_android.data.model.sign
 
 data class EmailCertifyRequest(
     val email: String,
