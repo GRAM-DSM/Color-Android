@@ -13,7 +13,7 @@ interface SignRepository {
 
     suspend fun register(body: RegisterRequest) : Response<Void>
 
-    suspend fun nicknameCheck(body: HashMap<String, String>) : Response<Void>
+    suspend fun nameCheck(body: HashMap<String, String>) : Response<Void>
 
     suspend fun sendEmail(body: HashMap<String, String>) : Response<Void>
 

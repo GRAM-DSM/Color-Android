@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.color_android.R
+import com.example.color_android.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.fragment_register.*
 
 class RegisterFragment : Fragment() {
+
+    private val registerViewModel = RegisterViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,8 @@ class RegisterFragment : Fragment() {
             (activity as SignActivity).replaceFragment(LoginFragment())
         }
 
-        sign_name_et
+        sign_overlap_tv.setOnClickListener{
+            registerViewModel.nameCheck(sign_name_et.text.toString())
+        }
     }
 }

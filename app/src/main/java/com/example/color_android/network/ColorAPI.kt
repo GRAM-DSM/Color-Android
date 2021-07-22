@@ -18,8 +18,8 @@ interface ColorAPI {
     @POST("/user")
     suspend fun register(@Body body: RegisterRequest): Response<Void>
 
-    @GET("/user")
-    suspend fun nicknameCheck(@Body body: HashMap<String, String>): Response<Void>
+    @HEAD("/user/{nickname}")
+    suspend fun nameCheck(@Path("nickname") nickname: HashMap<String, String>): Response<Void>
 
     @POST("/email")
     suspend fun sendEmail(@Body body: HashMap<String, String>): Response<Void>

@@ -23,8 +23,8 @@ class SignRepositoryImpl : SignRepository, SafeApiRequest() {
         return safeApiCall { RetrofitClient.getAPI().register(body) }
     }
 
-    override suspend fun nicknameCheck(body: HashMap<String, String>): Response<Void> {
-        return safeApiCall { RetrofitClient.getAPI().nicknameCheck(body) }
+    override suspend fun nameCheck(body: HashMap<String, String>): Response<Void> {
+        return safeApiCall { RetrofitClient.getAPI().nameCheck(body) }
     }
 
     override suspend fun sendEmail(body: HashMap<String, String>): Response<Void> {
