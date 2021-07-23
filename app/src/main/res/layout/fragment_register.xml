@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.color_android.viewmodel.LoginViewModel" />
+            type="com.example.color_android.viewmodel.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,13 +41,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <TextView
             android:id="@+id/sign_code_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
-            android:src="@drawable/ic_sign_up_code"
+            android:background="@drawable/sign_up_code"
+            android:backgroundTint="@color/love"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_email_et" />
@@ -116,7 +117,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:hint="@string/sign_insert_email"
-            android:maxLength="16"
             android:maxLines="1"
             android:paddingBottom="15dp"
             android:textSize="12sp"
