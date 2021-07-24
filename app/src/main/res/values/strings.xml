@@ -15,6 +15,15 @@
     <string name="sign_insert_email">이메일을 입력하세요</string>
     <string name="check_overlap">중복 확인</string>
     <string name="send_code">코드 전송</string>
+    <string name="check_code">여기를 눌러 컬러가 맞는지 확인해 보세요!</string>
+    <string name="success_code">컬러가 일치합니다 :)</string>
+    <string name="fail_code">컬러가 일치하지 않습니다 :(</string>
+    <string name="send_email">입력하신 이메일로 인증 코드가 발송되었습니다.</string>
+    <string name="sign_available_nickname">사용 가능한 닉네임 입니다.</string>
+    <string name="sign_unavailable_nickname">사용 불가능한 닉네임 입니다.</string>
+    <string name="sign_error">오류가 발생했습니다.</string>
+    <string name="success_register">회원가입에 성공했습니다!</string>
+    <string name="fail_register">회원가입에 실패했습니다.</string>
     <!-- Auth -->
 
     <!--  Color Explain  -->

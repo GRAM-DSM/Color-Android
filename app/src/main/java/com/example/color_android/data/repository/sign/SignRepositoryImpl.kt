@@ -14,24 +14,28 @@ class SignRepositoryImpl : SignRepository, SafeApiRequest() {
         RetrofitClient.getAPI().login(body)
     }
 
-    override fun setToken(tokenResponse: LoginResponse){
+    override fun setToken(tokenResponse: LoginResponse) {
         SharedPreferencesHelper.getInstance().access_token = "Bearer " + tokenResponse.access_token
-        SharedPreferencesHelper.getInstance().refresh_token = "Bearer " + tokenResponse.refresh_token
+        SharedPreferencesHelper.getInstance().refresh_token =
+            "Bearer " + tokenResponse.refresh_token
     }
 
     override suspend fun register(body: RegisterRequest): Response<Void> {
         return safeApiCall { RetrofitClient.getAPI().register(body) }
     }
 
-    override suspend fun nameCheck(body: HashMap<String, String>): Response<Void> {
-        return safeApiCall { RetrofitClient.getAPI().nameCheck(body) }
+    override suspend fun nameCheck(nickname: HashMap<String, String>): Response<Void> {
+        return safeApiCall { RetrofitClient.getAPI().nameCheck(nickname) }
     }
 
     override suspend fun sendEmail(body: HashMap<String, String>): Response<Void> {
         return safeApiCall { RetrofitClient.getAPI().sendEmail(body) }
     }
 
-    override suspend fun emailCertify(body: EmailCertifyRequest): Response<Void> {
-        return safeApiCall { RetrofitClient.getAPI().emailCertify(body) }
+    override suspend fun emailCertify(
+        email: String,
+        code: String
+    ): Response<Void> {
+        return safeApiCall { RetrofitClient.getAPI().emailCertify(email, code) }
     }
 }

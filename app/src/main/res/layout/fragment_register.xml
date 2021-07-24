@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.color_android.viewmodel.RegisterViewModel" />
@@ -42,7 +42,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/sign_code_iv"
+            android:id="@+id/sign_code_back_tv"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="20dp"
@@ -75,7 +75,9 @@
             android:background="@drawable/code_button"
             android:backgroundTint="@color/love"
             android:fontFamily="@font/font_nanum_gothic"
+            android:enabled="false"
             android:gravity="center"
+            android:onClick="@{() -> viewModel.nameCheck(signNameEt.getText().toString())}"
             android:text="@string/check_overlap"
             android:textColor="@color/white"
             android:textSize="8sp"
@@ -88,6 +90,7 @@
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:inputType="textPassword"
             android:hint="@string/sign_insert_pass"
             android:maxLength="16"
             android:maxLines="1"
@@ -102,6 +105,7 @@
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:inputType="textPassword"
             android:hint="@string/pass_overlap"
             android:maxLength="16"
             android:maxLines="1"
@@ -133,7 +137,9 @@
             android:background="@drawable/code_button"
             android:backgroundTint="@color/love"
             android:fontFamily="@font/font_nanum_gothic"
+            android:enabled="false"
             android:gravity="center"
+            android:onClick="@{() -> viewModel.sendEmail(signEmailEt.getText().toString())}"
             android:text="@string/send_code"
             android:textColor="@color/white"
             android:textSize="8sp"
@@ -144,7 +150,7 @@
         <EditText
             android:id="@+id/sign_code_et"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@null"
             android:fontFamily="@font/font_nanum_gothic"
             android:gravity="center"
@@ -154,17 +160,30 @@
             android:maxLines="1"
             android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/sign_code_iv"
-            app:layout_constraintEnd_toEndOf="@+id/sign_code_iv"
-            app:layout_constraintStart_toStartOf="@+id/sign_code_iv"
-            app:layout_constraintTop_toTopOf="@+id/sign_code_iv" />
+            app:layout_constraintBottom_toBottomOf="@+id/sign_code_back_tv"
+            app:layout_constraintEnd_toEndOf="@+id/sign_code_back_tv"
+            app:layout_constraintStart_toStartOf="@+id/sign_code_back_tv"
+            app:layout_constraintTop_toTopOf="@+id/sign_code_back_tv" />
+
+        <TextView
+            android:id="@+id/sign_code_check_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:enabled="false"
+            android:onClick="@{() -> viewModel.emailCertify(signEmailEt.getText().toString, signCodeEt.getText().toString())}"
+            android:text="@string/check_code"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_code_back_tv" />
+
 
         <TextView
             android:id="@+id/sign_up_btn"
             android:layout_width="350dp"
             android:layout_height="55dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/sign_button"
             android:backgroundTint="@color/love"
             android:fontFamily="@font/font_nanum_gothic"
@@ -175,7 +194,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_code_iv" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_code_check_tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

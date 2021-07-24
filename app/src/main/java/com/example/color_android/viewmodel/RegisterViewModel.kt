@@ -13,16 +13,16 @@ import retrofit2.Response
 
 class RegisterViewModel : ViewModel() {
     private val signRepository = SignRepositoryImpl()
-    private val _registerLiveData : MutableLiveData<RegisterSet> = MutableLiveData()
-    val registerLiveData : LiveData<RegisterSet> = _registerLiveData
+    private val _registerLiveData: MutableLiveData<RegisterSet> = MutableLiveData()
+    val registerLiveData: LiveData<RegisterSet> = _registerLiveData
 
-    fun nameCheck(nickname : String){
-        val body = HashMap<String, String>()
-        body["nickname"] = nickname
+    fun nameCheck(nickname: String) {
+        val path = HashMap<String, String>()
+        path["nickname"] = nickname
 
         viewModelScope.launch {
-            val response = signRepository.nameCheck(body)
-            if(response.isSuccessful){
+            val response = signRepository.nameCheck(path)
+            if (response.isSuccessful) {
                 nameCheckSuccess(response)
             } else {
                 _registerLiveData.postValue(RegisterSet.NameFail)
@@ -30,23 +30,23 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    fun sendEmail(email : String){
+    fun sendEmail(email: String) {
         val body = HashMap<String, String>()
         body["email"] = email
         viewModelScope.launch {
             val response = signRepository.sendEmail(body)
-            if(response.isSuccessful){
+            if (response.isSuccessful) {
                 sendEmailSuccess(response)
-            } else{
+            } else {
                 _registerLiveData.postValue(RegisterSet.SendEmailFail)
             }
         }
     }
 
-    fun emailCertify(emailCertifyRequest: EmailCertifyRequest){
+    fun emailCertify(email: String, code: String) {
         viewModelScope.launch {
-            val response = signRepository.emailCertify(emailCertifyRequest)
-            if(response.isSuccessful){
+            val response = signRepository.emailCertify(email, code)
+            if (response.isSuccessful) {
                 emailCertifySuccess(response)
             } else {
                 _registerLiveData.postValue(RegisterSet.EmailFail)
@@ -54,10 +54,10 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    fun register(registerRequest: RegisterRequest){
+    fun register(registerRequest: RegisterRequest) {
         viewModelScope.launch {
             val response = signRepository.register(registerRequest)
-            if(response.isSuccessful){
+            if (response.isSuccessful) {
                 registerSuccess(response)
             } else {
                 _registerLiveData.postValue(RegisterSet.RegisterFail)
@@ -65,32 +65,32 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    private fun nameCheckSuccess(response: Response<Void>){
-        if(response.code() == 200){
+    private fun nameCheckSuccess(response: Response<Void>) {
+        if (response.code() == 200) {
             _registerLiveData.postValue(RegisterSet.NameSuccess)
         } else {
             _registerLiveData.postValue(RegisterSet.NameFail)
         }
     }
 
-    private fun sendEmailSuccess(response: Response<Void>){
-        if(response.code() == 200){
+    private fun sendEmailSuccess(response: Response<Void>) {
+        if (response.code() == 200) {
             _registerLiveData.postValue(RegisterSet.SendEmailSuccess)
         } else {
             _registerLiveData.postValue(RegisterSet.SendEmailFail)
         }
     }
 
-    private fun emailCertifySuccess(response: Response<Void>){
-        if(response.code() == 200){
+    private fun emailCertifySuccess(response: Response<Void>) {
+        if (response.code() == 200) {
             _registerLiveData.postValue(RegisterSet.EmailSuccess)
         } else {
             _registerLiveData.postValue(RegisterSet.EmailFail)
         }
     }
 
-    private fun registerSuccess(response: Response<Void>){
-        if(response.code() == 201){
+    private fun registerSuccess(response: Response<Void>) {
+        if (response.code() == 201) {
             _registerLiveData.postValue(RegisterSet.RegisterSuccess)
         } else {
             _registerLiveData.postValue(RegisterSet.RegisterFail)

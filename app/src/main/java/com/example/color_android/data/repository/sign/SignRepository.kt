@@ -13,9 +13,9 @@ interface SignRepository {
 
     suspend fun register(body: RegisterRequest) : Response<Void>
 
-    suspend fun nameCheck(body: HashMap<String, String>) : Response<Void>
+    suspend fun nameCheck(nickname: HashMap<String, String>) : Response<Void>
 
     suspend fun sendEmail(body: HashMap<String, String>) : Response<Void>
 
-    suspend fun emailCertify(body: EmailCertifyRequest) : Response<Void>
+    suspend fun emailCertify(email : String, code : String) : Response<Void>
 }

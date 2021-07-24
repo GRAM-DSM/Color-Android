@@ -24,8 +24,11 @@ interface ColorAPI {
     @POST("/email")
     suspend fun sendEmail(@Body body: HashMap<String, String>): Response<Void>
 
-    @GET("/email")
-    suspend fun emailCertify(@Body body: EmailCertifyRequest): Response<Void>
+    @HEAD("/email/{email}/{code}")
+    suspend fun emailCertify(
+        @Path("email") email: String,
+        @Path("code") code: String
+    ): Response<Void>
 
     @POST("/post")
     suspend fun writing(
