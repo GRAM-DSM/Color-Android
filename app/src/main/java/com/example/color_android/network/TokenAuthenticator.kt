@@ -19,14 +19,14 @@ class TokenAuthenticator : Interceptor {
 
         when (response.code) {
             401 -> {
-                if (!sharedPreferencesHelper.isLogout) {
+                if (sharedPreferencesHelper.isLogin) {
                     if (sharedPreferencesHelper.access_token == null) {
                         val intent = Intent(ColorApplication.context, SignActivity::class.java)
                         intent.apply {
                             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                         }
                         ColorApplication.context.startActivity(intent)
-                        sharedPreferencesHelper.isLogout = true
+                        sharedPreferencesHelper.isLogin = false
                     }
                     else {
                         sharedPreferencesHelper.access_token = null

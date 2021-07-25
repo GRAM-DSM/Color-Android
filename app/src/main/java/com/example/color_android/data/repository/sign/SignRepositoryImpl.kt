@@ -1,6 +1,5 @@
 package com.example.color_android.data.repository.sign
 
-import com.example.color_android.data.model.sign.EmailCertifyRequest
 import com.example.color_android.data.model.sign.LoginRequest
 import com.example.color_android.data.model.sign.LoginResponse
 import com.example.color_android.data.model.sign.RegisterRequest
@@ -10,8 +9,8 @@ import com.example.color_android.util.SharedPreferencesHelper
 import retrofit2.Response
 
 class SignRepositoryImpl : SignRepository, SafeApiRequest() {
-    override suspend fun login(body: LoginRequest) {
-        RetrofitClient.getAPI().login(body)
+    override suspend fun login(body: LoginRequest) : Response<LoginResponse> {
+        return safeApiCall { RetrofitClient.getAPI().login(body) }
     }
 
     override fun setToken(tokenResponse: LoginResponse) {

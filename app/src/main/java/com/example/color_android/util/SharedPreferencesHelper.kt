@@ -1,7 +1,6 @@
 package com.example.color_android.util
 
 import android.content.Context
-import android.content.SharedPreferences
 
 class SharedPreferencesHelper {
     private val prefs = ColorApplication.context!!.getSharedPreferences(
@@ -24,11 +23,11 @@ class SharedPreferencesHelper {
             editor.apply()
         }
 
-    var isLogout: Boolean
-        get() = prefs.getBoolean("isLogout", false)
+    var isLogin: Boolean
+        get() = prefs.getBoolean("isLogin", false)
         set(value){
             val editor = prefs.edit()
-            editor.putBoolean("isLogout", value)
+            editor.putBoolean("isLogin", value)
             editor.apply()
         }
 

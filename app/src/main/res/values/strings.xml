@@ -24,6 +24,7 @@
     <string name="sign_error">오류가 발생했습니다.</string>
     <string name="success_register">회원가입에 성공했습니다!</string>
     <string name="fail_register">회원가입에 실패했습니다.</string>
+    <string name="login_fail">로그인에 실패했습니다.</string>
     <!-- Auth -->
 
     <!--  Color Explain  -->

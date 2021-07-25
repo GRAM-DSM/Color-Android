@@ -1,6 +1,5 @@
 package com.example.color_android.ui.sign
 
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,16 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.color_android.R
 import com.example.color_android.data.model.sign.RegisterRequest
 import com.example.color_android.databinding.FragmentRegisterBinding
-import com.example.color_android.network.RegisterSet
+import com.example.color_android.network.set.RegisterSet
+import com.example.color_android.util.OnBackPressedListener
 import com.example.color_android.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.fragment_register.*
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : Fragment(), OnBackPressedListener {
 
     private val registerViewModel = RegisterViewModel()
     private var dataBinding: FragmentRegisterBinding? = null
@@ -35,34 +34,35 @@ class RegisterFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        dataBinding!!.viewModel = registerViewModel
+        super.onViewCreated(view, savedInstanceState)
 
+        dataBinding!!.viewModel = registerViewModel
         editTextNullCheck()
         registerViewModel.registerLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                RegisterSet.NameSuccess -> {
+                RegisterSet.NAME_SUCCESS -> {
                     Toast.makeText(activity, R.string.sign_available_nickname, Toast.LENGTH_SHORT).show()
                     nameOverlapCheck = true
                 }
-                RegisterSet.NameFail -> {
+                RegisterSet.NAME_FAIL -> {
                     Toast.makeText(activity, R.string.sign_unavailable_nickname, Toast.LENGTH_SHORT).show()
                     nameOverlapCheck = false
                 }
-                RegisterSet.SendEmailSuccess -> Toast.makeText(activity, getString(R.string.send_email), Toast.LENGTH_SHORT).show()
-                RegisterSet.SendEmailFail -> Toast.makeText(activity, getString(R.string.sign_error), Toast.LENGTH_SHORT).show()
-                RegisterSet.EmailSuccess -> {
+                RegisterSet.SEND_SUCCESS -> Toast.makeText(activity, getString(R.string.send_email), Toast.LENGTH_SHORT).show()
+                RegisterSet.SEND_FAIL -> Toast.makeText(activity, getString(R.string.sign_error), Toast.LENGTH_SHORT).show()
+                RegisterSet.EMAIL_SUCCESS -> {
                     sign_code_check_tv.text = getString(R.string.success_code)
                     certifyCheck = true
                 }
-                RegisterSet.EmailFail -> {
+                RegisterSet.EMAIL_FAIL -> {
                     sign_code_check_tv.text = getString(R.string.fail_code)
                     certifyCheck = false
                 }
-                RegisterSet.RegisterSuccess -> {
+                RegisterSet.REGISTER_SUCCESS -> {
                     Toast.makeText(activity, getString(R.string.success_register), Toast.LENGTH_SHORT).show()
                     (activity as SignActivity).replaceFragment(LoginFragment())
                 }
-                RegisterSet.RegisterFail -> {
+                RegisterSet.REGISTER_FAIL -> {
                     Toast.makeText(activity, getString(R.string.fail_register), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -77,9 +77,18 @@ class RegisterFragment : Fragment() {
         }
     }
 
+    override fun onBackPressed() {
+        (activity as SignActivity).replaceFragment(LoginFragment())
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         dataBinding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as SignActivity).setOnBackPressedListener(this)
     }
 
     private fun editTextNullCheck() {

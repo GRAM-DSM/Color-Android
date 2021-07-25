@@ -1,7 +1,6 @@
 package com.example.color_android.network
 
 import com.example.color_android.data.model.*
-import com.example.color_android.data.model.sign.EmailCertifyRequest
 import com.example.color_android.data.model.sign.LoginRequest
 import com.example.color_android.data.model.sign.LoginResponse
 import com.example.color_android.data.model.sign.RegisterRequest
