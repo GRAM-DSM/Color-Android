@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.color_android.viewmodel.RegisterViewModel" />
+            type="com.gram.color_android.viewmodel.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
