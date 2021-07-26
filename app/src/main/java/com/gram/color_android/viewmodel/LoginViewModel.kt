@@ -26,9 +26,7 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-    fun getDeviceToken(){
 
-    }
 
     private fun loginSuccess(response: Response<LoginResponse>){
         if(response.code() == 200){

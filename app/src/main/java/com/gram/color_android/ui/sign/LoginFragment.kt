@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.gram.color_android.R
 import com.gram.color_android.data.model.sign.LoginRequest
 import com.gram.color_android.network.set.LoginSet
@@ -22,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
 class LoginFragment : Fragment(), OnBackPressedListener {
 
     private val loginViewModel = LoginViewModel()
+    private var device_token : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +39,8 @@ class LoginFragment : Fragment(), OnBackPressedListener {
         super.onViewCreated(view, savedInstanceState)
 
         layoutSetting()
+        getDeviceToken()
+
         loginViewModel.loginLiveData.observe(viewLifecycleOwner, {
             when(it){
                 LoginSet.LOGIN_SUCCESS -> {
@@ -76,6 +82,16 @@ class LoginFragment : Fragment(), OnBackPressedListener {
 
     private fun login(email: String, password: String){
         if(!email.equals("") && !password.equals(""))
-            loginViewModel.login(LoginRequest(email, password))
+            loginViewModel.login(LoginRequest(email, password, device_token!!))
+    }
+
+    private fun getDeviceToken(){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if(!task.isSuccessful){
+                Log.w("FCM_device_token", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            device_token = task.result
+        })
     }
 }

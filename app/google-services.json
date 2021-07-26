@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "532172585089",
+    "project_id": "gram-color",
+    "storage_bucket": "gram-color.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532172585089:android:ee3157834ca3de35387580",
+        "android_client_info": {
+          "package_name": "com.gram.color_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "532172585089-2d3261tf8ll5kkmtk0esaf8qbl32l5du.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZMfsEsCC0wYJCe1ogVFsDDkNKBbG1PEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "532172585089-2d3261tf8ll5kkmtk0esaf8qbl32l5du.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
