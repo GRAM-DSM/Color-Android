@@ -1,4 +1,4 @@
-package com.example.color_android.data.model.sign
+package com.gram.color_android.data.model.sign
 
 data class LoginRequest(
     val email: String,

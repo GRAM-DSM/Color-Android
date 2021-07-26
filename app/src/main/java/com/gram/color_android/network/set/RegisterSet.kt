@@ -1,4 +1,4 @@
-package com.example.color_android.network.set
+package com.gram.color_android.network.set
 
 enum class RegisterSet {
     REGISTER_SUCCESS,
