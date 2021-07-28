@@ -13,7 +13,7 @@ class SignActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign)
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.fragment_container, LoginFragment()).commit()
+        fragmentTransaction.add(R.id.sign_fragment_container, LoginFragment()).commit()
     }
 
     override fun onBackPressed() {
@@ -30,6 +30,6 @@ class SignActivity : AppCompatActivity() {
     fun replaceFragment(fragment: Fragment){
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
-        fragmentTransaction.replace(R.id.fragment_container, fragment).commit()
+        fragmentTransaction.replace(R.id.sign_fragment_container, fragment).commit()
     }
 }

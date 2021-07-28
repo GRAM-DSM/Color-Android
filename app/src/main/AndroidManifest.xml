@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.gram.color_android.ui.main.MainActivity"/>
+        <activity android:name="com.gram.color_android.ui.explain.ExplainActivity"/>
     </application>
 
 </manifest>

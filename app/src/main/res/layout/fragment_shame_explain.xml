@@ -7,7 +7,7 @@
     android:background="@color/shame">
 
     <ImageButton
-        android:id="@+id/love_close_ib"
+        android:id="@+id/shame_close_ib"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"

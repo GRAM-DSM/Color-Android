@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/main_Frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <TextView
         android:id="@+id/main_explain_tv"
         android:layout_width="wrap_content"
@@ -23,7 +18,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/main_happy_ib"
         app:layout_constraintStart_toEndOf="@+id/main_love_ib"
-        app:layout_constraintTop_toTopOf="@+id/main_Frame" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/main_angry_ib"

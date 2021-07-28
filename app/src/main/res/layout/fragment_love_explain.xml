@@ -68,7 +68,7 @@
         app:layout_constraintTop_toBottomOf="@+id/explain_love" />
 
     <ImageButton
-        android:id="@+id/bored_prev_ib"
+        android:id="@+id/love_prev_ib"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -77,7 +77,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/bored_next_ib"
+        android:id="@+id/love_next_ib"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
