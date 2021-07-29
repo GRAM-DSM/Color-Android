@@ -16,75 +16,98 @@
         android:textColor="@color/black"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/main_happy_ib"
-        app:layout_constraintStart_toEndOf="@+id/main_love_ib"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/main_angry_ib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:background="@null"
-        android:src="@drawable/ic_angry_main"
-        app:layout_constraintBottom_toTopOf="@+id/main_explain_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/main_happy_ib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="55dp"
-        android:background="@null"
-        android:src="@drawable/ic_happy_main"
+    <TextView
+        android:id="@+id/main_angry_tv"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:background="@drawable/main_circle"
+        android:backgroundTint="@color/angry"
+        android:fontFamily="@font/nanum_gothic_bold"
+        android:text="@string/angry"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/main_explain_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_angry_ib" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
-        android:id="@+id/main_sad_ib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/main_happy_tv"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/main_circle"
+        android:backgroundTint="@color/happy"
+        android:fontFamily="@font/nanum_gothic_bold"
+        android:gravity="center"
+        android:text="@string/happy"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/main_explain_tv"
+        app:layout_constraintTop_toBottomOf="@+id/main_angry_tv" />
+
+    <TextView
+        android:id="@+id/main_sad_tv"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="40dp"
-        android:layout_marginRight="55dp"
-        android:background="@null"
-        android:src="@drawable/ic_sad_main"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_happy_ib" />
+        android:background="@drawable/main_circle"
+        android:backgroundTint="@color/sad"
+        android:fontFamily="@font/nanum_gothic_bold"
+        android:gravity="center"
+        android:text="@string/sad"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/main_explain_tv"
+        app:layout_constraintTop_toBottomOf="@+id/main_happy_tv" />
 
-    <ImageButton
-        android:id="@+id/main_bored_ib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/main_bored_tv"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:gravity="center"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="160dp"
-        android:background="@null"
-        android:src="@drawable/ic_bored_main"
+        android:background="@drawable/main_circle"
+        android:backgroundTint="@color/bored"
+        android:text="@string/bored"
+        android:textColor="@color/white"
+        android:fontFamily="@font/nanum_gothic_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_explain_tv" />
 
-    <ImageButton
-        android:id="@+id/main_love_ib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="55dp"
-        android:background="@null"
-        android:src="@drawable/ic_love_main"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_angry_ib" />
+    <TextView
+        android:id="@+id/main_love_tv"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/main_circle"
+        android:backgroundTint="@color/love"
+        android:text="@string/love"
+        android:textColor="@color/white"
+        android:fontFamily="@font/nanum_gothic_bold"
+        app:layout_constraintEnd_toStartOf="@+id/main_explain_tv"
+        app:layout_constraintTop_toBottomOf="@+id/main_angry_tv" />
 
-    <ImageButton
-        android:id="@+id/main_shame_ib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/main_shame_tv"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:gravity="center"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="55dp"
-        android:background="@null"
-        android:src="@drawable/ic_shame_main"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_love_ib" />
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/main_circle"
+        android:backgroundTint="@color/shame"
+        android:text="@string/shame"
+        android:textColor="@color/white"
+        android:fontFamily="@font/nanum_gothic_bold"
+        app:layout_constraintEnd_toStartOf="@+id/main_explain_tv"
+        app:layout_constraintTop_toBottomOf="@+id/main_love_tv" />
 
     <ImageButton
         android:id="@+id/main_explain_ib"
