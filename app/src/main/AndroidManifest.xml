@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="m">
-        <activity android:name="com.gram.color_android.ui.sign.SignActivity">
+        <activity android:name="com.gram.color_android.ui.angry.FeedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +24,7 @@
         </activity>
         <activity android:name="com.gram.color_android.ui.main.MainActivity"/>
         <activity android:name="com.gram.color_android.ui.explain.ExplainActivity"/>
+        <activity android:name=".ui.sign.SignActivity" />
     </application>
 
 </manifest>

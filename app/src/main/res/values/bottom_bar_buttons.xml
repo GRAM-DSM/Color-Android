@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="bottom_bar_colors">
-        <item>#BDBDBD</item>
-        <item>#353866</item>
+    <array name="fab_menu_colors">
         <item>#FEC9C9</item>
-        <item>#FFFFFF</item>
+        <item>#353866</item>
+        <item>#BDBDBD</item>
         <item>#3998DD</item>
-
-
-    </array>
-
-    <array name="bottom_bar_icons">
-        <item>@drawable/ic_happy_main</item>
-        <item>@drawable/ic_sad_main</item>
-        <item>@drawable/ic_shame_main</item>
-        <item>@drawable/ic_happy_main</item>
-        <item>@drawable/ic_happy_main</item>
-
-
+        <item>#FDD692</item>
+        <item>#FF7473</item>
 
     </array>
+    
+    <array name="fab_menu_icons">
+        <item>@drawable/ic_love_icon</item>
+        <item>@drawable/ic_shame_icon</item>
+        <item>@drawable/ic_bored_icon</item>
+        <item>@drawable/ic_sad_icon</item>
+        <item>@drawable/ic_happy_icon</item>
+        <item>@drawable/ic_angry_icon</item>
+    </array>
+
 </resources>

@@ -4,13 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.angry.AngryActivity">
+    tools:context=".ui.angry.FeedActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/angry_tab_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="10dp"
         android:background="@color/white"
+        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,30 +31,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/sign_painter_house_script"
             android:text="@string/hash_color"
-            android:textSize="24sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/sign_painter_house_script" />
+            android:textSize="24sp" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <com.imangazaliev.circlemenu.CircleMenu
-        android:id="@+id/circleMenu"
+        android:id="@+id/circle_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:src="@drawable/ic_angry_main"
+        android:layout_marginBottom="30dp"
         android:background="@null"
-        app:buttonColors="@array/bottom_bar_colors"
-        app:buttonIcons="@array/bottom_bar_icons"
+        app:buttonColors="@array/fab_menu_colors"
+        app:buttonIcons="@array/fab_menu_icons"
+        app:distance="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:maxAngle="50"
+        app:menuIcon="plus"
+        app:centerButtonColor="@color/angry"
+        app:centerButtonIconColor="@color/white"
+        app:startAngle="374" />
+
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/angry_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/tab_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
