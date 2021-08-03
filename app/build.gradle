@@ -74,6 +74,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
 
     implementation 'com.github.imangazalievm:circlemenu:3.0.0'
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

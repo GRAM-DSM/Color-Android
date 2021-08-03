@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.angry.FeedActivity">
+    tools:context=".ui.feed.FeedActivity">
 
     <FrameLayout
+        android:id="@+id/feed_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="60dp"
