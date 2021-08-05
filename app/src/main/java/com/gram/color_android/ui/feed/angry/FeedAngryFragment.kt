@@ -1,4 +1,4 @@
-package com.gram.color_android.ui.feed
+package com.gram.color_android.ui.feed.angry
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

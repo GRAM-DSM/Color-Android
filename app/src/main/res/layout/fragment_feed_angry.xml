@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feed.FeedAngryFragment">
+    tools:context=".ui.feed.angry.FeedAngryFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/feed_angry_rv"

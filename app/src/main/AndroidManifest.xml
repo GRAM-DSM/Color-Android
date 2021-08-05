@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="m">
-        <activity android:name="com.gram.color_android.ui.feed.FeedActivity">
+        <activity android:name="com.gram.color_android.ui.feed.angry.FeedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
