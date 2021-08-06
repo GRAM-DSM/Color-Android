@@ -1,6 +1,7 @@
 package com.gram.color_android.network
 
 import com.gram.color_android.data.model.*
+import com.gram.color_android.data.model.feed.PostListResponse
 import com.gram.color_android.data.model.sign.LoginRequest
 import com.gram.color_android.data.model.sign.LoginResponse
 import com.gram.color_android.data.model.sign.RegisterRequest

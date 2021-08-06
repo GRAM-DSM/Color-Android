@@ -5,11 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gram.color_android.R
-import com.gram.color_android.data.model.PostListResponse
+import com.gram.color_android.data.model.feed.PostListResponse
 import kotlinx.android.synthetic.main.angry_item.view.*
 
 
-class AngryFeedRVAdapter(val items : PostListResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class ViewHolder(v : View) : RecyclerView.ViewHolder(v) {
         private val view = v
@@ -23,8 +23,8 @@ class AngryFeedRVAdapter(val items : PostListResponse) : RecyclerView.Adapter<Re
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflatedView :View
-        inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.angry_item, parent, false)
+        val inflatedView :View =
+            LayoutInflater.from(parent.context).inflate(R.layout.angry_item, parent, false)
         return ViewHolder(inflatedView)
     }
 
