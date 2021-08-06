@@ -7,8 +7,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:elevation="10dp"
+        android:layout_height="215dp"
+        android:layout_marginBottom="5dp"
         android:background="@color/white">
 
         <androidx.appcompat.widget.Toolbar
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@color/white"
-            android:elevation="10dp"
+            android:elevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -54,7 +54,7 @@
         <TextView
             android:id="@+id/angry_feed_content_tv"
             android:layout_width="match_parent"
-            android:layout_height="85dp"
+            android:layout_height="110dp"
             android:text="@string/feed_content"
             android:textSize="14sp"
             android:textColor="@color/black"

@@ -9,13 +9,16 @@ import com.gram.color_android.util.SharedPreferencesHelper
 import retrofit2.Response
 
 class SignRepositoryImpl : SignRepository, SafeApiRequest() {
-    override suspend fun login(body: LoginRequest) : Response<LoginResponse> {
+
+    private val sharedPreferencesHelper = SharedPreferencesHelper.getInstance()
+
+    override suspend fun login(body: LoginRequest): Response<LoginResponse> {
         return safeApiCall { RetrofitClient.getAPI().login(body) }
     }
 
     override fun setToken(tokenResponse: LoginResponse) {
-        SharedPreferencesHelper.getInstance().access_token = "Bearer " + tokenResponse.access_token
-        SharedPreferencesHelper.getInstance().refresh_token =
+        sharedPreferencesHelper.access_token = "Bearer " + tokenResponse.access_token
+        sharedPreferencesHelper.refresh_token =
             "Bearer " + tokenResponse.refresh_token
     }
 

@@ -5,13 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.gram.color_android.R
+import com.gram.color_android.network.set.FeedSet
+import com.gram.color_android.network.set.FeelSet
+import com.gram.color_android.util.SharedPreferencesHelper
+import com.gram.color_android.viewmodel.FeedViewModel
+import kotlinx.android.synthetic.main.fragment_feed_angry.*
 
 class FeedAngryFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val feedViewModel = FeedViewModel()
+    private val sharedPrefs = SharedPreferencesHelper.getInstance()
+    private var page = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +30,37 @@ class FeedAngryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var adapter : AngryFeedRVAdapter
+        val linearLayoutManager = LinearLayoutManager(activity)
+        feed_angry_rv.layoutManager = linearLayoutManager
+
+        getPostList()
+        swipeRefresh()
+
+        feedViewModel.feedLiveData.observe(viewLifecycleOwner) {
+            when(it){
+                FeedSet.GET_SUCCESS -> {
+                    adapter = AngryFeedRVAdapter(feedViewModel.feedListLiveData.value!!)
+                    feed_angry_rv.adapter = adapter
+                }
+            }
+        }
     }
 
+    private fun getPostList(){
+        feedViewModel.getPostList(sharedPrefs.access_token!!, getPage(), FeelSet.ANGRY.toString())
+    }
+
+    private fun getPage(): Int = page++
+
+    private fun swipeRefresh() {
+        swipe_refresh.setOnRefreshListener(object: SwipeRefreshLayout.OnRefreshListener{
+            override fun onRefresh() {
+                page = 0
+                getPostList()
+                swipe_refresh.isRefreshing = false
+            }
+
+        })
+    }
 }

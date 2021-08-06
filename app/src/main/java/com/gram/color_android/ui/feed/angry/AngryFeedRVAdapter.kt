@@ -29,7 +29,7 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = items.PostContentResponseList[position]
+        val item = items.postContentResponseList[position]
         if(holder is ViewHolder){
             holder.apply {
                 bind(item)
@@ -37,7 +37,7 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
         }
     }
 
-    override fun getItemCount(): Int = items.PostContentResponseList.size
+    override fun getItemCount(): Int = items.postContentResponseList.size
 }
 
 

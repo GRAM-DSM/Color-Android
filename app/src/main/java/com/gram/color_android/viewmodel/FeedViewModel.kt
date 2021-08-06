@@ -3,6 +3,7 @@ package com.gram.color_android.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.RecyclerView
 import com.gram.color_android.data.model.feed.PostListResponse
 import com.gram.color_android.data.repository.feed.FeedRepositoryImpl
 import com.gram.color_android.network.set.FeedSet
@@ -29,8 +30,8 @@ class FeedViewModel : ViewModel() {
 
     private fun getPostSuccess(response : Response<PostListResponse>){
         if(response.code() == 200){
-            _feedLiveData.postValue(FeedSet.GET_SUCCESS)
             _feedListLiveData.postValue(response.body())
+            _feedLiveData.postValue(FeedSet.GET_SUCCESS)
         } else {
             _feedLiveData.postValue(FeedSet.GET_FAIL)
         }

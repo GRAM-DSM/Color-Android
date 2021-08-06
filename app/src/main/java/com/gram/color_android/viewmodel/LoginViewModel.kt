@@ -26,8 +26,6 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-
-
     private fun loginSuccess(response: Response<LoginResponse>){
         if(response.code() == 200){
             _loginLiveData.postValue(LoginSet.LOGIN_SUCCESS)

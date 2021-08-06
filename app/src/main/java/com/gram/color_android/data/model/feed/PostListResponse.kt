@@ -1,11 +1,11 @@
 package com.gram.color_android.data.model.feed
 
 data class PostListResponse(
-    val total_pages : String,
-    val PostContentResponseList : List<PostContent>
+    val totalPages : String,
+    val postContentResponseList : List<PostContent>
 ){
     data class PostContent(
-        val id : Int,
+        val id : String,
         val content: String,
         val is_mine: Boolean,
         val created_at: String,
