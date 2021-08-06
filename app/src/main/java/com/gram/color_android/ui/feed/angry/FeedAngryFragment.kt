@@ -20,4 +20,9 @@ class FeedAngryFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_feed_angry, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
 }

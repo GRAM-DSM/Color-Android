@@ -31,7 +31,9 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items.PostContentResponseList[position]
         if(holder is ViewHolder){
-            holder.bind(item)
+            holder.apply {
+                bind(item)
+            }
         }
     }
 
