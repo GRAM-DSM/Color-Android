@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_feed_angry.*
 
 class FeedAngryFragment : Fragment() {
 
-    lateinit var bottomSheetDialog : BottomSheetDialog
     private val feedViewModel = FeedViewModel()
     private val sharedPrefs = SharedPreferencesHelper.getInstance()
     private var page = 0

@@ -44,8 +44,7 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
 
         }
         holder.itemView.angry_feed_more_iv.setOnClickListener{
-            FeedAngryFragment().bottomSheetDialog.setContentView(R.layout.feed_more_bottomsheet)
-            FeedAngryFragment().bottomSheetDialog.show()
+
         }
     }
 

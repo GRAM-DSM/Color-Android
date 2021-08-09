@@ -20,6 +20,7 @@ class SignRepositoryImpl : SignRepository, SafeApiRequest() {
         sharedPreferencesHelper.access_token = "Bearer " + tokenResponse.access_token
         sharedPreferencesHelper.refresh_token =
             "Bearer " + tokenResponse.refresh_token
+        sharedPreferencesHelper.isLogin = true
     }
 
     override suspend fun register(body: RegisterRequest): Response<Void> {

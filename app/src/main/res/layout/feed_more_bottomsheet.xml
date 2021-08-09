@@ -5,19 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="70dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bottom_dismiss_radius"
+        android:backgroundTint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/report_btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:background="@null"
-        android:text="@string/report"
-        android:textSize="16sp"
-        android:textColor="@color/red"
         android:fontFamily="@font/roboto_medium"
+        android:text="@string/report"
+        android:textColor="@color/red"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <View
         android:layout_width="match_parent"
