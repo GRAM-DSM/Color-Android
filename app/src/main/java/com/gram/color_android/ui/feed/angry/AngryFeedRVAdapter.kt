@@ -13,6 +13,16 @@ import kotlinx.android.synthetic.main.angry_item.view.*
 
 class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    interface OnClickListener{
+        fun onBtnClick(v: View, position: Int)
+    }
+
+    private var listener: OnClickListener? = null
+
+    fun setOnClickListener(listener: OnClickListener){
+        this.listener = listener
+    }
+
     inner class ViewHolder(v : View) : RecyclerView.ViewHolder(v) {
         private val view = v
         fun bind(item : PostListResponse.PostContent){
@@ -21,6 +31,13 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
             view.angry_feed_content_tv.text = item.content
             view.angry_like_cnt_tv.text = item.favorite_cnt.toString()
             view.angry_comment_cnt_tv.text = item.comment_cnt.toString()
+
+            val position = absoluteAdapterPosition
+            if(position != RecyclerView.NO_POSITION){
+                itemView.angry_feed_more_iv.setOnClickListener{
+                    listener?.onBtnClick(itemView, position)
+                }
+            }
         }
     }
 
@@ -36,15 +53,6 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
             holder.apply {
                 bind(item)
             }
-        }
-        holder.itemView.angry_like_ib.setOnClickListener{
-            Log.d("AngryFeedFragment", "Like button Clicked. item : $position")
-        }
-        holder.itemView.angry_comment_ib.setOnClickListener{
-
-        }
-        holder.itemView.angry_feed_more_iv.setOnClickListener{
-
         }
     }
 

@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.fragment_feed_angry.*
 
 class FeedAngryFragment : Fragment() {
 
+    private lateinit var adapter : AngryFeedRVAdapter
+    private lateinit var bottomSheetDialog: BottomSheetDialog
     private val feedViewModel = FeedViewModel()
     private val sharedPrefs = SharedPreferencesHelper.getInstance()
     private var page = 0
@@ -31,9 +33,10 @@ class FeedAngryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var adapter : AngryFeedRVAdapter
         val linearLayoutManager = LinearLayoutManager(activity)
         feed_angry_rv.layoutManager = linearLayoutManager
+
+        bottomSheetDialog = BottomSheetDialog(requireContext())
 
         getPostList()
         swipeRefresh()
@@ -43,6 +46,7 @@ class FeedAngryFragment : Fragment() {
                 FeedSet.GET_SUCCESS -> {
                     adapter = AngryFeedRVAdapter(feedViewModel.feedListLiveData.value!!)
                     feed_angry_rv.adapter = adapter
+                    postMore()
                 }
             }
         }
@@ -65,6 +69,13 @@ class FeedAngryFragment : Fragment() {
         })
     }
 
-    private fun initDialog(){
+    private fun postMore(){
+        adapter.setOnClickListener(object: AngryFeedRVAdapter.OnClickListener{
+            override fun onBtnClick(v: View, position: Int) {
+                bottomSheetDialog.setContentView(R.layout.feed_more_bottomsheet)
+                bottomSheetDialog.show()
+            }
+
+        })
     }
 }
