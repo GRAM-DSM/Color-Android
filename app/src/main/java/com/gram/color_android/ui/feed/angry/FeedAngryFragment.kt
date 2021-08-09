@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gram.color_android.R
 import com.gram.color_android.network.set.FeedSet
 import com.gram.color_android.network.set.FeelSet
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_feed_angry.*
 
 class FeedAngryFragment : Fragment() {
 
+    lateinit var bottomSheetDialog : BottomSheetDialog
     private val feedViewModel = FeedViewModel()
     private val sharedPrefs = SharedPreferencesHelper.getInstance()
     private var page = 0
@@ -62,5 +64,8 @@ class FeedAngryFragment : Fragment() {
             }
 
         })
+    }
+
+    private fun initDialog(){
     }
 }

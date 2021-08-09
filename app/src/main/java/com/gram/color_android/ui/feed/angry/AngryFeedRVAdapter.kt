@@ -1,9 +1,11 @@
 package com.gram.color_android.ui.feed.angry
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gram.color_android.R
 import com.gram.color_android.data.model.feed.PostListResponse
 import kotlinx.android.synthetic.main.angry_item.view.*
@@ -34,6 +36,16 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
             holder.apply {
                 bind(item)
             }
+        }
+        holder.itemView.angry_like_ib.setOnClickListener{
+            Log.d("AngryFeedFragment", "Like button Clicked. item : $position")
+        }
+        holder.itemView.angry_comment_ib.setOnClickListener{
+
+        }
+        holder.itemView.angry_feed_more_iv.setOnClickListener{
+            FeedAngryFragment().bottomSheetDialog.setContentView(R.layout.feed_more_bottomsheet)
+            FeedAngryFragment().bottomSheetDialog.show()
         }
     }
 

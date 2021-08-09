@@ -13,5 +13,7 @@ class FeedActivity : AppCompatActivity() {
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.feed_fragment_container, FeedAngryFragment()).commit()
+
+
     }
 }

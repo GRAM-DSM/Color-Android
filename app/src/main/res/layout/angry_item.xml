@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="215dp"
         android:layout_marginBottom="5dp"
-        android:background="@color/white">
+        android:background="#FEFEFE">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -31,6 +31,7 @@
                 android:textSize="14sp" />
 
             <ImageButton
+                android:id="@+id/angry_feed_more_iv"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="right"

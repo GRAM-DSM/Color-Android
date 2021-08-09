@@ -3,7 +3,6 @@ package com.gram.color_android.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.RecyclerView
 import com.gram.color_android.data.model.feed.PostListResponse
 import com.gram.color_android.data.repository.feed.FeedRepositoryImpl
 import com.gram.color_android.network.set.FeedSet

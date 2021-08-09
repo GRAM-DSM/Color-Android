@@ -13,4 +13,6 @@ class FeedRepositoryImpl : FeedRepository, SafeApiRequest() {
     ): Response<PostListResponse> {
         return safeApiCall { RetrofitClient.getAPI().getPostList(header, page, feel) }
     }
+
+
 }

@@ -56,6 +56,9 @@
     <string name="feed_content">나는 강남에 빌딩있는데 이 인생 패배자들아 ㅗㅗ</string>
     <string name="like_cnt">123</string>
     <string name="comment_cnt">35</string>
+    <string name="report">신고하기</string>
+    <string name="delete_post">게시글 삭제하기</string>
+    <string name="modify_post">게시글 수정하기</string>
     <!--  Feed  -->
 
     <!--  Write  -->

@@ -5,6 +5,6 @@
     </style>
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/sign_up_dialog</item>
+        <item name="android:background">@drawable/bottomsheet_radius</item>
     </style>
 </resources>
