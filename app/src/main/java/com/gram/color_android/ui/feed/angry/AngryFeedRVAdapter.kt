@@ -1,11 +1,9 @@
 package com.gram.color_android.ui.feed.angry
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gram.color_android.R
 import com.gram.color_android.data.model.feed.PostListResponse
 import kotlinx.android.synthetic.main.angry_item.view.*
@@ -13,14 +11,28 @@ import kotlinx.android.synthetic.main.angry_item.view.*
 
 class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    interface OnClickListener{
-        fun onBtnClick(v: View, position: Int)
+    interface OnMoreClickListener{
+        fun onMoreClick(v: View, position: Int)
+    }
+    interface OnLikeClickListener{
+        fun onLikeClick(v: View, position: Int)
+    }
+    interface OnCommentClickListener{
+        fun onCommentClick(v: View, position: Int)
     }
 
-    private var listener: OnClickListener? = null
+    private var moreListener: OnMoreClickListener? = null
+    private var likeListener: OnLikeClickListener? = null
+    private var commentListener: OnCommentClickListener? = null
 
-    fun setOnClickListener(listener: OnClickListener){
-        this.listener = listener
+    fun setOnMoreClickListener(moreListener: OnMoreClickListener){
+        this.moreListener = moreListener
+    }
+    fun setOnLikeClickListener(likeListener: OnLikeClickListener){
+        this.likeListener = likeListener
+    }
+    fun setOnCommentClickListener(commentListener: OnCommentClickListener){
+        this.commentListener = commentListener
     }
 
     inner class ViewHolder(v : View) : RecyclerView.ViewHolder(v) {
@@ -35,7 +47,13 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
             val position = absoluteAdapterPosition
             if(position != RecyclerView.NO_POSITION){
                 itemView.angry_feed_more_iv.setOnClickListener{
-                    listener?.onBtnClick(itemView, position)
+                    moreListener?.onMoreClick(itemView, position)
+                }
+                itemView.angry_like_ib.setOnClickListener{
+                    likeListener?.onLikeClick(itemView, position)
+                }
+                itemView.angry_comment_ib.setOnClickListener{
+                    commentListener?.onCommentClick(itemView, position)
                 }
             }
         }

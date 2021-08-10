@@ -22,9 +22,7 @@ class TokenAuthenticator : Interceptor {
                 if (sharedPreferencesHelper.isLogin) {
                     if (sharedPreferencesHelper.access_token == null) {
                         val intent = Intent(ColorApplication.context, SignActivity::class.java)
-                        intent.apply {
-                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-                        }
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                         ColorApplication.context.startActivity(intent)
                         sharedPreferencesHelper.isLogin = false
                     }
@@ -45,7 +43,7 @@ class TokenAuthenticator : Interceptor {
 
     private suspend fun getAccessToken(refresh_token: String) {
         val accessToken = withContext(Dispatchers.IO) {
-            RetrofitClient.getAPI().tokenRefresh(refresh_token)
+            RetrofitClient.getSpringAPI().tokenRefresh(refresh_token)
         }
 
         if (accessToken.isSuccessful) {

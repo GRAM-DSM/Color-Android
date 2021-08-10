@@ -7,8 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
     private const val SPRING_BOOT_BASE_URL = "http://211.38.86.92:8009"
+    private const val FAST_API_BASE_URL = ""
     private var retrofit_spring : Retrofit
-    private var colorAPI : ColorAPI
+    private var retrofit_fast_api : Retrofit
+    private var colorSpringAPI : ColorAPI
+    private var colorFastAPI : ColorAPI
 
     init {
         val loggingInterceptor =  HttpLoggingInterceptor()
@@ -24,8 +27,16 @@ object RetrofitClient {
             .client(client)
             .build()
 
-        colorAPI = retrofit_spring.create(ColorAPI::class.java)
+        retrofit_fast_api = Retrofit.Builder()
+            .baseUrl(FAST_API_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+
+        colorSpringAPI = retrofit_spring.create(ColorAPI::class.java)
+        colorFastAPI = retrofit_fast_api.create(ColorAPI::class.java)
     }
 
-    fun getAPI() = colorAPI
+    fun getSpringAPI() = colorSpringAPI
+    fun getFastAPI() = colorFastAPI
 }

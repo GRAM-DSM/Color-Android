@@ -13,7 +13,7 @@ class SignRepositoryImpl : SignRepository, SafeApiRequest() {
     private val sharedPreferencesHelper = SharedPreferencesHelper.getInstance()
 
     override suspend fun login(body: LoginRequest): Response<LoginResponse> {
-        return safeApiCall { RetrofitClient.getAPI().login(body) }
+        return safeApiCall { RetrofitClient.getSpringAPI().login(body) }
     }
 
     override fun setToken(tokenResponse: LoginResponse) {
@@ -24,21 +24,21 @@ class SignRepositoryImpl : SignRepository, SafeApiRequest() {
     }
 
     override suspend fun register(body: RegisterRequest): Response<Void> {
-        return safeApiCall { RetrofitClient.getAPI().register(body) }
+        return safeApiCall { RetrofitClient.getSpringAPI().register(body) }
     }
 
     override suspend fun nameCheck(nickname: HashMap<String, String>): Response<Void> {
-        return safeApiCall { RetrofitClient.getAPI().nameCheck(nickname) }
+        return safeApiCall { RetrofitClient.getSpringAPI().nameCheck(nickname) }
     }
 
     override suspend fun sendEmail(body: HashMap<String, String>): Response<Void> {
-        return safeApiCall { RetrofitClient.getAPI().sendEmail(body) }
+        return safeApiCall { RetrofitClient.getSpringAPI().sendEmail(body) }
     }
 
     override suspend fun emailCertify(
         email: String,
         code: String
     ): Response<Void> {
-        return safeApiCall { RetrofitClient.getAPI().emailCertify(email, code) }
+        return safeApiCall { RetrofitClient.getSpringAPI().emailCertify(email, code) }
     }
 }

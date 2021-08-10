@@ -5,4 +5,6 @@ import retrofit2.Response
 
 interface FeedRepository {
     suspend fun getPostList(header: String, page: Int, feel: String) : Response<PostListResponse>
+
+    suspend fun like(header: String, post_id: Int) : Response<Void>
 }
