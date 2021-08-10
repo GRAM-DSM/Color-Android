@@ -10,8 +10,10 @@ import android.text.style.ForegroundColorSpan
 import androidx.core.content.res.ResourcesCompat
 import com.gram.color_android.R
 import com.gram.color_android.ui.explain.ExplainActivity
-import com.gram.color_android.ui.feed.angry.FeedActivity
+import com.gram.color_android.ui.feed.FeedActivity
+import com.gram.color_android.ui.sign.SignActivity
 import com.gram.color_android.util.Color
+import com.gram.color_android.util.SharedPreferencesHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

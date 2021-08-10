@@ -14,7 +14,7 @@ class FeedRepositoryImpl : FeedRepository, SafeApiRequest() {
         return safeApiCall { RetrofitClient.getSpringAPI().getPostList(header, page, feel) }
     }
 
-    override suspend fun like(header: String, post_id: Int): Response<Void> {
-        return safeApiCall { RetrofitClient.getFastAPI().like(header, post_id) }
-    }
+//    override suspend fun like(header: String, post_id: Int): Response<Void> {
+//        return safeApiCall { RetrofitClient.getFastAPI().like(header, post_id) }
+//    }
 }

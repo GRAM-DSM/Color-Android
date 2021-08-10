@@ -1,84 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.feed.angry.FeedActivity">
-
-    <FrameLayout
-        android:id="@+id/feed_fragment_container"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/angry_tab_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+        tools:context=".ui.feed.FeedActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar3"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
-        android:elevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <FrameLayout
+            android:id="@+id/feed_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar3">
 
-        <TextView
-            android:id="@+id/title_tv"
+        </FrameLayout>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar3"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/sign_painter_house_script"
+                android:text="@string/hash_color"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.imangazaliev.circlemenu.CircleMenu
+            android:id="@+id/circle_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/sign_painter_house_script"
-            android:text="@string/hash_color"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:layout_marginBottom="30dp"
+            android:background="@null"
+            app:buttonColors="@array/fab_menu_colors"
+            app:buttonIcons="@array/fab_menu_icons"
+            app:centerButtonColor="@color/angry"
+            app:centerButtonIconColor="@color/white"
+            app:distance="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:maxAngle="50"
+            app:menuIcon="plus"
+            app:startAngle="374" />
 
-    </androidx.appcompat.widget.Toolbar>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar5"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/tab_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-    <com.imangazaliev.circlemenu.CircleMenu
-        android:id="@+id/circle_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:background="@null"
-        app:buttonColors="@array/fab_menu_colors"
-        app:buttonIcons="@array/fab_menu_icons"
-        app:distance="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:maxAngle="50"
-        app:menuIcon="plus"
-        app:centerButtonColor="@color/angry"
-        app:centerButtonIconColor="@color/white"
-        app:startAngle="374" />
+            <ImageButton
+                android:id="@+id/feed_write_ib"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="70dp"
+                android:background="@null"
+                android:src="@drawable/ic_write"/>
+<!--                android:onClick="@{() -> activity.gotoWrite()}"/>-->
 
+            <ImageButton
+                android:id="@+id/feed_my_page_ib"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="right"
+                android:layout_marginEnd="70dp"
+                android:background="@null"
+                android:src="@drawable/ic_my_page" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/angry_tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/tab_layout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        </androidx.appcompat.widget.Toolbar>
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/angry_item1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/ic_write" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/angry_item2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/ic_my_page" />
-
-    </com.google.android.material.tabs.TabLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

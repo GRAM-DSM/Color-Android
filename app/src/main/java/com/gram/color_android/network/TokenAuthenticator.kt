@@ -2,6 +2,8 @@ package com.gram.color_android.network
 
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
+import com.gram.color_android.R
 import com.gram.color_android.util.ColorApplication
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.ui.sign.SignActivity
@@ -24,6 +26,7 @@ class TokenAuthenticator : Interceptor {
                         val intent = Intent(ColorApplication.context, SignActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                         ColorApplication.context.startActivity(intent)
+                        Toast.makeText(ColorApplication.context, R.string.error, Toast.LENGTH_SHORT).show()
                         sharedPreferencesHelper.isLogin = false
                     }
                     else {
@@ -47,7 +50,7 @@ class TokenAuthenticator : Interceptor {
         }
 
         if (accessToken.isSuccessful) {
-            if (accessToken.code() == 204)
+            if (accessToken.code() == 200)
                 sharedPreferencesHelper.access_token = "Bearer " + accessToken.body()
         } else
             Log.e("TokenAuthenticator", accessToken.message())
