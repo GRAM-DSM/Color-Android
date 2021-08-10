@@ -33,9 +33,9 @@ interface ColorAPI {
     ): Response<Void>
 
     @POST("/post")
-    suspend fun writing(
+    suspend fun write(
         @Header("Authorization") header: String,
-        @Body body: WritingRequest
+        @Body body: WriteRequest
     ): Response<Void>
 
     @DELETE("/post/{path}")
@@ -48,7 +48,7 @@ interface ColorAPI {
     suspend fun updatePost(
         @Header("Authorization") header: String,
         @Path("post_id") post_id: Int,
-        @Body body: WritingRequest
+        @Body body: WriteRequest
     ): Response<Void>
 
     @GET("/post")
