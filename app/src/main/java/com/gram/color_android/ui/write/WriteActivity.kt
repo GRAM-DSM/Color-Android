@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import com.gram.color_android.R
+import com.gram.color_android.databinding.ActivityWriteBinding
 import com.gram.color_android.network.set.FeelSet
 import kotlinx.android.synthetic.main.activity_write.*
 import org.w3c.dom.Text
@@ -14,33 +16,16 @@ class WriteActivity : AppCompatActivity() {
 
     private var feel : FeelSet? = null
     private var curView : TextView? = null
-
+    private lateinit var dataBinding : ActivityWriteBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_write)
-
-
-        write_angry_tv.setOnClickListener{
-            selectFeel(angry_select_tv, FeelSet.ANGRY)
-        }
-        write_happy_tv.setOnClickListener{
-            selectFeel(happy_select_tv, FeelSet.HAPPY)
-        }
-        write_sad_tv.setOnClickListener{
-            selectFeel(sad_select_tv, FeelSet.SAD)
-        }
-        write_bored_tv.setOnClickListener{
-            selectFeel(bored_select_tv, FeelSet.BORED)
-        }
-        write_love_tv.setOnClickListener{
-            selectFeel(love_select_tv, FeelSet.LOVE)
-        }
-        write_shame_tv.setOnClickListener{
-            selectFeel(shame_select_tv, FeelSet.SHAME)
-        }
+        dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_write)
+        dataBinding.lifecycleOwner = this
+        dataBinding.activity = this
+        
     }
 
-    private fun selectFeel(tv : TextView, feel: FeelSet){
+    fun selectFeel(tv : TextView, feel: FeelSet){
         if(curView == null) {
             curView = tv
             curView!!.visibility = View.VISIBLE
