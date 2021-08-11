@@ -25,7 +25,7 @@
         </activity>
         <activity android:name="com.gram.color_android.ui.main.MainActivity"/>
         <activity android:name="com.gram.color_android.ui.explain.ExplainActivity"/>
-        <activity android:name=".ui.write.WriteActivity"/>
+        <activity android:name=".ui.write.WriteActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity android:name=".ui.feed.FeedActivity"/>
     </application>
 
