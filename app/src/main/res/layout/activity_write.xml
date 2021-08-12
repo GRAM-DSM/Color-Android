@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="com.gram.color_android.network.set.FeelSet" />
-
         <variable
             name="activity"
             type="com.gram.color_android.ui.write.WriteActivity" />

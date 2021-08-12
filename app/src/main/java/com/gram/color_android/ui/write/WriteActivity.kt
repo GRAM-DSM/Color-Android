@@ -7,8 +7,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.gram.color_android.R
+import com.gram.color_android.data.model.WriteRequest
 import com.gram.color_android.databinding.ActivityWriteBinding
 import com.gram.color_android.network.set.FeelSet
+import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.WriteViewModel
 import kotlinx.android.synthetic.main.activity_write.*
 
@@ -16,6 +18,7 @@ class WriteActivity : AppCompatActivity() {
 
     private lateinit var dataBinding: ActivityWriteBinding
     private val writeViewModel = WriteViewModel()
+    private val prefs = SharedPreferencesHelper.getInstance()
     private var feel: FeelSet? = null
     private var curView: TextView? = null
 
@@ -25,9 +28,9 @@ class WriteActivity : AppCompatActivity() {
         dataBinding.lifecycleOwner = this
         dataBinding.activity = this
 
+        var hashTag : MutableList<String> = mutableListOf()
         write_post_btn.setOnClickListener{
-            if(nullCheck())
-                Toast.makeText(this, "asdasdasda", Toast.LENGTH_SHORT).show()
+            println(write_tag_et.text.toString().split("#"))
         }
     }
 
@@ -51,6 +54,10 @@ class WriteActivity : AppCompatActivity() {
         }
     }
 
-    private fun nullCheck() = (feel != null && !write_content_et.text.toString().equals("")
-            && !write_tag_et.text.toString().equals(""))
+    fun post(access_token: String, body: WriteRequest){
+        if(nullCheck())
+            writeViewModel.write(access_token, body)
+    }
+
+    private fun nullCheck() = (feel != null && !write_content_et.text.toString().equals(""))
 }
