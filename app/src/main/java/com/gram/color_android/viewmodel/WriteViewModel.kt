@@ -1,5 +1,6 @@
 package com.gram.color_android.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,6 +18,7 @@ class WriteViewModel : ViewModel() {
     fun write(header : String, body : WriteRequest){
         viewModelScope.launch {
             val response = writeRepository.write(header, body)
+            Log.d("WriteViewModel", response.code().toString())
             if(response.isSuccessful){
                 writeSuccess(response)
             }
@@ -27,7 +29,7 @@ class WriteViewModel : ViewModel() {
     }
 
     private fun writeSuccess(response : Response<Void>){
-        if (response.code() == 201){
+        if (response.code() == 200){
             _writeLiveData.postValue(WriteSet.WRITE_SUCCESS)
         } else {
             _writeLiveData.postValue(WriteSet.WRITE_FAIL)

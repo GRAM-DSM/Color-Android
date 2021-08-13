@@ -7,7 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="215dp"
+        android:layout_height="240dp"
         android:layout_marginBottom="5dp"
         android:background="#FEFEFE">
 
@@ -65,49 +65,63 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
+        <TextView
+            android:id="@+id/angry_feed_tag_tv"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingLeft="16dp"
+            android:textSize="12sp"
+            android:textColor="@color/angry"
+            android:fontFamily="@font/roboto_medium"
+            app:layout_constraintBottom_toTopOf="@+id/toolbar4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/angry_feed_content_tv" />
+
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar4"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:elevation="10dp"
             android:background="@color/white"
+            android:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" >
+            app:layout_constraintStart_toStartOf="parent">
 
             <ImageButton
                 android:id="@+id/angry_like_ib"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/ic_like_empty"
-                android:background="@null" />
+                android:background="@null"
+                android:src="@drawable/ic_like_empty" />
 
             <TextView
                 android:id="@+id/angry_like_cnt_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
+                android:fontFamily="@font/roboto_medium"
                 android:text="@string/like_cnt"
-                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:fontFamily="@font/roboto_medium"/>
+                android:textSize="16sp" />
 
             <ImageButton
                 android:id="@+id/angry_comment_ib"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/ic_comment"
-                android:background="@null" />
+                android:background="@null"
+                android:src="@drawable/ic_comment" />
 
             <TextView
                 android:id="@+id/angry_comment_cnt_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/font_roboto_medium"
                 android:text="@string/comment_cnt"
-                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:fontFamily="@font/font_roboto_medium" />
+                android:textSize="16sp" />
 
         </androidx.appcompat.widget.Toolbar>
 

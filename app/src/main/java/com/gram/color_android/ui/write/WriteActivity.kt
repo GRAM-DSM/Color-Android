@@ -1,5 +1,6 @@
 package com.gram.color_android.ui.write
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,8 @@ import com.gram.color_android.R
 import com.gram.color_android.data.model.WriteRequest
 import com.gram.color_android.databinding.ActivityWriteBinding
 import com.gram.color_android.network.set.FeelSet
+import com.gram.color_android.network.set.WriteSet
+import com.gram.color_android.ui.feed.FeedActivity
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.WriteViewModel
 import kotlinx.android.synthetic.main.activity_write.*
@@ -28,10 +31,25 @@ class WriteActivity : AppCompatActivity() {
         dataBinding.lifecycleOwner = this
         dataBinding.activity = this
 
-        var hashTag : MutableList<String> = mutableListOf()
         write_post_btn.setOnClickListener{
-            println(write_tag_et.text.toString().split("#"))
+            if(nullCheck()){
+                val hashTag : MutableList<String> = write_tag_et.text.toString().split("#") as MutableList<String>
+                hashTag.removeAt(0)
+                val body = WriteRequest(write_content_et.text.toString(), feel.toString(), hashTag)
+                post(prefs.access_token!!, body)
+            }
         }
+
+        writeViewModel.writeLiveData.observe(this, {
+            when(it){
+                WriteSet.WRITE_SUCCESS -> {
+                    val intent = Intent(this@WriteActivity, FeedActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                WriteSet.WRITE_FAIL -> Toast.makeText(this@WriteActivity, getString(R.string.error), Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     fun selectFeel(tv: TextView, feel: FeelSet) {
@@ -54,8 +72,7 @@ class WriteActivity : AppCompatActivity() {
         }
     }
 
-    fun post(access_token: String, body: WriteRequest){
-        if(nullCheck())
+    private fun post(access_token: String, body: WriteRequest){
             writeViewModel.write(access_token, body)
     }
 

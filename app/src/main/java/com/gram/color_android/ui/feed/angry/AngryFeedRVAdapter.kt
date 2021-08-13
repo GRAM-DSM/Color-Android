@@ -1,5 +1,6 @@
 package com.gram.color_android.ui.feed.angry
 
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,8 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
             view.angry_feed_content_tv.text = item.content
             view.angry_like_cnt_tv.text = item.favorite_cnt.toString()
             view.angry_comment_cnt_tv.text = item.comment_cnt.toString()
+            if(item.hash_code != null)
+                view.angry_feed_tag_tv.text = item.hash_code.toString()
 
             val position = absoluteAdapterPosition
             if(position != RecyclerView.NO_POSITION){

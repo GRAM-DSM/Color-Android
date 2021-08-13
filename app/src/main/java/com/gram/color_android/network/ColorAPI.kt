@@ -15,7 +15,7 @@ interface ColorAPI {
     suspend fun login(@Body body: LoginRequest): Response<LoginResponse>
 
     @PUT("/auth")
-    suspend fun tokenRefresh(@Header("Refresh-Token") header: String): Response<String>
+    suspend fun tokenRefresh(@Header("Authorization") header: String): Response<String>
 
     @POST("/user")
     suspend fun register(@Body body: RegisterRequest): Response<Void>

@@ -26,7 +26,6 @@ class TokenAuthenticator : Interceptor {
                         val intent = Intent(ColorApplication.context, SignActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                         ColorApplication.context.startActivity(intent)
-                        Toast.makeText(ColorApplication.context, R.string.error, Toast.LENGTH_SHORT).show()
                         sharedPreferencesHelper.isLogin = false
                     }
                     else {
