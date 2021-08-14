@@ -19,4 +19,5 @@
     <color name="sign_up_background">#F5F5F5</color>
     <color name="tab_layout">#F0F1F8</color>
     <color name="write_text_color">#9C9C9C</color>
+    <color name="feed_background">#EEEEEE</color>
 </resources>

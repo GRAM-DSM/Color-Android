@@ -38,10 +38,10 @@ interface ColorAPI {
         @Body body: WriteRequest
     ): Response<Void>
 
-    @DELETE("/post/{path}")
+    @DELETE("/post/{post_id}")
     suspend fun deletePost(
         @Header("Authorization") header: String,
-        @Path("post_id") post_id: Int
+        @Path("post_id") post_id: String
     ): Response<Void>
 
     @PUT("/post/{path}")

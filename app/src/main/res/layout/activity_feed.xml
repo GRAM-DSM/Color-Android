@@ -11,6 +11,7 @@
             android:id="@+id/feed_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/feed_background"
             android:layout_marginTop="60dp"
             android:layout_marginBottom="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -65,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/tab_layout"
+            android:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

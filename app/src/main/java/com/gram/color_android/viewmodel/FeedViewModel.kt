@@ -27,6 +27,17 @@ class FeedViewModel : ViewModel() {
         }
     }
 
+    fun deletePost(header: String, post_id: String) {
+        viewModelScope.launch {
+            val response = feedRepository.deletePost(header, post_id)
+            if(response.isSuccessful){
+                deletePostSuccess(response)
+            } else {
+                _feedLiveData.postValue(FeedSet.DELETE_FAIL)
+            }
+        }
+    }
+
     private fun getPostSuccess(response : Response<PostListResponse>){
         if(response.code() == 200){
             _feedListLiveData.postValue(response.body())
@@ -35,4 +46,13 @@ class FeedViewModel : ViewModel() {
             _feedLiveData.postValue(FeedSet.GET_FAIL)
         }
     }
+
+    private fun deletePostSuccess(response: Response<Void>) {
+        if(response.code() == 204){
+            _feedLiveData.postValue(FeedSet.DELETE_SUCCESS)
+        } else {
+            _feedLiveData.postValue(FeedSet.DELETE_FAIL)
+        }
+    }
+
 }

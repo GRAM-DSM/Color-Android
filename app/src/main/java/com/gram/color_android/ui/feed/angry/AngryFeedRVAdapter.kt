@@ -78,6 +78,12 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
     }
 
     override fun getItemCount(): Int = items.postContentResponseList.size
+
+    fun removeItem(position: Int){
+        items.postContentResponseList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyDataSetChanged()
+    }
 }
 
 
