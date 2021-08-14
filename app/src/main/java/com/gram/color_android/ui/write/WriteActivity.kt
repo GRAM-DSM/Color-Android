@@ -16,6 +16,7 @@ import com.gram.color_android.ui.feed.FeedActivity
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.WriteViewModel
 import kotlinx.android.synthetic.main.activity_write.*
+import kotlinx.android.synthetic.main.angry_item.*
 
 class WriteActivity : AppCompatActivity() {
 
@@ -34,7 +35,9 @@ class WriteActivity : AppCompatActivity() {
         write_post_btn.setOnClickListener{
             if(nullCheck()){
                 val hashTag : MutableList<String> = write_tag_et.text.toString().split("#") as MutableList<String>
-                hashTag.removeAt(0)
+                if(write_tag_et.text.toString() != "") {
+                    hashTag.removeAt(0)
+                }
                 val body = WriteRequest(write_content_et.text.toString(), feel.toString(), hashTag)
                 post(prefs.access_token!!, body)
             }

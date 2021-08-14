@@ -48,7 +48,7 @@ class FeedViewModel : ViewModel() {
     }
 
     private fun deletePostSuccess(response: Response<Void>) {
-        if(response.code() == 204){
+        if(response.code() == 200){
             _feedLiveData.postValue(FeedSet.DELETE_SUCCESS)
         } else {
             _feedLiveData.postValue(FeedSet.DELETE_FAIL)
