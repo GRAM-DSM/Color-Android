@@ -58,11 +58,11 @@ interface ColorAPI {
         @Query("feel") feel: String
     ): Response<PostListResponse>
 
-    @GET("/comment")
+    @GET("/comment/{post_id}")
     suspend fun getComment(
         @Header("Authorization") header: String,
-        @Query("page") page: Int,
-        @Query("post_id") post_id: Int
+        @Path("post_id") post_id: String,
+        @Query("page") page: Int
     ): Response<CommentContentResponseList>
 
     @DELETE("/comment/{comment_id}")
@@ -74,7 +74,7 @@ interface ColorAPI {
     @PUT("/like")
     suspend fun like(
         @Header("Authorization") header: String,
-        @Query("post_id") post_id: Int
+        @Query("post_id") post_id: String
     ): Response<Void>
 
     @POST("/report")
