@@ -30,7 +30,7 @@ class FeedAngryFragment : Fragment() {
     private val feedViewModel = FeedViewModel()
     private val prefs = SharedPreferencesHelper.getInstance()
     private var page = 0
-    private var isLike = false
+    private var isLike : ArrayList<Boolean> = ArrayList()
     private var pos = 0
     private var id = ""
 
@@ -117,7 +117,13 @@ class FeedAngryFragment : Fragment() {
         })
         adapter.setOnLikeClickListener(object: AngryFeedRVAdapter.OnLikeClickListener{
             override fun onLikeClick(v: View, position: Int) {
-                v.angry_like_ib.setImageResource(R.drawable.ic_like_fill)
+                if (!isLike[position]) {
+                    v.angry_like_ib.setImageResource(R.drawable.ic_like_fill)
+                    isLike[position] = true
+                } else {
+                    v.angry_like_ib.setImageResource(R.drawable.ic_like_empty)
+                    isLike[position] = false
+                }
             }
         })
         adapter.setOnCommentClickListener(object : AngryFeedRVAdapter.OnCommentClickListener{

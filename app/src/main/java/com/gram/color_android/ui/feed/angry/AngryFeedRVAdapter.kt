@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gram.color_android.R
 import com.gram.color_android.data.model.feed.PostListResponse
 import kotlinx.android.synthetic.main.angry_item.view.*
+import kotlinx.android.synthetic.main.feed_angry_item.view.*
 
 
 class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -44,8 +45,12 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
             view.angry_feed_content_tv.text = item.content
             view.angry_like_cnt_tv.text = item.favorite_cnt.toString()
             view.angry_comment_cnt_tv.text = item.comment_cnt.toString()
-            if(item.hash_code != null)
+            if(item.hash_code != null) {
                 view.angry_feed_tag_tv.text = item.hash_code.toString()
+            }
+            if(item.is_favorite){
+                view.feed_angry_like_iv.setImageResource(R.drawable.ic_like_fill)
+            }
 
             val position = absoluteAdapterPosition
             if(position != RecyclerView.NO_POSITION){

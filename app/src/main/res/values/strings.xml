@@ -67,6 +67,7 @@
     <string name="delete_post_dialog_content2">복구가 불가능 합니다.</string>
     <string name="feed_dialog_cancel">취소</string>
     <string name="feed_dialog_delete">삭제</string>
+    <string name="comment">댓글 입력하기</string>
     <!--  Feed  -->
 
     <!--  Write  -->
