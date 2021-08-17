@@ -30,4 +30,12 @@ class FeedRepositoryImpl : FeedRepository, SafeApiRequest() {
     ): Response<CommentContentResponseList> {
         return safeApiCall { RetrofitClient.getSpringAPI().getComment(header, post_id, page) }
     }
+
+    override suspend fun writeComment(
+        header: String,
+        post_id: String,
+        body: String
+    ): Response<Void> {
+        return safeApiCall { RetrofitClient.getSpringAPI().writeComment(header, post_id, body) }
+    }
 }

@@ -59,7 +59,7 @@
     <string name="report">신고하기</string>
     <string name="delete_post">게시글 삭제하기</string>
     <string name="modify_post">게시글 수정하기</string>
-    <string name="view_other">님 게시글 보기</string>
+    <string name="view_other"> 게시글 보기</string>
     <string name="delete_post_success">게시글이 삭제되었습니다.</string>
     <string name="do_not_delete">삭제할 수 없습니다.</string>
     <string name="delete_post_dialog_title">게시글을 삭제하시겠습니까?</string>

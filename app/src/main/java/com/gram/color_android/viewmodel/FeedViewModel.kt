@@ -52,6 +52,17 @@ class FeedViewModel : ViewModel() {
         }
     }
 
+    fun writeComment(header: String, post_id: String, body: String){
+        viewModelScope.launch {
+            val response = feedRepository.writeComment(header, post_id, body)
+            if(response.isSuccessful){
+                writeCommentSuccess(response)
+            } else {
+                _feedLiveData.postValue(FeedSet.WRITE_FAIL)
+            }
+        }
+    }
+
     private fun getPostSuccess(response : Response<PostListResponse>){
         if(response.code() == 200){
             _feedListLiveData.postValue(response.body())
@@ -75,6 +86,14 @@ class FeedViewModel : ViewModel() {
             _feedLiveData.postValue(FeedSet.GET_COMMENT_SUCCESS)
         } else {
             _feedLiveData.postValue(FeedSet.GET_COMMENT_FAIL)
+        }
+    }
+
+    private fun writeCommentSuccess(response: Response<Void>){
+        if(response.code() == 200){
+            _feedLiveData.postValue(FeedSet.WRITE_SUCCESS)
+        } else {
+            _feedLiveData.postValue(FeedSet.WRITE_FAIL)
         }
     }
 }

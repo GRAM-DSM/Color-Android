@@ -22,6 +22,7 @@ import com.gram.color_android.viewmodel.FeedViewModel
 import kotlinx.android.synthetic.main.angry_item.view.*
 import kotlinx.android.synthetic.main.feed_comment_bottomsheet.*
 import kotlinx.android.synthetic.main.feed_more_bottomsheet_mine.*
+import kotlinx.android.synthetic.main.feed_more_bottomsheet_other.*
 import kotlinx.android.synthetic.main.feed_post_delete.*
 import kotlinx.android.synthetic.main.fragment_feed_angry.*
 
@@ -75,6 +76,9 @@ class FeedAngryFragment : Fragment() {
                     commentAdapter = AngryCommentRVAdapter(feedViewModel.commentListLiveData.value!!)
                     commentBottomSheet.feed_comment_rv.adapter = commentAdapter
                 }
+                FeedSet.WRITE_SUCCESS -> {
+                    getCommentList(id, 0)
+                }
             }
         }
     }
@@ -101,6 +105,10 @@ class FeedAngryFragment : Fragment() {
 
     private fun getFeedPage(): Int = feedPage++
 
+    private fun getCommentList(id: String, page: Int){
+        feedViewModel.getCommentList(prefs.access_token!!, id, page)
+    }
+
     private fun getCommentPage(): Int = commentPage++
 
     private fun swipeRefresh() {
@@ -114,16 +122,17 @@ class FeedAngryFragment : Fragment() {
     private fun postBtnClick() {
         feedAdapter.setOnMoreClickListener(object : AngryFeedRVAdapter.OnMoreClickListener {
             override fun onMoreClick(v: View, position: Int) {
-                if (feedViewModel.feedListLiveData.value!!.postContentResponseList[position].is_mine) {
+                val item = feedViewModel.feedListLiveData.value!!.postContentResponseList[position]
+                if (item.is_mine) {
                     feedBottomSheet.setContentView(R.layout.feed_more_bottomsheet_mine)
                     feedBottomSheet.delete_post_btn.setOnClickListener {
                         pos = position
-                        id =
-                            feedViewModel.feedListLiveData.value!!.postContentResponseList[position].id
+                        id = feedViewModel.feedListLiveData.value!!.postContentResponseList[position].id
                         showDeleteDialog(prefs.access_token!!, id)
                     }
                 } else {
                     feedBottomSheet.setContentView(R.layout.feed_more_bottomsheet_other)
+                    feedBottomSheet.view_post_btn.text = item.user_nickname + getString(R.string.view_other)
                 }
                 feedBottomSheet.show()
             }
@@ -141,11 +150,15 @@ class FeedAngryFragment : Fragment() {
         })
         feedAdapter.setOnCommentClickListener(object : AngryFeedRVAdapter.OnCommentClickListener {
             override fun onCommentClick(v: View, position: Int) {
-                val id = feedViewModel.feedListLiveData.value!!.postContentResponseList[position].id
-                feedViewModel.getCommentList(prefs.access_token!!, id, 0)
+                id = feedViewModel.feedListLiveData.value!!.postContentResponseList[position].id
+                getCommentList(id, 0)
                 commentBottomSheet.setContentView(R.layout.feed_comment_bottomsheet)
                 commentBottomSheet.feed_comment_rv.layoutManager = LinearLayoutManager(requireContext())
                 commentBottomSheet.show()
+
+                commentBottomSheet.comment_send_ib.setOnClickListener{
+                    feedViewModel.writeComment(prefs.access_token!!, id, commentBottomSheet.feed_comment_et.text.toString())
+                }
             }
         })
     }

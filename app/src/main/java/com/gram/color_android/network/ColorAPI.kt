@@ -65,6 +65,13 @@ interface ColorAPI {
         @Query("page") page: Int
     ): Response<CommentContentResponseList>
 
+    @POST("/comment/{post_id}")
+    suspend fun writeComment(
+        @Header("Authorization") header: String,
+        @Path("post_id") post_id: String,
+        @Body body: String
+    ) : Response<Void>
+
     @DELETE("/comment/{comment_id}")
     suspend fun deleteComment(
         @Header("Authorization") header: String,

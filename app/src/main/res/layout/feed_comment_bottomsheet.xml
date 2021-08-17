@@ -39,6 +39,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
+            android:id="@+id/comment_send_ib"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
