@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.gram.color_android.network.set.FeelSet"/>
+        <variable
+            name="activity"
+            type="com.gram.color_android.ui.profile.ProfileFragment" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".ui.profile.ProfileFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            android:background="@color/white"
+            android:elevation="10dp">
+
+            <TextView
+                android:id="@+id/profile_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/font_roboto_bold"
+                android:text="정현왕자님"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/profile_user_color_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/font_roboto_bold"
+                android:text="정현왕자님의 컬러"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+
+            <TextView
+                android:id="@+id/profile_angry_tv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="29dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/angry"
+                android:onClick="@{() -> activity.selectFeel(profileAngrySelectTv, FeelSet.ANGRY)}"
+                app:layout_constraintStart_toEndOf="@+id/profile_user_color_tv"
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+
+            <TextView
+                android:id="@+id/profile_angry_select_tv"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="@drawable/circle_select"
+                android:backgroundTint="@color/white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_angry_tv"
+                app:layout_constraintEnd_toEndOf="@+id/profile_angry_tv"
+                app:layout_constraintStart_toStartOf="@+id/profile_angry_tv"
+                app:layout_constraintTop_toTopOf="@+id/profile_angry_tv" />
+
+            <TextView
+                android:id="@+id/profile_happy_tv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="29dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/happy"
+                android:onClick="@{() -> activity.selectFeel(profileHappySelectTv, FeelSet.HAPPY)}"
+                app:layout_constraintStart_toEndOf="@+id/profile_angry_tv"
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+
+            <TextView
+                android:id="@+id/profile_happy_select_tv"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="@drawable/circle_select"
+                android:backgroundTint="@color/white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_happy_tv"
+                app:layout_constraintEnd_toEndOf="@+id/profile_happy_tv"
+                app:layout_constraintStart_toStartOf="@+id/profile_happy_tv"
+                app:layout_constraintTop_toTopOf="@+id/profile_happy_tv" />
+
+            <TextView
+                android:id="@+id/profile_sad_tv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="29dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/sad"
+                android:onClick="@{() -> activity.selectFeel(profileSadSelectTv, FeelSet.SAD)}"
+                app:layout_constraintStart_toEndOf="@+id/profile_happy_tv"
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+
+            <TextView
+                android:id="@+id/profile_sad_select_tv"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="@drawable/circle_select"
+                android:backgroundTint="@color/white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_sad_tv"
+                app:layout_constraintEnd_toEndOf="@+id/profile_sad_tv"
+                app:layout_constraintStart_toStartOf="@+id/profile_sad_tv"
+                app:layout_constraintTop_toTopOf="@+id/profile_sad_tv" />
+
+            <TextView
+                android:id="@+id/profile_bored_tv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="29dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/bored"
+                android:onClick="@{() -> activity.selectFeel(profileBoredSelectTv, FeelSet.BORED)}"
+                app:layout_constraintStart_toEndOf="@+id/profile_sad_tv"
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+
+            <TextView
+                android:id="@+id/profile_bored_select_tv"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="@drawable/circle_select"
+                android:backgroundTint="@color/white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_bored_tv"
+                app:layout_constraintEnd_toEndOf="@+id/profile_bored_tv"
+                app:layout_constraintStart_toStartOf="@+id/profile_bored_tv"
+                app:layout_constraintTop_toTopOf="@+id/profile_bored_tv" />
+
+            <TextView
+                android:id="@+id/profile_love_tv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="29dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/love"
+                android:onClick="@{() -> activity.selectFeel(profileLoveSelectTv, FeelSet.LOVE)}"
+                app:layout_constraintStart_toEndOf="@+id/profile_bored_tv"
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+
+            <TextView
+                android:id="@+id/profile_love_select_tv"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="@drawable/circle_select"
+                android:backgroundTint="@color/white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_love_tv"
+                app:layout_constraintEnd_toEndOf="@+id/profile_love_tv"
+                app:layout_constraintStart_toStartOf="@+id/profile_love_tv"
+                app:layout_constraintTop_toTopOf="@+id/profile_love_tv" />
+
+            <TextView
+                android:id="@+id/profile_shame_tv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="29dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/shame"
+                android:onClick="@{() -> activity.selectFeel(profileShameSelectTv, FeelSet.SHAME)}"
+                app:layout_constraintStart_toEndOf="@+id/profile_love_tv"
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+
+            <TextView
+                android:id="@+id/profile_shame_select_tv"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="@drawable/circle_select"
+                android:backgroundTint="@color/white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_shame_tv"
+                app:layout_constraintEnd_toEndOf="@+id/profile_shame_tv"
+                app:layout_constraintStart_toStartOf="@+id/profile_shame_tv"
+                app:layout_constraintTop_toTopOf="@+id/profile_shame_tv" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/profile_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="116dp"
+            android:background="@color/white"
+            android:elevation="10dp"
+            app:tabIndicatorColor="@color/angry">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/item1"
+                android:icon="@drawable/ic_my_page" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/item2"
+                android:icon="@drawable/ic_like_empty"/>
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <FrameLayout
+            android:id="@+id/profile_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="169dp"/>
+
+    </FrameLayout>
+
+</layout>
