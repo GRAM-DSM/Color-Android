@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.databinding.DataBindingUtil
+import androidx.viewpager.widget.PagerAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import com.gram.color_android.R
 import com.gram.color_android.databinding.FragmentProfileBinding
 import com.gram.color_android.network.set.FeelSet
 import com.gram.color_android.ui.feed.FeedActivity
 import kotlinx.android.synthetic.main.activity_write.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
 
@@ -32,6 +35,14 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataBinding!!.activity = ProfileFragment()
+
+        profile_post_vp.adapter = PostPagerAdapter(requireActivity())
+        TabLayoutMediator(profile_tablayout, profile_post_vp) {tab, position ->
+            when(position) {
+                0 -> tab.text = "탭1"
+                1 -> tab.text = "탭2"
+            }
+        }.attach()
     }
 
     fun selectFeel(tv: TextView, feel: FeelSet) {

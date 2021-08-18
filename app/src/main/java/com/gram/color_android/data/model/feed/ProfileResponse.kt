@@ -1,6 +1,6 @@
 package com.gram.color_android.data.model.feed
 
-data class MyPageResponse(
+data class ProfileResponse(
     val user_info: UserInfo,
     val posts: List<Posts>
 ){

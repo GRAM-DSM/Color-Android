@@ -2,7 +2,7 @@ package com.gram.color_android.network
 
 import com.gram.color_android.data.model.*
 import com.gram.color_android.data.model.feed.FeedReportRequest
-import com.gram.color_android.data.model.feed.MyPageResponse
+import com.gram.color_android.data.model.feed.ProfileResponse
 import com.gram.color_android.data.model.feed.PostListResponse
 import com.gram.color_android.data.model.sign.LoginRequest
 import com.gram.color_android.data.model.sign.LoginResponse
@@ -93,11 +93,11 @@ interface ColorAPI {
     ): Response<Void>
 
     @GET("/profile")
-    suspend fun myPage(
+    suspend fun profile(
         @Header("Authorization") header: String,
         @Query("id") id: String,
         @Query("feel") feel: String,
         @Query("filter") filter: String,
         @Query("page") page: Int
-    ): Response<MyPageResponse>
+    ): Response<ProfileResponse>
 }

@@ -206,27 +206,13 @@
             android:layout_marginTop="116dp"
             android:background="@color/white"
             android:elevation="10dp"
-            app:tabIndicatorColor="@color/angry">
+            app:tabIndicatorColor="@color/angry"/>
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/item1"
-                android:icon="@drawable/ic_my_page" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/item2"
-                android:icon="@drawable/ic_like_empty"/>
-
-        </com.google.android.material.tabs.TabLayout>
-
-        <FrameLayout
-            android:id="@+id/profile_fragment_container"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/profile_post_vp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="169dp"/>
+            android:layout_marginTop="169dp" />
 
     </FrameLayout>
 
