@@ -1,6 +1,7 @@
 package com.gram.color_android.ui.feed.angry
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,6 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gram.color_android.R
 import com.gram.color_android.network.set.FeedSet
 import com.gram.color_android.network.set.FeelSet
+import com.gram.color_android.ui.write.WriteActivity
 import com.gram.color_android.util.ColorApplication
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.FeedViewModel
@@ -128,6 +130,15 @@ class FeedAngryFragment : Fragment() {
                         pos = position
                         id = feedViewModel.feedListLiveData.value!!.postContentResponseList[position].id
                         showDeleteDialog(prefs.accessToken!!, id)
+                    }
+                    feedBottomSheet.modify_post_btn.setOnClickListener{
+                        val intent = Intent(requireContext(), WriteActivity::class.java)
+                        intent.apply {
+                            intent.putExtra("content", item.content)
+                            intent.putExtra("tag", item.hash_code.toString())
+                            intent.putExtra("post_id", item.id)
+                        }
+                        startActivity(intent)
                     }
                 } else {
                     feedBottomSheet.setContentView(R.layout.feed_more_bottomsheet_other)

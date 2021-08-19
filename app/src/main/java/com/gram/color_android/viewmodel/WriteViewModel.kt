@@ -28,6 +28,25 @@ class WriteViewModel : ViewModel() {
         }
     }
 
+    fun updatePost(header: String, post_id: String, body:WriteRequest){
+        viewModelScope.launch {
+            val response = writeRepository.updatePost(header, post_id, body)
+            if(response.isSuccessful){
+                updateSuccess(response)
+            } else {
+                _writeLiveData.postValue(WriteSet.UPDATE_FAIL)
+            }
+        }
+    }
+
+    private fun updateSuccess(response: Response<Void>) {
+        if(response.code() == 200){
+            _writeLiveData.postValue(WriteSet.UPDATE_SUCCESS)
+        } else {
+            _writeLiveData.postValue(WriteSet.UPDATE_FAIL)
+        }
+    }
+
     private fun writeSuccess(response : Response<Void>){
         if (response.code() == 200){
             _writeLiveData.postValue(WriteSet.WRITE_SUCCESS)

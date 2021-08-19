@@ -45,10 +45,10 @@ interface ColorAPI {
         @Path("post_id") post_id: String
     ): Response<Void>
 
-    @PUT("/post/{path}")
+    @PUT("/post/{post_id}")
     suspend fun updatePost(
         @Header("Authorization") header: String,
-        @Path("post_id") post_id: Int,
+        @Path("post_id") post_id: String,
         @Body body: WriteRequest
     ): Response<Void>
 

@@ -3,6 +3,7 @@ package com.gram.color_android.ui.write
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -31,25 +32,36 @@ class WriteActivity : AppCompatActivity() {
         dataBinding.lifecycleOwner = this
         dataBinding.activity = this
 
-        write_post_btn.setOnClickListener{
-            if(nullCheck()){
-                val hashTag : MutableList<String> = write_tag_et.text.toString().split("#") as MutableList<String>
-                if(write_tag_et.text.toString() != "") {
-                    hashTag.removeAt(0)
+        val intent = intent
+        if (intent.hasExtra("content")) {
+            write_content_et.setText(intent.getStringExtra("content"))
+            write_post_btn.setOnClickListener{
+                if(nullCheck()){
+                    val body = WriteRequest(write_content_et.text.toString(), feel.toString(), getTag())
+                    updatePost(prefs.accessToken!!, intent.getStringExtra("post_id")!!, body)
                 }
-                val body = WriteRequest(write_content_et.text.toString(), feel.toString(), hashTag)
-                post(prefs.accessToken!!, body)
+            }
+        } else {
+            write_post_btn.setOnClickListener {
+                if (nullCheck()) {
+                    val body = WriteRequest(write_content_et.text.toString(), feel.toString(), getTag())
+                    post(prefs.accessToken!!, body)
+                }
             }
         }
 
         writeViewModel.writeLiveData.observe(this, {
-            when(it){
-                WriteSet.WRITE_SUCCESS -> {
+            when (it) {
+                WriteSet.WRITE_SUCCESS, WriteSet.UPDATE_SUCCESS -> {
                     val intent = Intent(this@WriteActivity, FeedActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
-                WriteSet.WRITE_FAIL -> Toast.makeText(this@WriteActivity, getString(R.string.error), Toast.LENGTH_SHORT).show()
+                WriteSet.WRITE_FAIL, WriteSet.UPDATE_FAIL -> Toast.makeText(
+                    this@WriteActivity,
+                    getString(R.string.error),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }
@@ -64,7 +76,7 @@ class WriteActivity : AppCompatActivity() {
             curView!!.visibility = View.VISIBLE
         }
         this.feel = feel
-        when(feel){
+        when (feel) {
             FeelSet.ANGRY -> write_post_btn.setBackgroundColor(getColor(R.color.angry))
             FeelSet.HAPPY -> write_post_btn.setBackgroundColor(getColor(R.color.happy))
             FeelSet.SAD -> write_post_btn.setBackgroundColor(getColor(R.color.sad))
@@ -74,9 +86,21 @@ class WriteActivity : AppCompatActivity() {
         }
     }
 
-    private fun post(access_token: String, body: WriteRequest){
-            writeViewModel.write(access_token, body)
+    private fun post(access_token: String, body: WriteRequest) {
+        writeViewModel.write(access_token, body)
+    }
+
+    private fun updatePost(access_token: String, post_id: String, body: WriteRequest){
+        writeViewModel.updatePost(access_token, post_id, body)
     }
 
     private fun nullCheck() = (feel != null && !write_content_et.text.toString().equals(""))
+
+    private fun getTag() : MutableList<String> {
+        val hashTag: MutableList<String> = write_tag_et.text.toString().split("#") as MutableList<String>
+        if (write_tag_et.text.toString() != "") {
+            hashTag.removeAt(0)
+        }
+        return hashTag
+    }
 }

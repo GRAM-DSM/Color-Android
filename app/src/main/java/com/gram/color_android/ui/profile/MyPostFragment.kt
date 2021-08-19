@@ -39,7 +39,6 @@ class MyPostFragment : Fragment() {
         profileViewModel.profileLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 ProfileSet.GET_SUCCESS -> {
-                    val variable = profileViewModel.profileListLiveData.value
                     adapter = ProfileRVAdapter(profileViewModel.profileListLiveData.value!!)
                     profile_my_post_rv.adapter = adapter
                 }
