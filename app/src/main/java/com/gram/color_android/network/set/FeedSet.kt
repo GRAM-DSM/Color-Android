@@ -8,5 +8,7 @@ enum class FeedSet {
     GET_COMMENT_SUCCESS,
     GET_COMMENT_FAIL,
     WRITE_SUCCESS,
-    WRITE_FAIL
+    WRITE_FAIL,
+    REPORT_SUCCESS,
+    REPORT_FAIL
 }

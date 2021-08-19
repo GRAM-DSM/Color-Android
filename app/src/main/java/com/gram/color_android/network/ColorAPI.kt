@@ -1,6 +1,7 @@
 package com.gram.color_android.network
 
 import com.gram.color_android.data.model.*
+import com.gram.color_android.data.model.feed.CommentRequest
 import com.gram.color_android.data.model.feed.FeedReportRequest
 import com.gram.color_android.data.model.profile.ProfileResponse
 import com.gram.color_android.data.model.feed.PostListResponse
@@ -70,7 +71,7 @@ interface ColorAPI {
     suspend fun writeComment(
         @Header("Authorization") header: String,
         @Path("post_id") post_id: String,
-        @Body body: String
+        @Body body: CommentRequest
     ) : Response<Void>
 
     @DELETE("/comment/{comment_id}")

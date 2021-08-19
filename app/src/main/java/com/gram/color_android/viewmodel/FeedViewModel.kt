@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gram.color_android.data.model.CommentContentResponseList
+import com.gram.color_android.data.model.feed.CommentRequest
+import com.gram.color_android.data.model.feed.FeedReportRequest
 import com.gram.color_android.data.model.feed.PostListResponse
 import com.gram.color_android.data.repository.feed.FeedRepositoryImpl
 import com.gram.color_android.network.set.FeedSet
@@ -52,13 +54,24 @@ class FeedViewModel : ViewModel() {
         }
     }
 
-    fun writeComment(header: String, post_id: String, body: String){
+    fun writeComment(header: String, post_id: String, body: CommentRequest){
         viewModelScope.launch {
             val response = feedRepository.writeComment(header, post_id, body)
             if(response.isSuccessful){
                 writeCommentSuccess(response)
             } else {
                 _feedLiveData.postValue(FeedSet.WRITE_FAIL)
+            }
+        }
+    }
+
+    fun report(header: String, body: FeedReportRequest, id: String, type: String){
+        viewModelScope.launch {
+            val response = feedRepository.report(header, body, id, type)
+            if(response.isSuccessful){
+                reportSuccess(response)
+            } else {
+                _feedLiveData.postValue(FeedSet.REPORT_FAIL)
             }
         }
     }
@@ -94,6 +107,14 @@ class FeedViewModel : ViewModel() {
             _feedLiveData.postValue(FeedSet.WRITE_SUCCESS)
         } else {
             _feedLiveData.postValue(FeedSet.WRITE_FAIL)
+        }
+    }
+
+    private fun reportSuccess(response: Response<Void>) {
+        if(response.code() == 200){
+            _feedLiveData.postValue(FeedSet.REPORT_SUCCESS)
+        } else {
+            _feedLiveData.postValue(FeedSet.REPORT_FAIL)
         }
     }
 }

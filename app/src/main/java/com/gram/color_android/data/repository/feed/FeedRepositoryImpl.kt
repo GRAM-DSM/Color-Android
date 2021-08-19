@@ -1,6 +1,8 @@
 package com.gram.color_android.data.repository.feed
 
 import com.gram.color_android.data.model.CommentContentResponseList
+import com.gram.color_android.data.model.feed.CommentRequest
+import com.gram.color_android.data.model.feed.FeedReportRequest
 import com.gram.color_android.data.model.feed.PostListResponse
 import com.gram.color_android.network.RetrofitClient
 import com.gram.color_android.network.SafeApiRequest
@@ -34,8 +36,17 @@ class FeedRepositoryImpl : FeedRepository, SafeApiRequest() {
     override suspend fun writeComment(
         header: String,
         post_id: String,
-        body: String
+        body: CommentRequest
     ): Response<Void> {
         return safeApiCall { RetrofitClient.getSpringAPI().writeComment(header, post_id, body) }
+    }
+
+    override suspend fun report(
+        header: String,
+        body: FeedReportRequest,
+        id: String,
+        type: String
+    ): Response<Void> {
+        return safeApiCall { RetrofitClient.getFastAPI().report(header, body, id, type) }
     }
 }
