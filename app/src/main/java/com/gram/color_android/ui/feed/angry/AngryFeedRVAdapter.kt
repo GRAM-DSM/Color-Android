@@ -1,14 +1,13 @@
 package com.gram.color_android.ui.feed.angry
 
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gram.color_android.R
 import com.gram.color_android.data.model.feed.PostListResponse
-import kotlinx.android.synthetic.main.angry_item.view.*
 import kotlinx.android.synthetic.main.feed_angry_item.view.*
+import kotlinx.android.synthetic.main.feed_item.view.*
 
 
 class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -40,13 +39,13 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
     inner class ViewHolder(v : View) : RecyclerView.ViewHolder(v) {
         private val view = v
         fun bind(item : PostListResponse.PostContent){
-            view.angry_feed_name.text = item.user_nickname
-            view.angry_feed_date.text = item.created_at
-            view.angry_feed_content_tv.text = item.content
-            view.angry_like_cnt_tv.text = item.favorite_cnt.toString()
-            view.angry_comment_cnt_tv.text = item.comment_cnt.toString()
+            view.feed_name_tv.text = item.user_nickname
+            view.feed_date_tv.text = item.created_at
+            view.feed_content_tv.text = item.content
+            view.feed_like_cnt_tv.text = item.favorite_cnt.toString()
+            view.feed_comment_cnt_tv.text = item.comment_cnt.toString()
             if(item.hash_code != null) {
-                view.angry_feed_tag_tv.text = item.hash_code.toString()
+                view.feed_tag_tv.text = item.hash_code.toString()
             }
             if(item.is_favorite){
                 view.feed_angry_like_iv.setImageResource(R.drawable.ic_like_fill)
@@ -54,13 +53,13 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
 
             val position = absoluteAdapterPosition
             if(position != RecyclerView.NO_POSITION){
-                itemView.angry_feed_more_iv.setOnClickListener{
+                itemView.feed_more_iv.setOnClickListener{
                     moreListener?.onMoreClick(itemView, position)
                 }
-                itemView.angry_like_ib.setOnClickListener{
+                itemView.feed_like_ib.setOnClickListener{
                     likeListener?.onLikeClick(itemView, position)
                 }
-                itemView.angry_comment_ib.setOnClickListener{
+                itemView.feed_comment_ib.setOnClickListener{
                     commentListener?.onCommentClick(itemView, position)
                 }
             }
@@ -69,7 +68,7 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflatedView :View =
-            LayoutInflater.from(parent.context).inflate(R.layout.angry_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.feed_item, parent, false)
         return ViewHolder(inflatedView)
     }
 

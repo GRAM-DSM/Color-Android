@@ -9,18 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gram.color_android.R
 import com.gram.color_android.network.set.FeedSet
 import com.gram.color_android.network.set.FeelSet
+import com.gram.color_android.util.ColorApplication
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.FeedViewModel
-import kotlinx.android.synthetic.main.angry_item.view.*
 import kotlinx.android.synthetic.main.feed_comment_bottomsheet.*
+import kotlinx.android.synthetic.main.feed_item.view.*
 import kotlinx.android.synthetic.main.feed_more_bottomsheet_mine.*
 import kotlinx.android.synthetic.main.feed_more_bottomsheet_other.*
 import kotlinx.android.synthetic.main.feed_post_delete.*
@@ -50,6 +48,7 @@ class FeedAngryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ColorApplication.feel = FeelSet.ANGRY.toString()
 
         val linearLayoutManager = LinearLayoutManager(activity)
         feed_angry_rv.layoutManager = linearLayoutManager
@@ -60,7 +59,7 @@ class FeedAngryFragment : Fragment() {
         getPostList()
         swipeRefresh()
 
-        feedViewModel.feedLiveData.observe(viewLifecycleOwner) {
+        feedViewModel.feedLiveData.observe(viewLifecycleOwner, {
             when(it){
                 FeedSet.GET_FEED_SUCCESS -> {
                     feedAdapter = AngryFeedRVAdapter(feedViewModel.feedListLiveData.value!!)
@@ -80,7 +79,7 @@ class FeedAngryFragment : Fragment() {
                     getCommentList(id, 0)
                 }
             }
-        }
+        })
     }
 
     private fun showDeleteDialog(header: String, post_id: String) {
@@ -100,13 +99,13 @@ class FeedAngryFragment : Fragment() {
     }
 
     private fun getPostList(){
-        feedViewModel.getPostList(prefs.access_token!!, getFeedPage(), FeelSet.ANGRY.toString())
+        feedViewModel.getPostList(prefs.accessToken!!, getFeedPage(), FeelSet.ANGRY.toString())
     }
 
     private fun getFeedPage(): Int = feedPage++
 
     private fun getCommentList(id: String, page: Int){
-        feedViewModel.getCommentList(prefs.access_token!!, id, page)
+        feedViewModel.getCommentList(prefs.accessToken!!, id, page)
     }
 
     private fun getCommentPage(): Int = commentPage++
@@ -128,7 +127,7 @@ class FeedAngryFragment : Fragment() {
                     feedBottomSheet.delete_post_btn.setOnClickListener {
                         pos = position
                         id = feedViewModel.feedListLiveData.value!!.postContentResponseList[position].id
-                        showDeleteDialog(prefs.access_token!!, id)
+                        showDeleteDialog(prefs.accessToken!!, id)
                     }
                 } else {
                     feedBottomSheet.setContentView(R.layout.feed_more_bottomsheet_other)
@@ -140,10 +139,10 @@ class FeedAngryFragment : Fragment() {
         feedAdapter.setOnLikeClickListener(object : AngryFeedRVAdapter.OnLikeClickListener {
             override fun onLikeClick(v: View, position: Int) {
                 if (!isLike[position]) {
-                    v.angry_like_ib.setImageResource(R.drawable.ic_like_fill)
+                    v.feed_like_ib.setImageResource(R.drawable.ic_like_fill)
                     isLike[position] = true
                 } else {
-                    v.angry_like_ib.setImageResource(R.drawable.ic_like_empty)
+                    v.feed_like_ib.setImageResource(R.drawable.ic_like_empty)
                     isLike[position] = false
                 }
             }
@@ -157,7 +156,7 @@ class FeedAngryFragment : Fragment() {
                 commentBottomSheet.show()
 
                 commentBottomSheet.comment_send_ib.setOnClickListener{
-                    feedViewModel.writeComment(prefs.access_token!!, id, commentBottomSheet.feed_comment_et.text.toString())
+                    feedViewModel.writeComment(prefs.accessToken!!, id, commentBottomSheet.feed_comment_et.text.toString())
                 }
             }
         })

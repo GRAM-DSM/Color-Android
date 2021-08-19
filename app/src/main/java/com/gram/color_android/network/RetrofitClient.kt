@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object RetrofitClient {
     private const val SPRING_BOOT_BASE_URL = "http://211.38.86.92:8009"
@@ -23,6 +24,7 @@ object RetrofitClient {
             .build()
         retrofit_spring = Retrofit.Builder()
             .baseUrl(SPRING_BOOT_BASE_URL)
+            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

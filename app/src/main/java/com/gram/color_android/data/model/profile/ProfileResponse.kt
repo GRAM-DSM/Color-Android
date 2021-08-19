@@ -1,8 +1,8 @@
-package com.gram.color_android.data.model.feed
+package com.gram.color_android.data.model.profile
 
 data class ProfileResponse(
     val user_info: UserInfo,
-    val posts: List<Posts>
+    val posts: ArrayList<Posts>
 ){
     data class UserInfo(
         val nickname: String,
@@ -16,6 +16,6 @@ data class ProfileResponse(
         val comment_cnt: Int,
         val favorite_cnt: Int,
         val is_favorite: Boolean,
-        val hash_tag: List<String>
+        val hash_tag: ArrayList<String>
     )
 }

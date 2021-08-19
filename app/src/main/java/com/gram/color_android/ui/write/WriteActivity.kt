@@ -16,7 +16,6 @@ import com.gram.color_android.ui.feed.FeedActivity
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.WriteViewModel
 import kotlinx.android.synthetic.main.activity_write.*
-import kotlinx.android.synthetic.main.angry_item.*
 
 class WriteActivity : AppCompatActivity() {
 
@@ -39,7 +38,7 @@ class WriteActivity : AppCompatActivity() {
                     hashTag.removeAt(0)
                 }
                 val body = WriteRequest(write_content_et.text.toString(), feel.toString(), hashTag)
-                post(prefs.access_token!!, body)
+                post(prefs.accessToken!!, body)
             }
         }
 

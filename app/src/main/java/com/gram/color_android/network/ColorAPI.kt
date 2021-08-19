@@ -2,11 +2,12 @@ package com.gram.color_android.network
 
 import com.gram.color_android.data.model.*
 import com.gram.color_android.data.model.feed.FeedReportRequest
-import com.gram.color_android.data.model.feed.ProfileResponse
+import com.gram.color_android.data.model.profile.ProfileResponse
 import com.gram.color_android.data.model.feed.PostListResponse
 import com.gram.color_android.data.model.sign.LoginRequest
 import com.gram.color_android.data.model.sign.LoginResponse
 import com.gram.color_android.data.model.sign.RegisterRequest
+import com.gram.color_android.data.model.sign.TokenRefreshResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -15,7 +16,7 @@ interface ColorAPI {
     suspend fun login(@Body body: LoginRequest): Response<LoginResponse>
 
     @PUT("/auth")
-    suspend fun tokenRefresh(@Header("Authorization") header: String): Response<String>
+    suspend fun tokenRefresh(@Header("Refresh-Token") header: String): Response<TokenRefreshResponse>
 
     @POST("/user")
     suspend fun register(@Body body: RegisterRequest): Response<Void>

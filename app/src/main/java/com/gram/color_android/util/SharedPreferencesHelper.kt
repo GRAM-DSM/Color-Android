@@ -7,7 +7,7 @@ class SharedPreferencesHelper {
         "Color-Android", Context.MODE_PRIVATE
     )
 
-    var access_token: String?
+    var accessToken: String?
         get() = prefs.getString("access_token", null)
         set(value){
             val editor = prefs.edit()
@@ -15,7 +15,7 @@ class SharedPreferencesHelper {
             editor.apply()
         }
 
-    var refresh_token: String?
+    var refreshToken: String?
         get() = prefs.getString("refresh_token", null)
         set(value){
             val editor = prefs.edit()
@@ -28,6 +28,14 @@ class SharedPreferencesHelper {
         set(value){
             val editor = prefs.edit()
             editor.putBoolean("isLogin", value)
+            editor.apply()
+        }
+
+    var email: String?
+        get() = prefs.getString("email", null)
+        set(value){
+            val editor = prefs.edit()
+            editor.putString("email", value)
             editor.apply()
         }
 

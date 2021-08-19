@@ -19,12 +19,14 @@ import com.gram.color_android.data.model.sign.LoginRequest
 import com.gram.color_android.network.set.LoginSet
 import com.gram.color_android.ui.main.MainActivity
 import com.gram.color_android.util.OnBackPressedListener
+import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment(), OnBackPressedListener {
 
     private val loginViewModel = LoginViewModel()
+    private val prefs = SharedPreferencesHelper.getInstance()
     private var device_token : String? = null
 
     override fun onCreateView(
@@ -44,6 +46,7 @@ class LoginFragment : Fragment(), OnBackPressedListener {
         loginViewModel.loginLiveData.observe(viewLifecycleOwner, {
             when(it){
                 LoginSet.LOGIN_SUCCESS -> {
+                    prefs.email = login_email_et.text.toString()
                     val intent = Intent(activity, MainActivity::class.java)
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)

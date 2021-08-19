@@ -17,8 +17,8 @@ class SignRepositoryImpl : SignRepository, SafeApiRequest() {
     }
 
     override fun setToken(tokenResponse: LoginResponse) {
-        sharedPreferencesHelper.access_token = "Bearer " + tokenResponse.access_token
-        sharedPreferencesHelper.refresh_token =
+        sharedPreferencesHelper.accessToken = "Bearer " + tokenResponse.access_token
+        sharedPreferencesHelper.refreshToken =
             "Bearer " + tokenResponse.refresh_token
         sharedPreferencesHelper.isLogin = true
     }

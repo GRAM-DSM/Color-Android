@@ -2,8 +2,6 @@ package com.gram.color_android.network
 
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
-import com.gram.color_android.R
 import com.gram.color_android.util.ColorApplication
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.ui.sign.SignActivity
@@ -22,17 +20,17 @@ class TokenAuthenticator : Interceptor {
         when (response.code) {
             401 -> {
                 if (sharedPreferencesHelper.isLogin) {
-                    if (sharedPreferencesHelper.access_token == null) {
+                    if (sharedPreferencesHelper.accessToken == null) {
                         val intent = Intent(ColorApplication.context, SignActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                         ColorApplication.context.startActivity(intent)
                         sharedPreferencesHelper.isLogin = false
                     }
                     else {
-                        sharedPreferencesHelper.access_token = null
+                        sharedPreferencesHelper.accessToken = null
 
-                        val refreshToken = sharedPreferencesHelper.refresh_token
-                        CoroutineScope(Dispatchers.IO).launch {
+                        val refreshToken = sharedPreferencesHelper.refreshToken
+                        CoroutineScope(Dispatchers.Main).launch {
                             if(refreshToken != null)
                                 getAccessToken(refreshToken)
                         }
@@ -44,13 +42,17 @@ class TokenAuthenticator : Interceptor {
     }
 
     private suspend fun getAccessToken(refresh_token: String) {
+        var s = ""
         val accessToken = withContext(Dispatchers.IO) {
             RetrofitClient.getSpringAPI().tokenRefresh(refresh_token)
         }
 
         if (accessToken.isSuccessful) {
-            if (accessToken.code() == 200)
-                sharedPreferencesHelper.access_token = "Bearer " + accessToken.body()
+            if (accessToken.code() == 200) {
+                s = accessToken.body()!!.access_token
+                Log.d("AccessToken", s)
+                sharedPreferencesHelper.accessToken = "Bearer " + accessToken.body()!!.access_token
+            }
         } else
             Log.e("TokenAuthenticator", accessToken.message())
     }
