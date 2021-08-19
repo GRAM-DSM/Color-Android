@@ -10,5 +10,7 @@ enum class FeedSet {
     WRITE_SUCCESS,
     WRITE_FAIL,
     REPORT_SUCCESS,
-    REPORT_FAIL
+    REPORT_FAIL,
+    LIKE_SUCCESS,
+    LIKE_FAIL
 }

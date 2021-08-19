@@ -11,7 +11,7 @@ interface FeedRepository {
 
     suspend fun deletePost(header: String, post_id: String) : Response<Void>
 
-    //suspend fun like(header: String, post_id: Int) : Response<Void>
+    suspend fun like(header: String, post_id: String) : Response<Void>
 
     suspend fun getCommentList(header: String, post_id: String, page: Int) : Response<CommentContentResponseList>
 

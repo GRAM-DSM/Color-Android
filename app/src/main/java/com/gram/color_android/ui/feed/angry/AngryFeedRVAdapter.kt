@@ -48,7 +48,7 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
                 view.feed_tag_tv.text = item.hash_code.toString()
             }
             if(item.is_favorite){
-                view.feed_angry_like_iv.setImageResource(R.drawable.ic_like_fill)
+                view.feed_like_ib.setImageResource(R.drawable.ic_like_fill)
             }
 
             val position = absoluteAdapterPosition

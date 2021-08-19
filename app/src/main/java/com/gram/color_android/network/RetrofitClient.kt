@@ -8,7 +8,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object RetrofitClient {
     private const val SPRING_BOOT_BASE_URL = "http://211.38.86.92:8009"
-    private const val FAST_API_BASE_URL = "http://13.209.8.210:5000"
+        private const val FAST_API_BASE_URL = "http://13.209.8.210:5000"
     private var retrofit_spring : Retrofit
     private var retrofit_fast_api : Retrofit
     private var colorSpringAPI : ColorAPI

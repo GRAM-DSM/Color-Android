@@ -15,6 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gram.color_android.R
 import com.gram.color_android.data.model.feed.CommentRequest
 import com.gram.color_android.data.model.feed.FeedReportRequest
+import com.gram.color_android.data.model.feed.PostListResponse
 import com.gram.color_android.network.set.FeedSet
 import com.gram.color_android.network.set.FeelSet
 import com.gram.color_android.ui.write.WriteActivity
@@ -42,7 +43,6 @@ class FeedAngryFragment : Fragment() {
     private val prefs = SharedPreferencesHelper.getInstance()
     private var feedPage = 0
     private var commentPage = 0
-    private var isLike: ArrayList<Boolean> = ArrayList()
     private var pos = 0
     private var id = ""
 
@@ -102,6 +102,9 @@ class FeedAngryFragment : Fragment() {
                     getString(R.string.send_report),
                     Toast.LENGTH_SHORT
                 ).show()
+                FeedSet.LIKE_SUCCESS -> {
+
+                }
             }
         })
     }
@@ -210,13 +213,17 @@ class FeedAngryFragment : Fragment() {
         })
         feedAdapter.setOnLikeClickListener(object : AngryFeedRVAdapter.OnLikeClickListener {
             override fun onLikeClick(v: View, position: Int) {
-                if (!isLike[position]) {
-                    v.feed_like_ib.setImageResource(R.drawable.ic_like_fill)
-                    isLike[position] = true
-                } else {
+                val item = feedViewModel.feedListLiveData.value!!.postContentResponseList[position]
+                var like = item.favorite_cnt
+                if (item.is_favorite) {
                     v.feed_like_ib.setImageResource(R.drawable.ic_like_empty)
-                    isLike[position] = false
+                    v.feed_like_cnt_tv.text = (like - 1).toString()
+                } else {
+                    v.feed_like_ib.setImageResource(R.drawable.ic_like_fill)
+                    v.feed_like_cnt_tv.text = (like + 1).toString()
                 }
+                feedViewModel.like(prefs.accessToken!!, item.id)
+                pos = position
             }
         })
         feedAdapter.setOnCommentClickListener(object :

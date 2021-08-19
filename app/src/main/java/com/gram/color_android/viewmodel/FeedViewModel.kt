@@ -76,6 +76,17 @@ class FeedViewModel : ViewModel() {
         }
     }
 
+    fun like(header: String, post_id: String){
+        viewModelScope.launch {
+            val response = feedRepository.like(header, post_id)
+            if(response.isSuccessful){
+                likeSuccess(response)
+            } else {
+                feedLiveData.postValue(FeedSet.LIKE_FAIL)
+            }
+        }
+    }
+
     private fun getPostSuccess(response : Response<PostListResponse>){
         if(response.code() == 200){
             _feedListLiveData.postValue(response.body())
@@ -115,6 +126,14 @@ class FeedViewModel : ViewModel() {
             _feedLiveData.postValue(FeedSet.REPORT_SUCCESS)
         } else {
             _feedLiveData.postValue(FeedSet.REPORT_FAIL)
+        }
+    }
+
+    private fun likeSuccess(response: Response<Void>){
+        if(response.code() == 200){
+            feedLiveData.postValue(FeedSet.LIKE_SUCCESS)
+        } else {
+            feedLiveData.postValue(FeedSet.LIKE_FAIL)
         }
     }
 }
