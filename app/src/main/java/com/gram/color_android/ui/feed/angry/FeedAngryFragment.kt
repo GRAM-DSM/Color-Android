@@ -122,7 +122,7 @@ class FeedAngryFragment : Fragment() {
         }
     }
 
-    private fun showReportDialog(id: String) {
+    private fun showReportDialog(id: String, type: String) {
         reportDialog = Dialog(requireContext())
         reportDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         reportDialog.setContentView(R.layout.report_dialog)
@@ -148,7 +148,7 @@ class FeedAngryFragment : Fragment() {
         reportDialog.report_positive_btn.setOnClickListener {
             if (reportDialog.confirm_radio_btn.isChecked) {
                 val body = FeedReportRequest(reason, FeelSet.ANGRY.toString())
-                report(body, id, "comment")
+                report(body, id, type)
                 reportDialog.dismiss()
             }
         }
@@ -200,6 +200,10 @@ class FeedAngryFragment : Fragment() {
                     feedDialog.setContentView(R.layout.feed_more_bottomsheet_other)
                     feedDialog.view_post_btn.text =
                         item.user_nickname + getString(R.string.view_other)
+                    feedDialog.report_post_btn.setOnClickListener{
+                        feedDialog.dismiss()
+                        showReportDialog(item.id, "post")
+                    }
                 }
                 feedDialog.show()
             }
@@ -251,7 +255,7 @@ class FeedAngryFragment : Fragment() {
 
                     commentDialog.report_comment_btn.setOnClickListener {
                         commentDialog.dismiss()
-                        showReportDialog(item.id)
+                        showReportDialog(item.id, "comment")
                     }
                 }
             }
