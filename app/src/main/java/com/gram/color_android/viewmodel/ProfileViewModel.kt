@@ -12,25 +12,25 @@ import retrofit2.Response
 class ProfileViewModel : ViewModel() {
     private val profileRepository = ProfileRepositoryImpl()
     private val _profileLiveData : MutableLiveData<ProfileSet> = MutableLiveData()
-    private val _profileListLiveData : MutableLiveData<ProfileResponse> = MutableLiveData()
+    private val _postListLiveData : MutableLiveData<ProfileResponse> = MutableLiveData()
     val profileLiveData = _profileLiveData
-    val profileListLiveData = _profileListLiveData
+    val postListLiveData = _postListLiveData
 
-    fun getProfilePost(header: String, id: String, feel: String, filter: String, page: Int){
+    fun getProfile(header: String, id: String, feel: String, filter: String, page: Int){
         viewModelScope.launch {
             val response = profileRepository.profile(header, id, feel, filter, page)
             if(response.isSuccessful){
-                getProfilePostSuccess(response)
+                getProfileSuccess(response)
             } else {
                 _profileLiveData.postValue(ProfileSet.GET_FAIL)
             }
         }
     }
 
-    private fun getProfilePostSuccess(response: Response<ProfileResponse>) {
+    private fun getProfileSuccess(response: Response<ProfileResponse>) {
         if(response.code() == 200){
+            _postListLiveData.postValue(response.body())
             _profileLiveData.postValue(ProfileSet.GET_SUCCESS)
-            _profileListLiveData.postValue(response.body())
         } else {
             _profileLiveData.postValue(ProfileSet.GET_FAIL)
         }

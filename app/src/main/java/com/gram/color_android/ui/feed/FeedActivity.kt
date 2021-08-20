@@ -10,10 +10,13 @@ import com.gram.color_android.ui.feed.angry.FeedAngryFragment
 import com.gram.color_android.ui.profile.ProfileFragment
 import com.gram.color_android.ui.sign.SignActivity
 import com.gram.color_android.ui.write.WriteActivity
+import com.gram.color_android.util.OnBackPressedListener
 import com.gram.color_android.util.SharedPreferencesHelper
 import kotlinx.android.synthetic.main.activity_feed.*
 
 class FeedActivity : AppCompatActivity() {
+
+    private var listener : OnBackPressedListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +35,18 @@ class FeedActivity : AppCompatActivity() {
         }
     }
 
-    private fun replaceFragment(fragment: Fragment){
+    override fun onBackPressed() {
+        if(listener != null)
+            listener!!.onBackPressed()
+        else
+            super.onBackPressed()
+    }
+
+    fun setOnBackPressedListener(listener: OnBackPressedListener){
+        this.listener = listener
+    }
+
+    fun replaceFragment(fragment: Fragment){
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.feed_fragment_container, fragment).commit()
     }

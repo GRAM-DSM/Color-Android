@@ -15,11 +15,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gram.color_android.R
 import com.gram.color_android.data.model.feed.CommentRequest
 import com.gram.color_android.data.model.feed.FeedReportRequest
-import com.gram.color_android.data.model.feed.PostListResponse
 import com.gram.color_android.network.set.FeedSet
 import com.gram.color_android.network.set.FeelSet
+import com.gram.color_android.ui.feed.FeedActivity
 import com.gram.color_android.ui.write.WriteActivity
 import com.gram.color_android.util.ColorApplication
+import com.gram.color_android.util.OnBackPressedListener
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.FeedViewModel
 import kotlinx.android.synthetic.main.comment_bottomsheet_other.*
@@ -31,7 +32,7 @@ import kotlinx.android.synthetic.main.feed_post_delete.*
 import kotlinx.android.synthetic.main.fragment_feed_angry.*
 import kotlinx.android.synthetic.main.report_dialog.*
 
-class FeedAngryFragment : Fragment() {
+class FeedAngryFragment : Fragment(), OnBackPressedListener {
 
     private lateinit var feedAdapter: AngryFeedRVAdapter
     private lateinit var commentAdapter: AngryCommentRVAdapter
@@ -102,9 +103,6 @@ class FeedAngryFragment : Fragment() {
                     getString(R.string.send_report),
                     Toast.LENGTH_SHORT
                 ).show()
-                FeedSet.LIKE_SUCCESS -> {
-
-                }
             }
         })
     }
@@ -271,5 +269,14 @@ class FeedAngryFragment : Fragment() {
 
     private fun report(body: FeedReportRequest, id: String, type: String) {
         feedViewModel.report(prefs.accessToken!!, body, id, type)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as FeedActivity).setOnBackPressedListener(this)
+    }
+
+    override fun onBackPressed() {
+        (activity as FeedActivity).finishAffinity()
     }
 }

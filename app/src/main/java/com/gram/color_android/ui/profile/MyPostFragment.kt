@@ -1,7 +1,6 @@
 package com.gram.color_android.ui.profile
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,16 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gram.color_android.R
 import com.gram.color_android.network.set.ProfileSet
+import com.gram.color_android.ui.feed.FeedActivity
+import com.gram.color_android.ui.feed.angry.FeedAngryFragment
+import com.gram.color_android.ui.sign.SignActivity
 import com.gram.color_android.util.ColorApplication
+import com.gram.color_android.util.OnBackPressedListener
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_my_post.*
 
-class MyPostFragment : Fragment() {
+class MyPostFragment : Fragment(), OnBackPressedListener {
 
     private lateinit var adapter : ProfileRVAdapter
     private val profileViewModel = ProfileViewModel()
@@ -37,20 +40,25 @@ class MyPostFragment : Fragment() {
         getPost()
 
         profileViewModel.profileLiveData.observe(viewLifecycleOwner, {
-            when (it) {
+            when(it){
                 ProfileSet.GET_SUCCESS -> {
-                    adapter = ProfileRVAdapter(profileViewModel.profileListLiveData.value!!)
+                    adapter = ProfileRVAdapter(profileViewModel.postListLiveData.value!!)
                     profile_my_post_rv.adapter = adapter
-                }
-                ProfileSet.GET_FAIL -> {
-                    Toast.makeText(requireContext(), "asdasdasdasdasdasd", Toast.LENGTH_SHORT)
-                        .show()
                 }
             }
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        (activity as FeedActivity).setOnBackPressedListener(this)
+    }
+
+    override fun onBackPressed() {
+        (activity as FeedActivity).replaceFragment(FeedAngryFragment())
+    }
+
     private fun getPost(){
-        profileViewModel.getProfilePost(prefs.accessToken!!, prefs.email!!, ColorApplication.feel, "post", 1)
+        profileViewModel.getProfile(prefs.accessToken!!, prefs.email!!, ColorApplication.feel, "post", 1)
     }
 }
