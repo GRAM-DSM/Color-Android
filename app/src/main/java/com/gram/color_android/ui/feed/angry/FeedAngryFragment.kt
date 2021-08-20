@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gram.color_android.R
 import com.gram.color_android.data.model.feed.CommentRequest
@@ -66,6 +67,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
         commentBottomSheet = BottomSheetDialog(requireContext())
 
         getPostList()
+        getPostMore()
         swipeRefresh()
 
         feedViewModel.feedLiveData.observe(viewLifecycleOwner, {
@@ -96,7 +98,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                 }
                 FeedSet.WRITE_SUCCESS -> {
                     getCommentList(id, 0)
-                    feed_comment_et.setText("")
+                    commentBottomSheet.feed_comment_et.setText("")
                 }
                 FeedSet.REPORT_SUCCESS -> Toast.makeText(
                     requireContext(),
@@ -159,6 +161,16 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
         feedViewModel.getPostList(prefs.accessToken!!, getFeedPage(), FeelSet.ANGRY.toString())
     }
 
+    private fun getPostMore() {
+        feed_angry_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+
+            }
+        })
+    }
+
     private fun getFeedPage(): Int = feedPage++
 
     private fun getCommentList(id: String, page: Int) {
@@ -212,14 +224,16 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
         feedAdapter.setOnLikeClickListener(object : AngryFeedRVAdapter.OnLikeClickListener {
             override fun onLikeClick(v: View, position: Int) {
                 val item = feedViewModel.feedListLiveData.value!!.postContentResponseList[position]
-                var like = item.favorite_cnt
-                if (item.is_favorite) {
-                    v.feed_like_ib.setImageResource(R.drawable.ic_like_empty)
-                    v.feed_like_cnt_tv.text = (like - 1).toString()
-                } else {
-                    v.feed_like_ib.setImageResource(R.drawable.ic_like_fill)
-                    v.feed_like_cnt_tv.text = (like + 1).toString()
+                var like = Integer.parseInt(v.feed_like_cnt_tv.text.toString())
+
+                if(v.feed_like_ib != null){
+                    when(v.feed_like_ib.isSelected){
+                        true -> v.feed_like_cnt_tv.text = (like - 1).toString()
+                        false -> v.feed_like_cnt_tv.text = (like + 1).toString()
+                    }
+                    v.feed_like_ib.isSelected = !v.feed_like_ib.isSelected
                 }
+
                 feedViewModel.like(prefs.accessToken!!, item.id)
                 pos = position
             }

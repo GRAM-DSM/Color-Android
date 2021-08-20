@@ -88,13 +88,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/feed_like_ib"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:background="@null"
-                android:src="@drawable/ic_like_empty" />
+                android:src="@drawable/like_selector" />
 
             <TextView
                 android:id="@+id/feed_like_cnt_tv"

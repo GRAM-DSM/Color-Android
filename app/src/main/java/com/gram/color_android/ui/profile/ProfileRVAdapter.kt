@@ -10,6 +10,30 @@ import kotlinx.android.synthetic.main.feed_item.view.*
 
 class ProfileRVAdapter(private val items : ProfileResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    interface OnMoreClickListener{
+        fun onMoreClick(v: View, position: Int)
+    }
+    interface OnLikeClickListener{
+        fun onLikeClick(v: View, position: Int)
+    }
+    interface OnCommentClickListener{
+        fun onCommentClick(v: View, position: Int)
+    }
+
+    private var moreListener: OnMoreClickListener? = null
+    private var likeListener: OnLikeClickListener? = null
+    private var commentListener: OnCommentClickListener? = null
+
+    fun setOnMoreClickListener(moreListener: OnMoreClickListener){
+        this.moreListener = moreListener
+    }
+    fun setOnLikeClickListener(likeListener: OnLikeClickListener){
+        this.likeListener = likeListener
+    }
+    fun setOnCommentClickListener(commentListener: OnCommentClickListener){
+        this.commentListener = commentListener
+    }
+
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val view = v
         fun bind(item : ProfileResponse.Posts){
@@ -18,6 +42,24 @@ class ProfileRVAdapter(private val items : ProfileResponse) : RecyclerView.Adapt
             view.feed_content_tv.text = item.content
             view.feed_like_cnt_tv.text = item.favorite_cnt.toString()
             view.feed_comment_cnt_tv.text = item.comment_cnt.toString()
+
+            if(item.is_favorite){
+                view.feed_like_ib.setImageResource(R.drawable.ic_like_fill)
+            }
+
+
+            val position = absoluteAdapterPosition
+            if(position != RecyclerView.NO_POSITION){
+                itemView.feed_more_iv.setOnClickListener{
+                    moreListener?.onMoreClick(itemView, position)
+                }
+                itemView.feed_like_ib.setOnClickListener{
+                    likeListener?.onLikeClick(itemView, position)
+                }
+                itemView.feed_comment_ib.setOnClickListener{
+                    commentListener?.onCommentClick(itemView, position)
+                }
+            }
         }
     }
 
@@ -37,4 +79,10 @@ class ProfileRVAdapter(private val items : ProfileResponse) : RecyclerView.Adapt
     }
 
     override fun getItemCount(): Int = items.posts.size
+
+    fun removeItem(position: Int){
+        items.posts.removeAt(position)
+        notifyItemRemoved(position)
+        notifyDataSetChanged()
+    }
 }
