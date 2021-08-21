@@ -5,6 +5,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -43,10 +46,12 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
     private lateinit var reportDialog: Dialog
     private val feedViewModel = FeedViewModel()
     private val prefs = SharedPreferencesHelper.getInstance()
+    private var totalPage = 0
     private var feedPage = 0
     private var commentPage = 0
     private var pos = 0
     private var id = ""
+    private var isLoading = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,7 +72,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
         commentBottomSheet = BottomSheetDialog(requireContext())
 
         getPostList()
-        getPostMore()
+        getPostMore(totalPage)
         swipeRefresh()
 
         feedViewModel.feedLiveData.observe(viewLifecycleOwner, {
@@ -75,6 +80,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                 FeedSet.GET_FEED_SUCCESS -> {
                     feedAdapter = AngryFeedRVAdapter(feedViewModel.feedListLiveData.value!!)
                     feed_angry_rv.adapter = feedAdapter
+                    totalPage = feedViewModel.feedListLiveData.value!!.totalPages
                     postBtnClick()
                 }
                 FeedSet.DELETE_SUCCESS -> {
@@ -105,6 +111,10 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                     getString(R.string.send_report),
                     Toast.LENGTH_SHORT
                 ).show()
+                FeedSet.GET_MORE_SUCCESS -> {
+                    feedAdapter.notifyDataSetChanged()
+                    isLoading = false
+                }
             }
         })
     }
@@ -161,23 +171,13 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
         feedViewModel.getPostList(prefs.accessToken!!, getFeedPage(), FeelSet.ANGRY.toString())
     }
 
-    private fun getPostMore() {
-        feed_angry_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
 
-
-            }
-        })
-    }
 
     private fun getFeedPage(): Int = feedPage++
 
     private fun getCommentList(id: String, page: Int) {
         feedViewModel.getCommentList(prefs.accessToken!!, id, page)
     }
-
-    private fun getCommentPage(): Int = commentPage++
 
     private fun swipeRefresh() {
         swipe_refresh.setOnRefreshListener {
@@ -213,7 +213,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                     feedDialog.setContentView(R.layout.feed_more_bottomsheet_other)
                     feedDialog.view_post_btn.text =
                         item.user_nickname + getString(R.string.view_other)
-                    feedDialog.report_post_btn.setOnClickListener{
+                    feedDialog.report_post_btn.setOnClickListener {
                         feedDialog.dismiss()
                         showReportDialog(item.id, "post")
                     }
@@ -226,8 +226,8 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                 val item = feedViewModel.feedListLiveData.value!!.postContentResponseList[position]
                 var like = Integer.parseInt(v.feed_like_cnt_tv.text.toString())
 
-                if(v.feed_like_ib != null){
-                    when(v.feed_like_ib.isSelected){
+                if (v.feed_like_ib != null) {
+                    when (v.feed_like_ib.isSelected) {
                         true -> v.feed_like_cnt_tv.text = (like - 1).toString()
                         false -> v.feed_like_cnt_tv.text = (like + 1).toString()
                     }

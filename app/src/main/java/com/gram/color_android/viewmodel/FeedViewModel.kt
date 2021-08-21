@@ -32,6 +32,17 @@ class FeedViewModel : ViewModel() {
         }
     }
 
+    fun getPostMore(header: String, page: Int, feel: String) {
+        viewModelScope.launch {
+            val response = feedRepository.getPostList(header, page, feel)
+            if(response.isSuccessful){
+                getMoreSuccess(response)
+            } else {
+                _feedLiveData.postValue(FeedSet.GET_MORE_FAIL)
+            }
+        }
+    }
+
     fun deletePost(header: String, post_id: String) {
         viewModelScope.launch {
             val response = feedRepository.deletePost(header, post_id)
@@ -95,6 +106,16 @@ class FeedViewModel : ViewModel() {
             _feedLiveData.postValue(FeedSet.GET_FEED_FAIL)
         }
     }
+
+    private fun getMoreSuccess(response: Response<PostListResponse>) {
+        if(response.code() == 200){
+            _feedListLiveData.value!!.postContentResponseList.addAll(response.body()!!.postContentResponseList)
+            _feedLiveData.postValue(FeedSet.GET_MORE_SUCCESS)
+        } else {
+            _feedLiveData.postValue(FeedSet.GET_MORE_FAIL)
+        }
+    }
+
 
     private fun deletePostSuccess(response: Response<Void>) {
         if(response.code() == 200){

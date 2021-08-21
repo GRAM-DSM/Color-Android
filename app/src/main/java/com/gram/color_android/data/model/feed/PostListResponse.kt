@@ -1,7 +1,7 @@
 package com.gram.color_android.data.model.feed
 
 data class PostListResponse(
-    val totalPages : String,
+    val totalPages : Int,
     val postContentResponseList : ArrayList<PostContent>
 ){
     data class PostContent(

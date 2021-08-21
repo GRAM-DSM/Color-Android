@@ -12,5 +12,7 @@ enum class FeedSet {
     REPORT_SUCCESS,
     REPORT_FAIL,
     LIKE_SUCCESS,
-    LIKE_FAIL
+    LIKE_FAIL,
+    GET_MORE_SUCCESS,
+    GET_MORE_FAIL
 }
