@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -72,7 +71,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
         commentBottomSheet = BottomSheetDialog(requireContext())
 
         getPostList()
-        getPostMore(totalPage)
+        getPostMore()
         swipeRefresh()
 
         feedViewModel.feedLiveData.observe(viewLifecycleOwner, {
@@ -171,19 +170,25 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
         feedViewModel.getPostList(prefs.accessToken!!, getFeedPage(), FeelSet.ANGRY.toString())
     }
 
-    private fun getPostMore(totalPage: Int) {
+    private fun getPostMore() {
         feed_angry_rv.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
 
-                if(!isLoading){
+                if(!isLoading && feedViewModel.feedListLiveData.value!!.totalPages >= 1){
                     if(layoutManager != null &&
                         layoutManager.findLastCompletelyVisibleItemPosition() == recyclerView.adapter!!.itemCount - 1){
                             feed_progressBar.visibility = View.VISIBLE
-                        Log.d("findLastPosition", layoutManager.findLastCompletelyVisibleItemPosition().toString())
-                        Log.d("item count", (recyclerView.adapter!!.itemCount - 1).toString())
+                            requireActivity().runOnUiThread {
+                                val handler = Handler(Looper.getMainLooper())
+                                handler.postDelayed({
+                                    feedViewModel.getPostMore(prefs.accessToken!!, getFeedPage(), FeelSet.ANGRY.toString())
+                                    isLoading = true
+                                    feed_progressBar.visibility = View.INVISIBLE
+                                }, 1000)
+                            }
                     }
                 }
             }
