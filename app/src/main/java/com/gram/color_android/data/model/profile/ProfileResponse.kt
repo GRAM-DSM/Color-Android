@@ -11,6 +11,7 @@ data class ProfileResponse(
     data class Posts(
         val id: String,
         val content: String,
+        val is_mine: Boolean,
         val created_at: String,
         val user_nickname: String,
         val comment_cnt: Int,

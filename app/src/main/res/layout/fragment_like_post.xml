@@ -5,9 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.LikePostFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/profile_like_post_rv"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profile_like_post_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>

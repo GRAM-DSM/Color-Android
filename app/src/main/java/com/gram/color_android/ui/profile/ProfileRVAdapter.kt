@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gram.color_android.R
+import com.gram.color_android.data.model.feed.PostListResponse
 import com.gram.color_android.data.model.profile.ProfileResponse
 import kotlinx.android.synthetic.main.feed_item.view.*
 
-class ProfileRVAdapter(private val items : ProfileResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ProfileRVAdapter(private val items : ProfileResponse, private val type : String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     interface OnMoreClickListener{
         fun onMoreClick(v: View, position: Int)
@@ -73,7 +74,7 @@ class ProfileRVAdapter(private val items : ProfileResponse) : RecyclerView.Adapt
         val item = items.posts[position]
         if(holder is ViewHolder){
             holder.apply {
-                bind(item)
+               bind(getPostType(item))
             }
         }
     }
@@ -84,5 +85,13 @@ class ProfileRVAdapter(private val items : ProfileResponse) : RecyclerView.Adapt
         items.posts.removeAt(position)
         notifyItemRemoved(position)
         notifyDataSetChanged()
+    }
+
+    private fun getPostType(item : ProfileResponse.Posts) : ProfileResponse.Posts{
+        if(type == "my"){
+            if(item.is_mine)
+                return item
+        }
+        return item
     }
 }
