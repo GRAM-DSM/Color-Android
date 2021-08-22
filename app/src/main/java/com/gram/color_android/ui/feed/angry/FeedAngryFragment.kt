@@ -171,7 +171,24 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
         feedViewModel.getPostList(prefs.accessToken!!, getFeedPage(), FeelSet.ANGRY.toString())
     }
 
+    private fun getPostMore(totalPage: Int) {
+        feed_angry_rv.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
 
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+
+                if(!isLoading){
+                    if(layoutManager != null &&
+                        layoutManager.findLastCompletelyVisibleItemPosition() == recyclerView.adapter!!.itemCount - 1){
+                            feed_progressBar.visibility = View.VISIBLE
+                        Log.d("findLastPosition", layoutManager.findLastCompletelyVisibleItemPosition().toString())
+                        Log.d("item count", (recyclerView.adapter!!.itemCount - 1).toString())
+                    }
+                }
+            }
+        })
+    }
 
     private fun getFeedPage(): Int = feedPage++
 
