@@ -30,6 +30,7 @@ class LikePostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getPost()
 
         val linearLayoutManager = LinearLayoutManager(requireContext())
         profile_like_post_rv.layoutManager = linearLayoutManager
@@ -37,7 +38,7 @@ class LikePostFragment : Fragment() {
         profileViewModel.profileLiveData.observe(viewLifecycleOwner, {
             when(it){
                 ProfileSet.GET_SUCCESS -> {
-                    adapter = ProfileRVAdapter(profileViewModel.postListLiveData.value!!, "like")
+                    adapter = ProfileRVAdapter(profileViewModel.postListLiveData.value!!)
                     profile_like_post_rv.adapter = adapter
                 }
             }

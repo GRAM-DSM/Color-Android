@@ -23,6 +23,7 @@ import com.gram.color_android.network.set.FeelSet
 import com.gram.color_android.ui.feed.FeedActivity
 import com.gram.color_android.ui.write.WriteActivity
 import com.gram.color_android.util.ColorApplication
+import com.gram.color_android.util.DialogUtil
 import com.gram.color_android.util.OnBackPressedListener
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.FeedViewModel
@@ -38,13 +39,14 @@ import kotlinx.android.synthetic.main.report_dialog.*
 class FeedAngryFragment : Fragment(), OnBackPressedListener {
 
     private lateinit var feedAdapter: AngryFeedRVAdapter
-    private lateinit var commentAdapter: AngryCommentRVAdapter
+    private lateinit var commentAdapter: CommentRVAdapter
     private lateinit var feedDialog: BottomSheetDialog
     private lateinit var commentDialog: BottomSheetDialog
     private lateinit var commentBottomSheet: BottomSheetDialog
     private lateinit var reportDialog: Dialog
     private val feedViewModel = FeedViewModel()
     private val prefs = SharedPreferencesHelper.getInstance()
+    private val dialogUtil = DialogUtil.getInstance()
     private var totalPage = 0
     private var feedPage = 0
     private var commentPage = 0
@@ -97,9 +99,9 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                 ).show()
                 FeedSet.GET_COMMENT_SUCCESS -> {
                     commentAdapter =
-                        AngryCommentRVAdapter(feedViewModel.commentListLiveData.value!!)
+                        CommentRVAdapter(feedViewModel.commentListLiveData.value!!)
                     commentBottomSheet.feed_comment_rv.adapter = commentAdapter
-                    commentLongClick()
+                    dialogUtil.commentLongClick(commentAdapter, requireContext(), FeelSet.ANGRY)
                 }
                 FeedSet.WRITE_SUCCESS -> {
                     getCommentList(id, 0)
@@ -281,27 +283,27 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
         })
     }
 
-    private fun commentLongClick() {
-        commentAdapter.setOnItemLongClickListener(object :
-            AngryCommentRVAdapter.OnItemLongClickListener {
-            override fun onItemLongClick(v: View, position: Int) {
-                val item =
-                    feedViewModel.commentListLiveData.value!!.commentContentResponseList[position]
-                if (item.is_mine) {
-                    commentDialog.setContentView(R.layout.comment_bottomsheet_mine)
-                    commentDialog.show()
-                } else {
-                    commentDialog.setContentView(R.layout.comment_bottomsheet_other)
-                    commentDialog.show()
-
-                    commentDialog.report_comment_btn.setOnClickListener {
-                        commentDialog.dismiss()
-                        showReportDialog(item.id, "comment")
-                    }
-                }
-            }
-        })
-    }
+//    private fun commentLongClick() {
+//        commentAdapter.setOnItemLongClickListener(object :
+//            CommentRVAdapter.OnItemLongClickListener {
+//            override fun onItemLongClick(v: View, position: Int) {
+//                val item =
+//                    feedViewModel.commentListLiveData.value!!.commentContentResponseList[position]
+//                if (item.is_mine) {
+//                    commentDialog.setContentView(R.layout.comment_bottomsheet_mine)
+//                    commentDialog.show()
+//                } else {
+//                    commentDialog.setContentView(R.layout.comment_bottomsheet_other)
+//                    commentDialog.show()
+//
+//                    commentDialog.report_comment_btn.setOnClickListener {
+//                        commentDialog.dismiss()
+//                        showReportDialog(item.id, "comment")
+//                    }
+//                }
+//            }
+//        })
+//    }
 
     private fun report(body: FeedReportRequest, id: String, type: String) {
         feedViewModel.report(prefs.accessToken!!, body, id, type)

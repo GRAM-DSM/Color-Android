@@ -17,29 +17,24 @@ import com.gram.color_android.data.model.feed.CommentRequest
 import com.gram.color_android.network.set.FeedSet
 import com.gram.color_android.network.set.ProfileSet
 import com.gram.color_android.ui.feed.FeedActivity
-import com.gram.color_android.ui.feed.angry.AngryCommentRVAdapter
-import com.gram.color_android.ui.feed.angry.AngryFeedRVAdapter
+import com.gram.color_android.ui.feed.angry.CommentRVAdapter
 import com.gram.color_android.ui.feed.angry.FeedAngryFragment
-import com.gram.color_android.ui.sign.SignActivity
 import com.gram.color_android.ui.write.WriteActivity
 import com.gram.color_android.util.ColorApplication
 import com.gram.color_android.util.OnBackPressedListener
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.FeedViewModel
 import com.gram.color_android.viewmodel.ProfileViewModel
-import kotlinx.android.synthetic.main.comment_bottomsheet_other.*
 import kotlinx.android.synthetic.main.feed_comment_bottomsheet.*
 import kotlinx.android.synthetic.main.feed_item.view.*
 import kotlinx.android.synthetic.main.feed_more_bottomsheet_mine.*
-import kotlinx.android.synthetic.main.feed_more_bottomsheet_other.*
 import kotlinx.android.synthetic.main.feed_post_delete.*
-import kotlinx.android.synthetic.main.fragment_feed_angry.*
 import kotlinx.android.synthetic.main.fragment_my_post.*
 
 class MyPostFragment : Fragment(), OnBackPressedListener {
 
     private lateinit var adapter: ProfileRVAdapter
-    private lateinit var commentAdapter: AngryCommentRVAdapter
+    private lateinit var commentAdapter: CommentRVAdapter
     private lateinit var feedDialog: BottomSheetDialog
     private lateinit var commentDialog: BottomSheetDialog
     private lateinit var commentBottomSheet: BottomSheetDialog
@@ -72,7 +67,7 @@ class MyPostFragment : Fragment(), OnBackPressedListener {
         profileViewModel.profileLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 ProfileSet.GET_SUCCESS -> {
-                    adapter = ProfileRVAdapter(profileViewModel.postListLiveData.value!!, "mine")
+                    adapter = ProfileRVAdapter(profileViewModel.postListLiveData.value!!)
                     profile_my_post_rv.adapter = adapter
                     postBtnClick()
                 }
@@ -90,7 +85,7 @@ class MyPostFragment : Fragment(), OnBackPressedListener {
                 }
                 FeedSet.GET_COMMENT_SUCCESS -> {
                     commentAdapter =
-                        AngryCommentRVAdapter(feedViewModel.commentListLiveData.value!!)
+                        CommentRVAdapter(feedViewModel.commentListLiveData.value!!)
                     commentBottomSheet.feed_comment_rv.adapter = commentAdapter
                     commentLongClick()
                 }
@@ -165,7 +160,7 @@ class MyPostFragment : Fragment(), OnBackPressedListener {
 
     private fun commentLongClick() {
         commentAdapter.setOnItemLongClickListener(object :
-            AngryCommentRVAdapter.OnItemLongClickListener {
+            CommentRVAdapter.OnItemLongClickListener {
             override fun onItemLongClick(v: View, position: Int) {
                 val item =
                     feedViewModel.commentListLiveData.value!!.commentContentResponseList[position]
