@@ -17,5 +17,7 @@ interface FeedRepository {
 
     suspend fun writeComment(header: String, post_id: String, body: CommentRequest) : Response<Void>
 
+    suspend fun deleteComment(header: String, comment_id: Int) : Response<Void>
+
     suspend fun report(header: String, body: FeedReportRequest, id: String, type: String) : Response<Void>
 }

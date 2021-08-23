@@ -41,6 +41,10 @@ class FeedRepositoryImpl : FeedRepository, SafeApiRequest() {
         return safeApiCall { RetrofitClient.getSpringAPI().writeComment(header, post_id, body) }
     }
 
+    override suspend fun deleteComment(header: String, comment_id: Int): Response<Void> {
+        return safeApiCall { RetrofitClient.getSpringAPI().deleteComment(header, comment_id) }
+    }
+
     override suspend fun report(
         header: String,
         body: FeedReportRequest,

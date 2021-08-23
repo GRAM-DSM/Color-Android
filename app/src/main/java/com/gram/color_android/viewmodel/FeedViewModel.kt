@@ -76,6 +76,25 @@ class FeedViewModel : ViewModel() {
         }
     }
 
+    fun deleteComment(header: String, comment_id: Int){
+        viewModelScope.launch {
+            val response = feedRepository.deleteComment(header, comment_id)
+            if(response.isSuccessful){
+                deleteCommentSuccess(response)
+            } else {
+                feedLiveData.postValue(FeedSet.COMMENT_DEL_FAIL)
+            }
+        }
+    }
+
+    private fun deleteCommentSuccess(response: Response<Void>) {
+        if(response.code() == 204){
+            feedLiveData.postValue(FeedSet.COMMENT_DEL_SUCCESS)
+        } else {
+            feedLiveData.postValue(FeedSet.COMMENT_DEL_FAIL)
+        }
+    }
+
     fun report(header: String, body: FeedReportRequest, id: String, type: String){
         viewModelScope.launch {
             val response = feedRepository.report(header, body, id, type)
