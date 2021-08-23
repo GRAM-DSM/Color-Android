@@ -1,6 +1,6 @@
 package com.gram.color_android.data.repository.feed
 
-import com.gram.color_android.data.model.CommentContentResponseList
+import com.gram.color_android.data.model.feed.CommentContentResponseList
 import com.gram.color_android.data.model.feed.CommentRequest
 import com.gram.color_android.data.model.feed.FeedReportRequest
 import com.gram.color_android.data.model.feed.PostListResponse

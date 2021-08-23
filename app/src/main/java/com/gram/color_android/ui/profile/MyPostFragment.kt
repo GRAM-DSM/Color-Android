@@ -72,7 +72,7 @@ class MyPostFragment : Fragment(), OnBackPressedListener {
         profileViewModel.profileLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 ProfileSet.GET_SUCCESS -> {
-                    adapter = ProfileRVAdapter(profileViewModel.postListLiveData.value!!, "my")
+                    adapter = ProfileRVAdapter(profileViewModel.postListLiveData.value!!, "mine")
                     profile_my_post_rv.adapter = adapter
                     postBtnClick()
                 }

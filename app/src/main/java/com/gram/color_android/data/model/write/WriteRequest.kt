@@ -1,4 +1,4 @@
-package com.gram.color_android.data.model
+package com.gram.color_android.data.model.write
 
 data class WriteRequest(
     val content: String,

@@ -1,4 +1,4 @@
-package com.gram.color_android.data.model
+package com.gram.color_android.data.model.feed
 
 data class CommentContentResponseList(val commentContentResponseList: ArrayList<Comment>){
     data class Comment(

@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gram.color_android.R
-import com.gram.color_android.data.model.CommentContentResponseList
+import com.gram.color_android.data.model.feed.CommentContentResponseList
 import kotlinx.android.synthetic.main.comment_item.view.*
 
 class AngryCommentRVAdapter(private val items: CommentContentResponseList) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

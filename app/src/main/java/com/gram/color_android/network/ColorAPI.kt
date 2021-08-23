@@ -1,6 +1,6 @@
 package com.gram.color_android.network
 
-import com.gram.color_android.data.model.*
+import com.gram.color_android.data.model.feed.CommentContentResponseList
 import com.gram.color_android.data.model.feed.CommentRequest
 import com.gram.color_android.data.model.feed.FeedReportRequest
 import com.gram.color_android.data.model.profile.ProfileResponse
@@ -9,6 +9,7 @@ import com.gram.color_android.data.model.sign.LoginRequest
 import com.gram.color_android.data.model.sign.LoginResponse
 import com.gram.color_android.data.model.sign.RegisterRequest
 import com.gram.color_android.data.model.sign.TokenRefreshResponse
+import com.gram.color_android.data.model.write.WriteRequest
 import retrofit2.Response
 import retrofit2.http.*
 

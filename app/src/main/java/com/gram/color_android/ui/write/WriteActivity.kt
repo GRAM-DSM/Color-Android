@@ -3,13 +3,12 @@ package com.gram.color_android.ui.write
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.gram.color_android.R
-import com.gram.color_android.data.model.WriteRequest
+import com.gram.color_android.data.model.write.WriteRequest
 import com.gram.color_android.databinding.ActivityWriteBinding
 import com.gram.color_android.network.set.FeelSet
 import com.gram.color_android.network.set.WriteSet

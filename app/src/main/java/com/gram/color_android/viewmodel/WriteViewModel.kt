@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gram.color_android.data.model.WriteRequest
+import com.gram.color_android.data.model.write.WriteRequest
 import com.gram.color_android.data.repository.write.WriteRepositoryImpl
 import com.gram.color_android.network.set.WriteSet
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ class WriteViewModel : ViewModel() {
         }
     }
 
-    fun updatePost(header: String, post_id: String, body:WriteRequest){
+    fun updatePost(header: String, post_id: String, body: WriteRequest){
         viewModelScope.launch {
             val response = writeRepository.updatePost(header, post_id, body)
             if(response.isSuccessful){

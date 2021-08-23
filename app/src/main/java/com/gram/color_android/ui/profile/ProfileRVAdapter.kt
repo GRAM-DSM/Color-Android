@@ -88,9 +88,21 @@ class ProfileRVAdapter(private val items : ProfileResponse, private val type : S
     }
 
     private fun getPostType(item : ProfileResponse.Posts) : ProfileResponse.Posts{
-        if(type == "my"){
-            if(item.is_mine)
-                return item
+        var mine : ProfileResponse.Posts? = null
+        var like : ProfileResponse.Posts? = null
+
+        if(item.is_mine){
+            mine = item
+        } else {
+            like = item
+        }
+        when(type){
+            "mine" -> {
+                return mine!!
+            }
+            "like" -> {
+                return like!!
+            }
         }
         return item
     }
