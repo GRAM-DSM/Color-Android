@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,12 +28,10 @@ import com.gram.color_android.util.DialogUtil
 import com.gram.color_android.util.OnBackPressedListener
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.FeedViewModel
-import kotlinx.android.synthetic.main.comment_bottomsheet_other.*
 import kotlinx.android.synthetic.main.feed_comment_bottomsheet.*
 import kotlinx.android.synthetic.main.feed_item.view.*
 import kotlinx.android.synthetic.main.feed_more_bottomsheet_mine.*
 import kotlinx.android.synthetic.main.feed_more_bottomsheet_other.*
-import kotlinx.android.synthetic.main.feed_post_delete.*
 import kotlinx.android.synthetic.main.fragment_feed_angry.*
 import kotlinx.android.synthetic.main.report_dialog.*
 
@@ -84,14 +83,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                     totalPage = feedViewModel.feedListLiveData.value!!.totalPages
                     postBtnClick()
                 }
-                FeedSet.DELETE_SUCCESS -> {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.delete_post_success),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    feedAdapter.removeItem(pos)
-                }
+                FeedSet.DELETE_SUCCESS -> feedAdapter.removeItem(pos)
                 FeedSet.DELETE_FAIL -> Toast.makeText(
                     requireContext(),
                     getString(R.string.do_not_delete),
@@ -101,7 +93,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                     commentAdapter =
                         CommentRVAdapter(feedViewModel.commentListLiveData.value!!)
                     commentBottomSheet.feed_comment_rv.adapter = commentAdapter
-                    dialogUtil.commentLongClick(commentAdapter, requireContext(), FeelSet.ANGRY)
+                    dialogUtil.commentLongClick(commentAdapter, feedViewModel, requireContext(), id, FeelSet.ANGRY)
                 }
                 FeedSet.WRITE_SUCCESS -> {
                     getCommentList(id, 0)
@@ -116,25 +108,26 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                     feedAdapter.notifyDataSetChanged()
                     isLoading = false
                 }
+                FeedSet.DELETE_COM_SUCCESS -> commentAdapter.removeItem(dialogUtil.getPosition()!!)
             }
         })
     }
 
-    private fun showDeleteDialog(header: String, post_id: String) {
-        val deleteDialog = Dialog(requireContext())
-        deleteDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        deleteDialog.setContentView(R.layout.feed_post_delete)
-        feedDialog.dismiss()
-        deleteDialog.show()
-
-        deleteDialog.post_delete_dialog_cancel.setOnClickListener {
-            deleteDialog.dismiss()
-        }
-        deleteDialog.post_delete_dialog_delete.setOnClickListener {
-            feedViewModel.deletePost(header, post_id)
-            deleteDialog.dismiss()
-        }
-    }
+//    private fun showDeleteDialog(header: String, post_id: String) {
+//        val deleteDialog = Dialog(requireContext())
+//        deleteDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        deleteDialog.setContentView(R.layout.feed_post_delete)
+//        feedDialog.dismiss()
+//        deleteDialog.show()
+//
+//        deleteDialog.post_delete_dialog_cancel.setOnClickListener {
+//            deleteDialog.dismiss()
+//        }
+//        deleteDialog.post_delete_dialog_delete.setOnClickListener {
+//            feedViewModel.deletePost(header, post_id)
+//            deleteDialog.dismiss()
+//        }
+//    }
 
     private fun showReportDialog(id: String, type: String) {
         reportDialog = Dialog(requireContext())
@@ -222,7 +215,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                         pos = position
                         id =
                             feedViewModel.feedListLiveData.value!!.postContentResponseList[position].id
-                        showDeleteDialog(prefs.accessToken!!, id)
+                        //showDeleteDialog(prefs.accessToken!!, id)
                     }
                     feedDialog.modify_post_btn.setOnClickListener {
                         val intent = Intent(requireContext(), WriteActivity::class.java)
@@ -282,28 +275,6 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
             }
         })
     }
-
-//    private fun commentLongClick() {
-//        commentAdapter.setOnItemLongClickListener(object :
-//            CommentRVAdapter.OnItemLongClickListener {
-//            override fun onItemLongClick(v: View, position: Int) {
-//                val item =
-//                    feedViewModel.commentListLiveData.value!!.commentContentResponseList[position]
-//                if (item.is_mine) {
-//                    commentDialog.setContentView(R.layout.comment_bottomsheet_mine)
-//                    commentDialog.show()
-//                } else {
-//                    commentDialog.setContentView(R.layout.comment_bottomsheet_other)
-//                    commentDialog.show()
-//
-//                    commentDialog.report_comment_btn.setOnClickListener {
-//                        commentDialog.dismiss()
-//                        showReportDialog(item.id, "comment")
-//                    }
-//                }
-//            }
-//        })
-//    }
 
     private fun report(body: FeedReportRequest, id: String, type: String) {
         feedViewModel.report(prefs.accessToken!!, body, id, type)

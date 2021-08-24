@@ -53,6 +53,12 @@ class CommentRVAdapter(private val items: CommentContentResponseList) : Recycler
     }
 
     override fun getItemCount() = items.commentContentResponseList.size
+
+    fun removeItem(position: Int){
+        items.commentContentResponseList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyDataSetChanged()
+    }
 }
 
 

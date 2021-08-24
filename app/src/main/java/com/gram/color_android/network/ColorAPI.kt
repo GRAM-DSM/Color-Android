@@ -75,10 +75,11 @@ interface ColorAPI {
         @Body body: CommentRequest
     ) : Response<Void>
 
-    @DELETE("/comment/{comment_id}")
+    @DELETE("/comment/{post_id}/{comment_id}")
     suspend fun deleteComment(
         @Header("Authorization") header: String,
-        @Path("comment_id") comment_id: Int
+        @Path("post_id") post_id: String,
+        @Path("comment_id") comment_id: String
     ): Response<Void>
 
     @PUT("/like")

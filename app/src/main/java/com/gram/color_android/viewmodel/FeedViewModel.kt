@@ -54,6 +54,17 @@ class FeedViewModel : ViewModel() {
         }
     }
 
+    fun deleteComment(header: String, post_id: String, comment_id: String) {
+        viewModelScope.launch {
+            val response = feedRepository.deleteComment(header, post_id, comment_id)
+            if(response.isSuccessful){
+                deleteCommentSuccess(response)
+            } else {
+                _feedLiveData.postValue(FeedSet.DELETE_COM_FAIL)
+            }
+        }
+    }
+
     fun getCommentList(header: String, post_id: String, page: Int){
         viewModelScope.launch {
             val response = feedRepository.getCommentList(header, post_id, page)
@@ -76,25 +87,6 @@ class FeedViewModel : ViewModel() {
         }
     }
 
-    fun deleteComment(header: String, comment_id: Int){
-        viewModelScope.launch {
-            val response = feedRepository.deleteComment(header, comment_id)
-            if(response.isSuccessful){
-                deleteCommentSuccess(response)
-            } else {
-                feedLiveData.postValue(FeedSet.COMMENT_DEL_FAIL)
-            }
-        }
-    }
-
-    private fun deleteCommentSuccess(response: Response<Void>) {
-        if(response.code() == 204){
-            feedLiveData.postValue(FeedSet.COMMENT_DEL_SUCCESS)
-        } else {
-            feedLiveData.postValue(FeedSet.COMMENT_DEL_FAIL)
-        }
-    }
-
     fun report(header: String, body: FeedReportRequest, id: String, type: String){
         viewModelScope.launch {
             val response = feedRepository.report(header, body, id, type)
@@ -112,7 +104,7 @@ class FeedViewModel : ViewModel() {
             if(response.isSuccessful){
                 likeSuccess(response)
             } else {
-                feedLiveData.postValue(FeedSet.LIKE_FAIL)
+                _feedLiveData.postValue(FeedSet.LIKE_FAIL)
             }
         }
     }
@@ -144,6 +136,14 @@ class FeedViewModel : ViewModel() {
         }
     }
 
+    private fun deleteCommentSuccess(response: Response<Void>) {
+        if(response.code() == 200){
+            _feedLiveData.postValue(FeedSet.DELETE_COM_SUCCESS)
+        } else {
+            _feedLiveData.postValue(FeedSet.DELETE_COM_FAIL)
+        }
+    }
+
     private fun getCommentSuccess(response: Response<CommentContentResponseList>){
         if(response.code() == 200){
             _commentListLiveData.postValue(response.body())
@@ -171,9 +171,9 @@ class FeedViewModel : ViewModel() {
 
     private fun likeSuccess(response: Response<Void>){
         if(response.code() == 200){
-            feedLiveData.postValue(FeedSet.LIKE_SUCCESS)
+            _feedLiveData.postValue(FeedSet.LIKE_SUCCESS)
         } else {
-            feedLiveData.postValue(FeedSet.LIKE_FAIL)
+            _feedLiveData.postValue(FeedSet.LIKE_FAIL)
         }
     }
 }
