@@ -52,8 +52,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
-            android:background="@null"
-            android:src="@drawable/ic_send" />
+            android:background="@drawable/ic_send"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

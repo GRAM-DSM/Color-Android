@@ -2,6 +2,7 @@ package com.gram.color_android.ui.feed.angry
 
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.Handler
@@ -229,6 +230,9 @@ class FeedFragment : Fragment(), OnBackPressedListener {
                 id = feedViewModel.feedListLiveData.value!!.postContentResponseList[position].id
                 getCommentList(id)
                 commentBottomSheet.setContentView(R.layout.feed_comment_bottomsheet)
+                val drawable = commentBottomSheet.comment_send_ib.background
+                val wrappedDrawable = DrawableCompat.wrap(drawable)
+                DrawableCompat.setTint(wrappedDrawable, resources.getColor(getFeelColor(feel), null))
                 commentBottomSheet.feed_comment_rv.layoutManager =
                     LinearLayoutManager(requireContext())
                 commentBottomSheet.show()
