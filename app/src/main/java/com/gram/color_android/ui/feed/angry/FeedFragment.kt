@@ -1,26 +1,34 @@
 package com.gram.color_android.ui.feed.angry
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gram.color_android.R
 import com.gram.color_android.data.model.feed.CommentRequest
 import com.gram.color_android.network.set.FeedSet
+import com.gram.color_android.network.set.FeelSet
 import com.gram.color_android.ui.feed.FeedActivity
 import com.gram.color_android.ui.write.WriteActivity
 import com.gram.color_android.util.DialogUtil
 import com.gram.color_android.util.OnBackPressedListener
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.FeedViewModel
+import kotlinx.android.synthetic.main.activity_feed.*
 import kotlinx.android.synthetic.main.feed_comment_bottomsheet.*
 import kotlinx.android.synthetic.main.feed_item.view.*
 import kotlinx.android.synthetic.main.feed_more_bottomsheet_mine.*
@@ -53,12 +61,13 @@ class FeedFragment : Fragment(), OnBackPressedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        colorInit(feel)
+
         val linearLayoutManager = LinearLayoutManager(activity)
         feed_rv.layoutManager = linearLayoutManager
 
         feedDialog = BottomSheetDialog(requireContext())
         commentBottomSheet = BottomSheetDialog(requireContext())
-
         getPostList()
         getPostMore()
         swipeRefresh()
@@ -101,6 +110,20 @@ class FeedFragment : Fragment(), OnBackPressedListener {
         })
     }
 
+    private fun colorInit(feel : FeelSet) {
+        var position = 0
+        when(feel){
+            FeelSet.ANGRY -> position = 0
+            FeelSet.HAPPY -> position = 1
+            FeelSet.SAD -> position = 2
+            FeelSet.BORED -> position = 3
+            FeelSet.SHAME -> position = 4
+            FeelSet.LOVE -> position = 5
+        }
+        val colors = arrayListOf(R.color.angry, R.color.happy, R.color.sad, R.color.bored, R.color.shame, R.color.love)
+        feed_progressBar.indeterminateTintList = ColorStateList.valueOf(ResourcesCompat.getColor(resources, colors[position], null))
+    }
+
     private fun getPostList() {
         feedViewModel.getPostList(prefs.accessToken!!, getFeedPage(), feel.toString())
     }
@@ -131,7 +154,7 @@ class FeedFragment : Fragment(), OnBackPressedListener {
     }
 
     private fun getCommentList(id: String) {
-        feedViewModel.getCommentList(prefs.accessToken!!, id, 0)
+        feedViewModel.getCommentList(prefs.accessToken!!, id)
     }
 
     private fun getFeedPage(): Int = feedPage++

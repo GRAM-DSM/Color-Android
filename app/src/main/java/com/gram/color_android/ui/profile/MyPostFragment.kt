@@ -91,7 +91,7 @@ class MyPostFragment : Fragment(), OnBackPressedListener {
                     commentLongClick()
                 }
                 FeedSet.WRITE_SUCCESS -> {
-                    getCommentList(id, 0)
+                    getCommentList(id)
                     commentBottomSheet.feed_comment_et.setText("")
                 }
             }
@@ -142,7 +142,7 @@ class MyPostFragment : Fragment(), OnBackPressedListener {
             ProfileRVAdapter.OnCommentClickListener {
             override fun onCommentClick(v: View, position: Int) {
                 id = profileViewModel.postListLiveData.value!!.posts[position].id
-                getCommentList(id, 0)
+                getCommentList(id)
                 commentBottomSheet.setContentView(R.layout.feed_comment_bottomsheet)
                 commentBottomSheet.feed_comment_rv.layoutManager =
                     LinearLayoutManager(requireContext())
@@ -206,8 +206,8 @@ class MyPostFragment : Fragment(), OnBackPressedListener {
         )
     }
 
-    private fun getCommentList(id: String, page: Int) {
-        feedViewModel.getCommentList(prefs.accessToken!!, id, page)
+    private fun getCommentList(id: String) {
+        feedViewModel.getCommentList(prefs.accessToken!!, id)
     }
 
     private fun swipeRefresh() {

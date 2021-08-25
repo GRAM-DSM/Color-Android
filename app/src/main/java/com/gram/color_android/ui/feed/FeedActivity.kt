@@ -23,6 +23,9 @@ class FeedActivity : AppCompatActivity() {
                 feel = FeelSet.ANGRY
             return feel!!
         }
+        fun setFeel(feel : FeelSet){
+            this.feel = feel
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

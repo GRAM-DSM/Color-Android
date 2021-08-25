@@ -65,9 +65,9 @@ class FeedViewModel : ViewModel() {
         }
     }
 
-    fun getCommentList(header: String, post_id: String, page: Int){
+    fun getCommentList(header: String, post_id: String){
         viewModelScope.launch {
-            val response = feedRepository.getCommentList(header, post_id, page)
+            val response = feedRepository.getCommentList(header, post_id)
             if(response.isSuccessful){
                 getCommentSuccess(response)
             } else {

@@ -13,7 +13,7 @@ interface FeedRepository {
 
     suspend fun like(header: String, post_id: String) : Response<Void>
 
-    suspend fun getCommentList(header: String, post_id: String, page: Int) : Response<CommentContentResponseList>
+    suspend fun getCommentList(header: String, post_id: String) : Response<CommentContentResponseList>
 
     suspend fun writeComment(header: String, post_id: String, body: CommentRequest) : Response<Void>
 

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gram.color_android.R
 import com.gram.color_android.network.set.FeelSet
 import com.gram.color_android.network.set.ProfileSet
+import com.gram.color_android.ui.feed.FeedActivity
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_like_post.*
@@ -18,6 +19,7 @@ class LikePostFragment : Fragment() {
     private lateinit var adapter : ProfileRVAdapter
     private val profileViewModel = ProfileViewModel()
     private val prefs = SharedPreferencesHelper.getInstance()
+    private var feel = FeedActivity.getFeel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +48,6 @@ class LikePostFragment : Fragment() {
     }
 
     private fun getPost(){
-        profileViewModel.getProfile(prefs.accessToken!!, prefs.email!!, FeelSet.ANGRY.toString(), "like", 1)
+        profileViewModel.getProfile(prefs.accessToken!!, prefs.email!!, feel.toString(), "like", 1)
     }
 }

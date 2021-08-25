@@ -1,122 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/main_explain_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/font_nanum_gothic"
-        android:gravity="center"
-        android:text="@string/your_colors"
-        android:textColor="@color/black"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <import type="com.gram.color_android.network.set.FeelSet"/>
+        <variable
+            name="activity"
+            type="com.gram.color_android.ui.main.MainActivity" />
+    </data>
 
-    <TextView
-        android:id="@+id/main_angry_tv"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="25dp"
-        android:gravity="center"
-        android:background="@drawable/main_circle"
-        android:backgroundTint="@color/angry"
-        android:fontFamily="@font/nanum_gothic_bold"
-        android:text="@string/angry"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/main_explain_tv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.MainActivity">
 
-    <TextView
-        android:id="@+id/main_happy_tv"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="25dp"
-        android:background="@drawable/main_circle"
-        android:backgroundTint="@color/happy"
-        android:fontFamily="@font/nanum_gothic_bold"
-        android:gravity="center"
-        android:text="@string/happy"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toEndOf="@+id/main_explain_tv"
-        app:layout_constraintTop_toBottomOf="@+id/main_angry_tv" />
+        <TextView
+            android:id="@+id/main_explain_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_nanum_gothic"
+            android:gravity="center"
+            android:text="@string/your_colors"
+            android:textColor="@color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/main_sad_tv"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/main_circle"
-        android:backgroundTint="@color/sad"
-        android:fontFamily="@font/nanum_gothic_bold"
-        android:gravity="center"
-        android:text="@string/sad"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toEndOf="@+id/main_explain_tv"
-        app:layout_constraintTop_toBottomOf="@+id/main_happy_tv" />
+        <TextView
+            android:id="@+id/main_angry_tv"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/main_circle"
+            android:backgroundTint="@color/angry"
+            android:fontFamily="@font/nanum_gothic_bold"
+            android:gravity="center"
+            android:text="@string/angry"
+            android:textColor="@color/white"
+            android:onClick="@{() -> activity.feedIntent(FeelSet.ANGRY)}"
+            app:layout_constraintBottom_toTopOf="@+id/main_explain_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/main_bored_tv"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:gravity="center"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="160dp"
-        android:background="@drawable/main_circle"
-        android:backgroundTint="@color/bored"
-        android:text="@string/bored"
-        android:textColor="@color/white"
-        android:fontFamily="@font/nanum_gothic_bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_explain_tv" />
+        <TextView
+            android:id="@+id/main_happy_tv"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="25dp"
+            android:background="@drawable/main_circle"
+            android:backgroundTint="@color/happy"
+            android:fontFamily="@font/nanum_gothic_bold"
+            android:gravity="center"
+            android:text="@string/happy"
+            android:textColor="@color/white"
+            android:onClick="@{() -> activity.feedIntent(FeelSet.HAPPY)}"
+            app:layout_constraintStart_toEndOf="@+id/main_explain_tv"
+            app:layout_constraintTop_toBottomOf="@+id/main_angry_tv" />
 
-    <TextView
-        android:id="@+id/main_love_tv"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:gravity="center"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/main_circle"
-        android:backgroundTint="@color/love"
-        android:text="@string/love"
-        android:textColor="@color/white"
-        android:fontFamily="@font/nanum_gothic_bold"
-        app:layout_constraintEnd_toStartOf="@+id/main_explain_tv"
-        app:layout_constraintTop_toBottomOf="@+id/main_angry_tv" />
+        <TextView
+            android:id="@+id/main_sad_tv"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/main_circle"
+            android:backgroundTint="@color/sad"
+            android:fontFamily="@font/nanum_gothic_bold"
+            android:gravity="center"
+            android:text="@string/sad"
+            android:textColor="@color/white"
+            android:onClick="@{() -> activity.feedIntent(FeelSet.SAD)}"
+            app:layout_constraintStart_toEndOf="@+id/main_explain_tv"
+            app:layout_constraintTop_toBottomOf="@+id/main_happy_tv" />
 
-    <TextView
-        android:id="@+id/main_shame_tv"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:gravity="center"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/main_circle"
-        android:backgroundTint="@color/shame"
-        android:text="@string/shame"
-        android:textColor="@color/white"
-        android:fontFamily="@font/nanum_gothic_bold"
-        app:layout_constraintEnd_toStartOf="@+id/main_explain_tv"
-        app:layout_constraintTop_toBottomOf="@+id/main_love_tv" />
+        <TextView
+            android:id="@+id/main_bored_tv"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="160dp"
+            android:background="@drawable/main_circle"
+            android:backgroundTint="@color/bored"
+            android:fontFamily="@font/nanum_gothic_bold"
+            android:gravity="center"
+            android:text="@string/bored"
+            android:textColor="@color/white"
+            android:onClick="@{() -> activity.feedIntent(FeelSet.BORED)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_explain_tv" />
 
-    <ImageButton
-        android:id="@+id/main_explain_ib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        android:background="@null"
-        android:src="@drawable/ic_color_explain"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/main_love_tv"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/main_circle"
+            android:backgroundTint="@color/love"
+            android:fontFamily="@font/nanum_gothic_bold"
+            android:gravity="center"
+            android:text="@string/love"
+            android:textColor="@color/white"
+            android:onClick="@{() -> activity.feedIntent(FeelSet.LOVE)}"
+            app:layout_constraintEnd_toStartOf="@+id/main_explain_tv"
+            app:layout_constraintTop_toBottomOf="@+id/main_angry_tv" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/main_shame_tv"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/main_circle"
+            android:backgroundTint="@color/shame"
+            android:fontFamily="@font/nanum_gothic_bold"
+            android:gravity="center"
+            android:text="@string/shame"
+            android:textColor="@color/white"
+            android:onClick="@{() -> activity.feedIntent(FeelSet.SHAME)}"
+            app:layout_constraintEnd_toStartOf="@+id/main_explain_tv"
+            app:layout_constraintTop_toBottomOf="@+id/main_love_tv" />
+
+        <ImageButton
+            android:id="@+id/main_explain_ib"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="@null"
+            android:src="@drawable/ic_color_explain"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

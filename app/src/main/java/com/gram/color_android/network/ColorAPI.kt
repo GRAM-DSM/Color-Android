@@ -64,8 +64,7 @@ interface ColorAPI {
     @GET("/comment/{post_id}")
     suspend fun getComment(
         @Header("Authorization") header: String,
-        @Path("post_id") post_id: String,
-        @Query("page") page: Int
+        @Path("post_id") post_id: String
     ): Response<CommentContentResponseList>
 
     @POST("/comment/{post_id}")

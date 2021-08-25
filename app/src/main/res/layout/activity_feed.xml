@@ -57,8 +57,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:maxAngle="50"
             app:menuIcon="plus"
+            app:maxAngle="50"
             app:startAngle="374" />
 
         <androidx.appcompat.widget.Toolbar

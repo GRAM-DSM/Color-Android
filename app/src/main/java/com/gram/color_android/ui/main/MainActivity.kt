@@ -1,6 +1,5 @@
 package com.gram.color_android.ui.main
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,19 +7,22 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import androidx.core.content.res.ResourcesCompat
+import androidx.databinding.DataBindingUtil
 import com.gram.color_android.R
+import com.gram.color_android.databinding.ActivityMainBinding
+import com.gram.color_android.network.set.FeelSet
 import com.gram.color_android.ui.explain.ExplainActivity
 import com.gram.color_android.ui.feed.FeedActivity
-import com.gram.color_android.ui.sign.SignActivity
-import com.gram.color_android.util.Color
-import com.gram.color_android.util.SharedPreferencesHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var dataBinding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        dataBinding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
+        dataBinding.activity = this@MainActivity
 
         val colorText = main_explain_tv.text
         val content1 = SpannableString(colorText)
@@ -36,14 +38,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, ExplainActivity::class.java)
             startActivity(intent)
         }
-        main_angry_tv.setOnClickListener{
-            feedIntent(this@MainActivity, FeedActivity::class.java, Color.ANGRY)
-        }
     }
 
-    private fun <T> feedIntent(packageContext: Context, cls: Class<T>, color: Color){
-        val intent = Intent(packageContext, cls)
-        intent.putExtra("color", color)
+    fun feedIntent(feel: FeelSet){
+        FeedActivity.setFeel(feel)
+        val intent = Intent(this@MainActivity, FeedActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }
