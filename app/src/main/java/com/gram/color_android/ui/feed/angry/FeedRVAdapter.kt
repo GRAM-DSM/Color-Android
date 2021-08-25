@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gram.color_android.R
 import com.gram.color_android.data.model.feed.PostListResponse
-import kotlinx.android.synthetic.main.feed_angry_item.view.*
+import com.gram.color_android.network.set.FeelSet
 import kotlinx.android.synthetic.main.feed_item.view.*
 
 
-class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FeedRVAdapter(private val items : PostListResponse, private val feel : FeelSet) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     interface OnMoreClickListener{
         fun onMoreClick(v: View, position: Int)
@@ -51,6 +51,8 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
                 view.feed_like_ib.isSelected = true
             }
 
+            setLikeImage(view, feel)
+
             val position = absoluteAdapterPosition
             if(position != RecyclerView.NO_POSITION){
                 itemView.feed_more_iv.setOnClickListener{
@@ -63,6 +65,17 @@ class AngryFeedRVAdapter(private val items : PostListResponse) : RecyclerView.Ad
                     commentListener?.onCommentClick(itemView, position)
                 }
             }
+        }
+    }
+
+    private fun setLikeImage(view: View, feel: FeelSet) {
+        when(feel) {
+            FeelSet.ANGRY -> view.feed_like_ib.setImageResource(R.drawable.like_selector_angry)
+            FeelSet.HAPPY -> view.feed_like_ib.setImageResource(R.drawable.like_selector_happy)
+            FeelSet.SAD -> view.feed_like_ib.setImageResource(R.drawable.like_selector_sad)
+            FeelSet.BORED -> view.feed_like_ib.setImageResource(R.drawable.like_selector_bored)
+            FeelSet.SHAME -> view.feed_like_ib.setImageResource(R.drawable.like_selector_shame)
+            FeelSet.LOVE -> view.feed_like_ib.setImageResource(R.drawable.like_selector_love)
         }
     }
 

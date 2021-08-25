@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gram.color_android.R
-import com.gram.color_android.data.model.feed.PostListResponse
 import com.gram.color_android.data.model.profile.ProfileResponse
 import kotlinx.android.synthetic.main.feed_item.view.*
 
@@ -45,7 +44,7 @@ class ProfileRVAdapter(private val items : ProfileResponse) : RecyclerView.Adapt
             view.feed_comment_cnt_tv.text = item.comment_cnt.toString()
 
             if(item.is_favorite){
-                view.feed_like_ib.setImageResource(R.drawable.ic_like_fill)
+                view.feed_like_ib.setImageResource(R.drawable.ic_like_fill_angry)
             }
 
 

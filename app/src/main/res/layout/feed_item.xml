@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:background="@null"
-                android:src="@drawable/like_selector" />
+                android:src="@drawable/like_selector_angry" />
 
             <TextView
                 android:id="@+id/feed_like_cnt_tv"

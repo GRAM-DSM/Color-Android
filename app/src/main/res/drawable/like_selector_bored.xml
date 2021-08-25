@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_selected="true"
-        android:drawable="@drawable/ic_like_fill" />
+        android:drawable="@drawable/ic_like_fill_bored" />
     <item
         android:drawable="@drawable/ic_like_empty" />
 </selector>

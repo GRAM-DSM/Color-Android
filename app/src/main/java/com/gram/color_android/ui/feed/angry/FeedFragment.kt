@@ -2,19 +2,18 @@ package com.gram.color_android.ui.feed.angry
 
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -28,7 +27,6 @@ import com.gram.color_android.util.DialogUtil
 import com.gram.color_android.util.OnBackPressedListener
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.FeedViewModel
-import kotlinx.android.synthetic.main.activity_feed.*
 import kotlinx.android.synthetic.main.feed_comment_bottomsheet.*
 import kotlinx.android.synthetic.main.feed_item.view.*
 import kotlinx.android.synthetic.main.feed_more_bottomsheet_mine.*
@@ -37,7 +35,7 @@ import kotlinx.android.synthetic.main.fragment_feed.*
 
 class FeedFragment : Fragment(), OnBackPressedListener {
 
-    private lateinit var feedAdapter: AngryFeedRVAdapter
+    private lateinit var feedAdapter: FeedRVAdapter
     private lateinit var commentAdapter: CommentRVAdapter
     private lateinit var feedDialog: BottomSheetDialog
     private lateinit var commentBottomSheet: BottomSheetDialog
@@ -75,7 +73,7 @@ class FeedFragment : Fragment(), OnBackPressedListener {
         feedViewModel.feedLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 FeedSet.GET_FEED_SUCCESS -> {
-                    feedAdapter = AngryFeedRVAdapter(feedViewModel.feedListLiveData.value!!)
+                    feedAdapter = FeedRVAdapter(feedViewModel.feedListLiveData.value!!, feel)
                     feed_rv.adapter = feedAdapter
                     totalPage = feedViewModel.feedListLiveData.value!!.totalPages
                     postBtnClick()
@@ -111,17 +109,24 @@ class FeedFragment : Fragment(), OnBackPressedListener {
     }
 
     private fun colorInit(feel : FeelSet) {
-        var position = 0
-        when(feel){
-            FeelSet.ANGRY -> position = 0
-            FeelSet.HAPPY -> position = 1
-            FeelSet.SAD -> position = 2
-            FeelSet.BORED -> position = 3
-            FeelSet.SHAME -> position = 4
-            FeelSet.LOVE -> position = 5
-        }
+        val drawable = AppCompatResources.getDrawable(requireContext(), R.drawable.ic_like_fill_angry)!!
+        val wrappedDrawable = DrawableCompat.wrap(drawable)
+        DrawableCompat.setTint(wrappedDrawable.mutate(), getFeelColor(feel))
+        DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
+        feed_progressBar.indeterminateTintList = ColorStateList.valueOf(ResourcesCompat.getColor(resources, getFeelColor(feel), null))
+    }
+
+    private fun getFeelColor(feel: FeelSet) : Int{
         val colors = arrayListOf(R.color.angry, R.color.happy, R.color.sad, R.color.bored, R.color.shame, R.color.love)
-        feed_progressBar.indeterminateTintList = ColorStateList.valueOf(ResourcesCompat.getColor(resources, colors[position], null))
+        var position = when(feel){
+            FeelSet.ANGRY -> 0
+            FeelSet.HAPPY -> 1
+            FeelSet.SAD -> 2
+            FeelSet.BORED -> 3
+            FeelSet.SHAME -> 4
+            FeelSet.LOVE -> 5
+        }
+        return colors[position]
     }
 
     private fun getPostList() {
@@ -168,7 +173,7 @@ class FeedFragment : Fragment(), OnBackPressedListener {
     }
 
     private fun postBtnClick() {
-        feedAdapter.setOnMoreClickListener(object : AngryFeedRVAdapter.OnMoreClickListener {
+        feedAdapter.setOnMoreClickListener(object : FeedRVAdapter.OnMoreClickListener {
             override fun onMoreClick(v: View, position: Int) {
                 val item =
                     feedViewModel.feedListLiveData.value!!.postContentResponseList[position]
@@ -201,7 +206,7 @@ class FeedFragment : Fragment(), OnBackPressedListener {
                 feedDialog.show()
             }
         })
-        feedAdapter.setOnLikeClickListener(object : AngryFeedRVAdapter.OnLikeClickListener {
+        feedAdapter.setOnLikeClickListener(object : FeedRVAdapter.OnLikeClickListener {
             override fun onLikeClick(v: View, position: Int) {
                 val item = feedViewModel.feedListLiveData.value!!.postContentResponseList[position]
                 var like = Integer.parseInt(v.feed_like_cnt_tv.text.toString())
@@ -219,7 +224,7 @@ class FeedFragment : Fragment(), OnBackPressedListener {
             }
         })
         feedAdapter.setOnCommentClickListener(object :
-            AngryFeedRVAdapter.OnCommentClickListener {
+            FeedRVAdapter.OnCommentClickListener {
             override fun onCommentClick(v: View, position: Int) {
                 id = feedViewModel.feedListLiveData.value!!.postContentResponseList[position].id
                 getCommentList(id)
