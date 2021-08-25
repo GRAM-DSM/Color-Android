@@ -68,7 +68,7 @@ class DialogUtil {
 
     fun getPosition() = pos
 
-    private fun showReportDialog(context: Context, id: String, type: String, feel: FeelSet) {
+    fun showReportDialog(context: Context, id: String, type: String, feel: FeelSet) {
         val reportDialog = Dialog(context)
         reportDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         reportDialog.setContentView(R.layout.report_dialog)
@@ -97,6 +97,21 @@ class DialogUtil {
                 feedViewModel.report(prefs.accessToken!!, body, id, type)
                 reportDialog.dismiss()
             }
+        }
+    }
+
+    fun showDeletePost(context: Context, header: String, post_id: String) {
+        val deleteDialog = Dialog(context)
+        deleteDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        deleteDialog.setContentView(R.layout.feed_post_delete)
+        deleteDialog.show()
+
+        deleteDialog.post_delete_dialog_cancel.setOnClickListener {
+            deleteDialog.dismiss()
+        }
+        deleteDialog.post_delete_dialog_delete.setOnClickListener {
+            feedViewModel.deletePost(header, post_id)
+            deleteDialog.dismiss()
         }
     }
 

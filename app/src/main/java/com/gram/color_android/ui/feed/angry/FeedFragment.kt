@@ -1,13 +1,9 @@
 package com.gram.color_android.ui.feed.angry
 
-import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,12 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gram.color_android.R
 import com.gram.color_android.data.model.feed.CommentRequest
-import com.gram.color_android.data.model.feed.FeedReportRequest
 import com.gram.color_android.network.set.FeedSet
-import com.gram.color_android.network.set.FeelSet
 import com.gram.color_android.ui.feed.FeedActivity
 import com.gram.color_android.ui.write.WriteActivity
-import com.gram.color_android.util.ColorApplication
 import com.gram.color_android.util.DialogUtil
 import com.gram.color_android.util.OnBackPressedListener
 import com.gram.color_android.util.SharedPreferencesHelper
@@ -32,43 +25,38 @@ import kotlinx.android.synthetic.main.feed_comment_bottomsheet.*
 import kotlinx.android.synthetic.main.feed_item.view.*
 import kotlinx.android.synthetic.main.feed_more_bottomsheet_mine.*
 import kotlinx.android.synthetic.main.feed_more_bottomsheet_other.*
-import kotlinx.android.synthetic.main.fragment_feed_angry.*
-import kotlinx.android.synthetic.main.report_dialog.*
+import kotlinx.android.synthetic.main.fragment_feed.*
 
-class FeedAngryFragment : Fragment(), OnBackPressedListener {
+class FeedFragment : Fragment(), OnBackPressedListener {
 
     private lateinit var feedAdapter: AngryFeedRVAdapter
     private lateinit var commentAdapter: CommentRVAdapter
     private lateinit var feedDialog: BottomSheetDialog
-    private lateinit var commentDialog: BottomSheetDialog
     private lateinit var commentBottomSheet: BottomSheetDialog
-    private lateinit var reportDialog: Dialog
     private val feedViewModel = FeedViewModel()
     private val prefs = SharedPreferencesHelper.getInstance()
     private val dialogUtil = DialogUtil.getInstance()
     private var totalPage = 0
     private var feedPage = 0
-    private var commentPage = 0
+    private val feel = FeedActivity.getFeel()
     private var pos = 0
     private var id = ""
-    private var isLoading = false
+    private var isPostLoading = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_feed_angry, container, false)
+        return inflater.inflate(R.layout.fragment_feed, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ColorApplication.feel = FeelSet.ANGRY.toString()
 
         val linearLayoutManager = LinearLayoutManager(activity)
-        feed_angry_rv.layoutManager = linearLayoutManager
+        feed_rv.layoutManager = linearLayoutManager
 
         feedDialog = BottomSheetDialog(requireContext())
-        commentDialog = BottomSheetDialog(requireContext())
         commentBottomSheet = BottomSheetDialog(requireContext())
 
         getPostList()
@@ -79,7 +67,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
             when (it) {
                 FeedSet.GET_FEED_SUCCESS -> {
                     feedAdapter = AngryFeedRVAdapter(feedViewModel.feedListLiveData.value!!)
-                    feed_angry_rv.adapter = feedAdapter
+                    feed_rv.adapter = feedAdapter
                     totalPage = feedViewModel.feedListLiveData.value!!.totalPages
                     postBtnClick()
                 }
@@ -93,10 +81,10 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                     commentAdapter =
                         CommentRVAdapter(feedViewModel.commentListLiveData.value!!)
                     commentBottomSheet.feed_comment_rv.adapter = commentAdapter
-                    dialogUtil.commentLongClick(commentAdapter, feedViewModel, requireContext(), id, FeelSet.ANGRY)
+                    dialogUtil.commentLongClick(commentAdapter, feedViewModel, requireContext(), id, feel)
                 }
                 FeedSet.WRITE_SUCCESS -> {
-                    getCommentList(id, 0)
+                    getCommentList(id)
                     commentBottomSheet.feed_comment_et.setText("")
                 }
                 FeedSet.REPORT_SUCCESS -> Toast.makeText(
@@ -106,81 +94,33 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                 ).show()
                 FeedSet.GET_MORE_SUCCESS -> {
                     feedAdapter.notifyDataSetChanged()
-                    isLoading = false
+                    isPostLoading = false
                 }
                 FeedSet.DELETE_COM_SUCCESS -> commentAdapter.removeItem(dialogUtil.getPosition()!!)
             }
         })
     }
 
-//    private fun showDeleteDialog(header: String, post_id: String) {
-//        val deleteDialog = Dialog(requireContext())
-//        deleteDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//        deleteDialog.setContentView(R.layout.feed_post_delete)
-//        feedDialog.dismiss()
-//        deleteDialog.show()
-//
-//        deleteDialog.post_delete_dialog_cancel.setOnClickListener {
-//            deleteDialog.dismiss()
-//        }
-//        deleteDialog.post_delete_dialog_delete.setOnClickListener {
-//            feedViewModel.deletePost(header, post_id)
-//            deleteDialog.dismiss()
-//        }
-//    }
-
-    private fun showReportDialog(id: String, type: String) {
-        reportDialog = Dialog(requireContext())
-        reportDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        reportDialog.setContentView(R.layout.report_dialog)
-        reportDialog.show()
-
-        var reason = ""
-        reportDialog.radio_group.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                reportDialog.radio_btn1.id -> reason =
-                    reportDialog.reason1_tv.text.toString()
-                reportDialog.radio_btn2.id -> reason =
-                    reportDialog.reason2_tv.text.toString()
-                reportDialog.radio_btn3.id -> reason =
-                    reportDialog.reason3_tv.text.toString()
-                reportDialog.radio_btn4.id -> reason =
-                    reportDialog.reason4_tv.text.toString()
-            }
-        }
-
-        reportDialog.report_negative_btn.setOnClickListener {
-            reportDialog.dismiss()
-        }
-        reportDialog.report_positive_btn.setOnClickListener {
-            if (reportDialog.confirm_radio_btn.isChecked) {
-                val body = FeedReportRequest(reason, FeelSet.ANGRY.toString())
-                report(body, id, type)
-                reportDialog.dismiss()
-            }
-        }
-    }
-
     private fun getPostList() {
-        feedViewModel.getPostList(prefs.accessToken!!, getFeedPage(), FeelSet.ANGRY.toString())
+        feedViewModel.getPostList(prefs.accessToken!!, getFeedPage(), feel.toString())
     }
 
     private fun getPostMore() {
-        feed_angry_rv.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        feed_rv.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
 
-                if(!isLoading && feedViewModel.feedListLiveData.value!!.totalPages >= 1){
+                if(!isPostLoading && feedViewModel.feedListLiveData.value!!.totalPages >= 1){
                     if(layoutManager != null &&
                         layoutManager.findLastCompletelyVisibleItemPosition() == recyclerView.adapter!!.itemCount - 1){
                             feed_progressBar.visibility = View.VISIBLE
                             requireActivity().runOnUiThread {
                                 val handler = Handler(Looper.getMainLooper())
                                 handler.postDelayed({
-                                    feedViewModel.getPostMore(prefs.accessToken!!, getFeedPage(), FeelSet.ANGRY.toString())
-                                    isLoading = true
+                                    feedViewModel.getPostMore(prefs.accessToken!!, getFeedPage(), feel.toString())
+                                    isPostLoading = true
                                     feed_progressBar.visibility = View.INVISIBLE
                                 }, 1000)
                             }
@@ -190,11 +130,11 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
         })
     }
 
-    private fun getFeedPage(): Int = feedPage++
-
-    private fun getCommentList(id: String, page: Int) {
-        feedViewModel.getCommentList(prefs.accessToken!!, id, page)
+    private fun getCommentList(id: String) {
+        feedViewModel.getCommentList(prefs.accessToken!!, id, 0)
     }
+
+    private fun getFeedPage(): Int = feedPage++
 
     private fun swipeRefresh() {
         swipe_refresh.setOnRefreshListener {
@@ -215,7 +155,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                         pos = position
                         id =
                             feedViewModel.feedListLiveData.value!!.postContentResponseList[position].id
-                        //showDeleteDialog(prefs.accessToken!!, id)
+                        dialogUtil.showDeletePost(requireContext(), prefs.accessToken!!, id)
                     }
                     feedDialog.modify_post_btn.setOnClickListener {
                         val intent = Intent(requireContext(), WriteActivity::class.java)
@@ -232,7 +172,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                         item.user_nickname + getString(R.string.view_other)
                     feedDialog.report_post_btn.setOnClickListener {
                         feedDialog.dismiss()
-                        showReportDialog(item.id, "post")
+                        dialogUtil.showReportDialog(requireContext(), item.id, "post", feel)
                     }
                 }
                 feedDialog.show()
@@ -259,7 +199,7 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
             AngryFeedRVAdapter.OnCommentClickListener {
             override fun onCommentClick(v: View, position: Int) {
                 id = feedViewModel.feedListLiveData.value!!.postContentResponseList[position].id
-                getCommentList(id, 0)
+                getCommentList(id)
                 commentBottomSheet.setContentView(R.layout.feed_comment_bottomsheet)
                 commentBottomSheet.feed_comment_rv.layoutManager =
                     LinearLayoutManager(requireContext())
@@ -274,10 +214,6 @@ class FeedAngryFragment : Fragment(), OnBackPressedListener {
                 }
             }
         })
-    }
-
-    private fun report(body: FeedReportRequest, id: String, type: String) {
-        feedViewModel.report(prefs.accessToken!!, body, id, type)
     }
 
     override fun onResume() {

@@ -18,7 +18,7 @@ import com.gram.color_android.network.set.FeedSet
 import com.gram.color_android.network.set.ProfileSet
 import com.gram.color_android.ui.feed.FeedActivity
 import com.gram.color_android.ui.feed.angry.CommentRVAdapter
-import com.gram.color_android.ui.feed.angry.FeedAngryFragment
+import com.gram.color_android.ui.feed.angry.FeedFragment
 import com.gram.color_android.ui.write.WriteActivity
 import com.gram.color_android.util.ColorApplication
 import com.gram.color_android.util.OnBackPressedListener
@@ -41,6 +41,7 @@ class MyPostFragment : Fragment(), OnBackPressedListener {
     private val profileViewModel = ProfileViewModel()
     private val feedViewModel = FeedViewModel()
     private val prefs = SharedPreferencesHelper.getInstance()
+    private var feel = FeedActivity.getFeel()
     private var pos = 0
     private var id = ""
 
@@ -192,14 +193,14 @@ class MyPostFragment : Fragment(), OnBackPressedListener {
     }
 
     override fun onBackPressed() {
-        (activity as FeedActivity).replaceFragment(FeedAngryFragment())
+        (activity as FeedActivity).replaceFragment(FeedFragment())
     }
 
     private fun getPost() {
         profileViewModel.getProfile(
             prefs.accessToken!!,
             prefs.email!!,
-            ColorApplication.feel,
+            feel.toString(),
             "post",
             1
         )

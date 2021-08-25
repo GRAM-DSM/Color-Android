@@ -137,7 +137,7 @@ class FeedViewModel : ViewModel() {
     }
 
     private fun deleteCommentSuccess(response: Response<Void>) {
-        if(response.code() == 200){
+        if(response.code() == 200 || response.code() == 204){
             _feedLiveData.postValue(FeedSet.DELETE_COM_SUCCESS)
         } else {
             _feedLiveData.postValue(FeedSet.DELETE_COM_FAIL)

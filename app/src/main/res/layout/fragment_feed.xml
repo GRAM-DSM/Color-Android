@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feed.angry.FeedAngryFragment">
+    tools:context=".ui.feed.angry.FeedFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
@@ -13,7 +13,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/feed_angry_rv"
+                android:id="@+id/feed_rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

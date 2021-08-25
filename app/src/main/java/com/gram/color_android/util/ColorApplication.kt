@@ -13,6 +13,5 @@ class ColorApplication : Application(){
     companion object{
         lateinit var context: Context
             private set
-        lateinit var feel: String
     }
 }

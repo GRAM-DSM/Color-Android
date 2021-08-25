@@ -4,26 +4,33 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gram.color_android.R
-import com.gram.color_android.ui.feed.angry.FeedAngryFragment
+import com.gram.color_android.network.set.FeelSet
+import com.gram.color_android.ui.feed.angry.FeedFragment
 import com.gram.color_android.ui.profile.ProfileFragment
-import com.gram.color_android.ui.sign.SignActivity
 import com.gram.color_android.ui.write.WriteActivity
 import com.gram.color_android.util.OnBackPressedListener
-import com.gram.color_android.util.SharedPreferencesHelper
 import kotlinx.android.synthetic.main.activity_feed.*
 
 class FeedActivity : AppCompatActivity() {
 
     private var listener : OnBackPressedListener? = null
 
+    companion object{
+        private var feel : FeelSet? = null
+        fun getFeel() : FeelSet {
+            if(feel == null)
+                feel = FeelSet.ANGRY
+            return feel!!
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.feed_fragment_container, FeedAngryFragment()).commit()
+        fragmentTransaction.add(R.id.feed_fragment_container, FeedFragment()).commit()
 
         feed_write_ib.setOnClickListener{
             val intent = Intent(this@FeedActivity, WriteActivity::class.java)
@@ -32,6 +39,12 @@ class FeedActivity : AppCompatActivity() {
 
         feed_my_page_ib.setOnClickListener{
             replaceFragment(ProfileFragment())
+        }
+
+        val feels = arrayListOf(FeelSet.LOVE, FeelSet.SHAME, FeelSet.BORED, FeelSet.SAD, FeelSet.HAPPY, FeelSet.ANGRY)
+        circle_menu.setOnItemClickListener{
+                buttonIndex -> feel = feels[buttonIndex]
+            replaceFragment(FeedFragment())
         }
     }
 
