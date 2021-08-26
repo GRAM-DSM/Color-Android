@@ -5,4 +5,6 @@ import retrofit2.Response
 
 interface ProfileRepository {
     suspend fun profile(header: String, id: String, feel: String, filter: String, page: Int): Response<ProfileResponse>
+
+    suspend fun modifyName(header: String, body: String): Response<Void>
 }

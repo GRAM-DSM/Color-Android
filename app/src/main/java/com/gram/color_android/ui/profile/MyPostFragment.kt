@@ -15,6 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gram.color_android.R
 import com.gram.color_android.data.model.feed.CommentRequest
 import com.gram.color_android.network.set.FeedSet
+import com.gram.color_android.network.set.FeelSet
 import com.gram.color_android.network.set.ProfileSet
 import com.gram.color_android.ui.feed.FeedActivity
 import com.gram.color_android.ui.feed.angry.CommentRVAdapter
@@ -31,7 +32,7 @@ import kotlinx.android.synthetic.main.feed_more_bottomsheet_mine.*
 import kotlinx.android.synthetic.main.feed_post_delete.*
 import kotlinx.android.synthetic.main.fragment_my_post.*
 
-class MyPostFragment : Fragment(), OnBackPressedListener {
+class MyPostFragment(private val feel : FeelSet) : Fragment(), OnBackPressedListener {
 
     private lateinit var adapter: ProfileRVAdapter
     private lateinit var commentAdapter: CommentRVAdapter
@@ -41,7 +42,6 @@ class MyPostFragment : Fragment(), OnBackPressedListener {
     private val profileViewModel = ProfileViewModel()
     private val feedViewModel = FeedViewModel()
     private val prefs = SharedPreferencesHelper.getInstance()
-    private var feel = FeedActivity.getFeel()
     private var pos = 0
     private var id = ""
 
@@ -68,7 +68,7 @@ class MyPostFragment : Fragment(), OnBackPressedListener {
         profileViewModel.profileLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 ProfileSet.GET_SUCCESS -> {
-                    adapter = ProfileRVAdapter(profileViewModel.postListLiveData.value!!)
+                    adapter = ProfileRVAdapter(profileViewModel.postListLiveData.value!!, feel)
                     profile_my_post_rv.adapter = adapter
                     postBtnClick()
                 }

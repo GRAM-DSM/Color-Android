@@ -14,12 +14,11 @@ import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_like_post.*
 
-class LikePostFragment : Fragment() {
+class LikePostFragment(private var feel: FeelSet) : Fragment() {
 
     private lateinit var adapter : ProfileRVAdapter
     private val profileViewModel = ProfileViewModel()
     private val prefs = SharedPreferencesHelper.getInstance()
-    private var feel = FeedActivity.getFeel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +39,7 @@ class LikePostFragment : Fragment() {
         profileViewModel.profileLiveData.observe(viewLifecycleOwner, {
             when(it){
                 ProfileSet.GET_SUCCESS -> {
-                    adapter = ProfileRVAdapter(profileViewModel.postListLiveData.value!!)
+                    adapter = ProfileRVAdapter(profileViewModel.postListLiveData.value!!, feel)
                     profile_like_post_rv.adapter = adapter
                 }
             }

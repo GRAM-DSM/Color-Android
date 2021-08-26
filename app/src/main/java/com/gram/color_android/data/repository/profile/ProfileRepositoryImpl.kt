@@ -15,4 +15,8 @@ class ProfileRepositoryImpl : ProfileRepository, SafeApiRequest() {
     ): Response<ProfileResponse> {
         return safeApiCall { RetrofitClient.getFastAPI().profile(header, id, feel, filter, page) }
     }
+
+    override suspend fun modifyName(header: String, body: String): Response<Void> {
+        return safeApiCall { RetrofitClient.getFastAPI().modifyName(header, body) }
+    }
 }

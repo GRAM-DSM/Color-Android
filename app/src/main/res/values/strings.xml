@@ -25,6 +25,7 @@
     <string name="success_register">회원가입에 성공했습니다!</string>
     <string name="fail_register">회원가입에 실패했습니다.</string>
     <string name="login_fail">로그인에 실패했습니다.</string>
+    <string name="logout">로그아웃</string>
     <!-- Auth -->
 
     <!--  Color Explain  -->
@@ -90,6 +91,9 @@
     <string name="write_hash_tag_hint">#해시태그</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="error">오류가 발생했습니다.</string>
+    
+    <!--  Profile  -->
+    <string name="modify">변경</string>
+    <string name="modify_cancel">취소</string>
 </resources>

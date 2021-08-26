@@ -2,7 +2,6 @@ package com.gram.color_android.ui.feed.angry
 
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.Handler
@@ -185,6 +184,7 @@ class FeedFragment : Fragment(), OnBackPressedListener {
                         id =
                             feedViewModel.feedListLiveData.value!!.postContentResponseList[position].id
                         dialogUtil.showDeletePost(requireContext(), prefs.accessToken!!, id)
+                        feedDialog.dismiss()
                     }
                     feedDialog.modify_post_btn.setOnClickListener {
                         val intent = Intent(requireContext(), WriteActivity::class.java)

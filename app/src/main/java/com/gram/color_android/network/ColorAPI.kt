@@ -103,4 +103,10 @@ interface ColorAPI {
         @Query("filter") filter: String,
         @Query("page") page: Int
     ): Response<ProfileResponse>
+
+    @PUT("/profile")
+    suspend fun modifyName(
+        @Header("Authorization") header: String,
+        @Body body: String
+    ) : Response<Void>
 }

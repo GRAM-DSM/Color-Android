@@ -20,49 +20,104 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="115dp"
+            android:layout_height="125dp"
             android:background="@color/white"
             android:elevation="10dp">
 
-            <TextView
-                android:id="@+id/profile_name_tv"
+            <EditText
+                android:id="@+id/profile_name_et"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="6dp"
+                android:enabled="false"
                 android:fontFamily="@font/font_roboto_bold"
                 android:text="정현왕자님"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:background="@null"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/profile_modify_name_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_modify_name"
+                app:layout_constraintStart_toEndOf="@+id/profile_name_et"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/profile_logout_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="17dp"
+                android:text="@string/logout"
+                android:textColor="@color/angry"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/profile_modify_btn"
+                android:layout_width="210dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/modify"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:fontFamily="@font/font_roboto_bold"
+                android:visibility="gone"
+                android:backgroundTint="@color/angry"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/profile_cancel_btn"
+                android:layout_width="210dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/bored"
+                android:fontFamily="@font/font_roboto_bold"
+                android:text="@string/modify_cancel"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_modify_btn" />
+            
             <TextView
                 android:id="@+id/profile_user_color_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/font_roboto_bold"
                 android:text="정현왕자님의 컬러"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_et" />
 
             <TextView
                 android:id="@+id/profile_angry_tv"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="29dp"
+                android:layout_marginTop="39dp"
                 android:background="@drawable/circle"
                 android:backgroundTint="@color/angry"
                 android:onClick="@{() -> activity.selectFeel(profileAngrySelectTv, FeelSet.ANGRY)}"
                 app:layout_constraintStart_toEndOf="@+id/profile_user_color_tv"
-                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_et" />
 
             <TextView
                 android:id="@+id/profile_angry_select_tv"
@@ -81,12 +136,12 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="29dp"
+                android:layout_marginTop="39dp"
                 android:background="@drawable/circle"
                 android:backgroundTint="@color/happy"
                 android:onClick="@{() -> activity.selectFeel(profileHappySelectTv, FeelSet.HAPPY)}"
                 app:layout_constraintStart_toEndOf="@+id/profile_angry_tv"
-                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_et" />
 
             <TextView
                 android:id="@+id/profile_happy_select_tv"
@@ -105,12 +160,12 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="29dp"
+                android:layout_marginTop="39dp"
                 android:background="@drawable/circle"
                 android:backgroundTint="@color/sad"
                 android:onClick="@{() -> activity.selectFeel(profileSadSelectTv, FeelSet.SAD)}"
                 app:layout_constraintStart_toEndOf="@+id/profile_happy_tv"
-                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_et" />
 
             <TextView
                 android:id="@+id/profile_sad_select_tv"
@@ -129,12 +184,12 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="29dp"
+                android:layout_marginTop="39dp"
                 android:background="@drawable/circle"
                 android:backgroundTint="@color/bored"
                 android:onClick="@{() -> activity.selectFeel(profileBoredSelectTv, FeelSet.BORED)}"
                 app:layout_constraintStart_toEndOf="@+id/profile_sad_tv"
-                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_et" />
 
             <TextView
                 android:id="@+id/profile_bored_select_tv"
@@ -153,12 +208,12 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="29dp"
+                android:layout_marginTop="39dp"
                 android:background="@drawable/circle"
                 android:backgroundTint="@color/love"
                 android:onClick="@{() -> activity.selectFeel(profileLoveSelectTv, FeelSet.LOVE)}"
                 app:layout_constraintStart_toEndOf="@+id/profile_bored_tv"
-                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_et" />
 
             <TextView
                 android:id="@+id/profile_love_select_tv"
@@ -177,12 +232,12 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="29dp"
+                android:layout_marginTop="39dp"
                 android:background="@drawable/circle"
                 android:backgroundTint="@color/shame"
                 android:onClick="@{() -> activity.selectFeel(profileShameSelectTv, FeelSet.SHAME)}"
                 app:layout_constraintStart_toEndOf="@+id/profile_love_tv"
-                app:layout_constraintTop_toBottomOf="@+id/profile_name_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_name_et" />
 
             <TextView
                 android:id="@+id/profile_shame_select_tv"
@@ -203,7 +258,7 @@
             android:id="@+id/profile_tablayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="116dp"
+            android:layout_marginTop="126dp"
             android:background="@color/white"
             android:elevation="10dp"
             app:tabIndicatorColor="@color/angry"/>
@@ -212,7 +267,7 @@
             android:id="@+id/profile_post_vp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="169dp" />
+            android:layout_marginTop="179dp" />
 
     </FrameLayout>
 

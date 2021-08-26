@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.gram.color_android.ui.feed.FeedActivity" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.feed.FeedActivity">
@@ -11,9 +19,9 @@
             android:id="@+id/feed_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/feed_background"
             android:layout_marginTop="60dp"
             android:layout_marginBottom="50dp"
+            android:background="@color/feed_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +56,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
-            android:background="@null"
             app:buttonColors="@array/fab_menu_colors"
             app:buttonIcons="@array/fab_menu_icons"
             app:centerButtonColor="@color/angry"
@@ -57,8 +64,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:menuIcon="plus"
             app:maxAngle="50"
+            app:menuIcon="plus"
             app:startAngle="374" />
 
         <androidx.appcompat.widget.Toolbar
@@ -77,18 +84,20 @@
                 android:layout_height="35dp"
                 android:layout_gravity="left"
                 android:background="@null"
-                android:src="@drawable/ic_write"/>
-<!--                android:onClick="@{() -> activity.gotoWrite()}"/>-->
+                android:src="@drawable/ic_write" />
+            <!--                android:onClick="@{() -> activity.gotoWrite()}"/>-->
 
             <ImageButton
                 android:id="@+id/feed_my_page_ib"
                 android:layout_width="150dp"
                 android:layout_height="35dp"
-                android:layout_marginRight="20dp"
                 android:layout_gravity="right"
+                android:layout_marginRight="20dp"
                 android:background="@null"
                 android:src="@drawable/ic_my_profile" />
 
         </androidx.appcompat.widget.Toolbar>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
