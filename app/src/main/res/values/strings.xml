@@ -26,6 +26,7 @@
     <string name="fail_register">회원가입에 실패했습니다.</string>
     <string name="login_fail">로그인에 실패했습니다.</string>
     <string name="logout">로그아웃</string>
+    <string name="logout_question">로그아웃 하시겠습니까?</string>
     <!-- Auth -->
 
     <!--  Color Explain  -->
@@ -96,4 +97,5 @@
     <!--  Profile  -->
     <string name="modify">변경</string>
     <string name="modify_cancel">취소</string>
+    <string name="user_color">의 컬러</string>
 </resources>

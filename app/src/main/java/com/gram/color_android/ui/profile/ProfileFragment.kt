@@ -1,6 +1,10 @@
 package com.gram.color_android.ui.profile
 
+import android.app.Dialog
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,19 +13,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.tabs.TabLayoutMediator
 import com.gram.color_android.R
+import com.gram.color_android.data.model.profile.ProfileResponse
 import com.gram.color_android.databinding.FragmentProfileBinding
 import com.gram.color_android.network.set.FeelSet
+import com.gram.color_android.network.set.ProfileSet
 import com.gram.color_android.ui.feed.FeedActivity
+import com.gram.color_android.ui.sign.SignActivity
+import com.gram.color_android.util.SharedPreferencesHelper
+import com.gram.color_android.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.logout.*
 
 class ProfileFragment : Fragment() {
 
     private lateinit var adapter : PostPagerAdapter
+    private val prefs = SharedPreferencesHelper.getInstance()
+    private val profileViewModel = ProfileViewModel()
     private var dataBinding: FragmentProfileBinding? = null
     private var feel: FeelSet? = FeedActivity.getFeel()
     private var curView: TextView? = null
@@ -38,6 +49,20 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataBinding!!.activity = ProfileFragment()
+
+        profileViewModel.getProfile(prefs.accessToken!!, prefs.email!!, feel.toString(), "post", 1)
+        profileViewModel.profileLiveData.observe(viewLifecycleOwner, {
+            when(it){
+                ProfileSet.GET_SUCCESS -> {
+                    val userInfo = profileViewModel.postListLiveData.value!!.user_info
+                    setProfile(userInfo)
+                }
+            }
+        })
+
+        profile_logout_tv.setOnClickListener{
+            logout()
+        }
 
         adapter = PostPagerAdapter(requireActivity(), feel!!)
         profile_post_vp.adapter = adapter
@@ -56,8 +81,31 @@ class ProfileFragment : Fragment() {
         profile_tablayout.setSelectedTabIndicatorColor(resources.getColor(getFeelColor(feel!!), null))
 
         profile_modify_name_iv.setOnClickListener{
-            profile_name_et.isEnabled = true
-            profile_name_et.requestFocus()
+            setEditText(true)
+        }
+        profile_cancel_btn.setOnClickListener{
+            setEditText(false)
+        }
+    }
+    private fun logout(){
+        val dialog = Dialog(requireActivity())
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.logout)
+        dialog.show()
+
+        dialog.logout_dialog_negative.setOnClickListener{
+            dialog.dismiss()
+        }
+        dialog.logout_dialog_positive.setOnClickListener{
+            dialog.dismiss()
+            prefs.accessToken = null
+            prefs.refreshToken = null
+
+            val intent = Intent(requireActivity(), SignActivity::class.java)
+            intent.apply {
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+            startActivity(intent)
         }
     }
 
@@ -91,6 +139,35 @@ class ProfileFragment : Fragment() {
         DrawableCompat.setTint(wrappedDrawable, resources.getColor(getFeelColor(feel!!), null))
     }
 
+    private fun setProfile(userInfo : ProfileResponse.UserInfo) {
+        profile_name_et.setText(userInfo.nickname)
+        profile_user_color_tv.text = userInfo.nickname + getString(R.string.user_color)
+    }
+
+    private fun setEditText(boolean: Boolean){
+        if(boolean){
+            profile_name_et.isEnabled = boolean
+            profile_name_et.requestFocus()
+            profile_name_et.isCursorVisible = boolean
+            profile_name_et.setSelection(profile_name_et.length())
+            profile_modify_name_iv.visibility = View.INVISIBLE
+            profile_modify_btn.visibility = View.VISIBLE
+            profile_cancel_btn.visibility = View.VISIBLE
+            showKeyboard()
+        }
+        else {
+            profile_name_et.isEnabled = boolean
+            profile_name_et.isCursorVisible = boolean
+            profile_name_et.setSelection(profile_name_et.length())
+            profile_modify_name_iv.visibility = View.VISIBLE
+            profile_modify_btn.visibility = View.INVISIBLE
+            profile_cancel_btn.visibility = View.INVISIBLE
+        }
+    }
+
     private fun showKeyboard(){
+        val imm: InputMethodManager =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
     }
 }

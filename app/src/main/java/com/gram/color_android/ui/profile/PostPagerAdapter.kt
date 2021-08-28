@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.gram.color_android.network.set.FeelSet
+import com.gram.color_android.viewmodel.ProfileViewModel
 
 class PostPagerAdapter(fragmentActivity: FragmentActivity, private val feel: FeelSet) : FragmentStateAdapter(fragmentActivity) {
 
