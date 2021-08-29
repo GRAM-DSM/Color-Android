@@ -13,10 +13,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.tabs.TabLayoutMediator
 import com.gram.color_android.R
+import com.gram.color_android.data.model.profile.ModifyNameRequest
 import com.gram.color_android.data.model.profile.ProfileResponse
 import com.gram.color_android.databinding.FragmentProfileBinding
 import com.gram.color_android.network.set.FeelSet
@@ -57,12 +59,10 @@ class ProfileFragment : Fragment() {
                     val userInfo = profileViewModel.postListLiveData.value!!.user_info
                     setProfile(userInfo)
                 }
+                ProfileSet.MODIFY_SUCCESS -> Toast.makeText(requireContext(), getString(R.string.modify_name_success), Toast.LENGTH_SHORT).show()
+                ProfileSet.MODIFY_FAIL -> Toast.makeText(requireContext(), getString(R.string.do_not_change_name), Toast.LENGTH_SHORT).show()
             }
         })
-
-        profile_logout_tv.setOnClickListener{
-            logout()
-        }
 
         adapter = PostPagerAdapter(requireActivity(), feel!!)
         profile_post_vp.adapter = adapter
@@ -86,7 +86,54 @@ class ProfileFragment : Fragment() {
         profile_cancel_btn.setOnClickListener{
             setEditText(false)
         }
+        profile_logout_tv.setOnClickListener{
+            logout()
+        }
+        profile_modify_btn.setOnClickListener{
+            modifyName()
+        }
     }
+
+    fun selectFeel(tv: TextView, feel: FeelSet) {
+        if (curView == null) {
+            curView = tv
+            curView!!.visibility = View.VISIBLE
+        } else {
+            curView!!.visibility = View.GONE
+            curView = tv
+            curView!!.visibility = View.VISIBLE
+        }
+        this.feel = feel
+    }
+
+    private fun modifyName(){
+        val body = ModifyNameRequest(profile_name_et.text.toString())
+        profileViewModel.modifyName(prefs.accessToken!!, body)
+        showKeyboard(false)
+    }
+
+    private fun setEditText(boolean: Boolean){
+        if(boolean){
+            profile_name_et.isEnabled = boolean
+            profile_name_et.requestFocus()
+            profile_name_et.isCursorVisible = boolean
+            profile_name_et.setSelection(profile_name_et.length())
+            profile_modify_name_iv.visibility = View.INVISIBLE
+            profile_modify_btn.visibility = View.VISIBLE
+            profile_cancel_btn.visibility = View.VISIBLE
+            showKeyboard(true)
+        }
+        else {
+            profile_name_et.setText(profileViewModel.postListLiveData.value!!.user_info.nickname)
+            profile_name_et.isEnabled = boolean
+            profile_name_et.isCursorVisible = boolean
+            profile_name_et.setSelection(profile_name_et.length())
+            profile_modify_name_iv.visibility = View.VISIBLE
+            profile_modify_btn.visibility = View.INVISIBLE
+            profile_cancel_btn.visibility = View.INVISIBLE
+        }
+    }
+
     private fun logout(){
         val dialog = Dialog(requireActivity())
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -107,18 +154,6 @@ class ProfileFragment : Fragment() {
             }
             startActivity(intent)
         }
-    }
-
-    fun selectFeel(tv: TextView, feel: FeelSet) {
-        if (curView == null) {
-            curView = tv
-            curView!!.visibility = View.VISIBLE
-        } else {
-            curView!!.visibility = View.GONE
-            curView = tv
-            curView!!.visibility = View.VISIBLE
-        }
-        this.feel = feel
     }
 
     private fun getFeelColor(feel: FeelSet) : Int{
@@ -144,30 +179,13 @@ class ProfileFragment : Fragment() {
         profile_user_color_tv.text = userInfo.nickname + getString(R.string.user_color)
     }
 
-    private fun setEditText(boolean: Boolean){
-        if(boolean){
-            profile_name_et.isEnabled = boolean
-            profile_name_et.requestFocus()
-            profile_name_et.isCursorVisible = boolean
-            profile_name_et.setSelection(profile_name_et.length())
-            profile_modify_name_iv.visibility = View.INVISIBLE
-            profile_modify_btn.visibility = View.VISIBLE
-            profile_cancel_btn.visibility = View.VISIBLE
-            showKeyboard()
-        }
-        else {
-            profile_name_et.isEnabled = boolean
-            profile_name_et.isCursorVisible = boolean
-            profile_name_et.setSelection(profile_name_et.length())
-            profile_modify_name_iv.visibility = View.VISIBLE
-            profile_modify_btn.visibility = View.INVISIBLE
-            profile_cancel_btn.visibility = View.INVISIBLE
-        }
-    }
-
-    private fun showKeyboard(){
+    private fun showKeyboard(isShow: Boolean){
         val imm: InputMethodManager =
             requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+
+        if(isShow)
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+        else
+            imm.hideSoftInputFromWindow(profile_name_et.windowToken, 0)
     }
 }

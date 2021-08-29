@@ -5,6 +5,7 @@ import com.gram.color_android.data.model.feed.CommentRequest
 import com.gram.color_android.data.model.feed.FeedReportRequest
 import com.gram.color_android.data.model.profile.ProfileResponse
 import com.gram.color_android.data.model.feed.PostListResponse
+import com.gram.color_android.data.model.profile.ModifyNameRequest
 import com.gram.color_android.data.model.sign.LoginRequest
 import com.gram.color_android.data.model.sign.LoginResponse
 import com.gram.color_android.data.model.sign.RegisterRequest
@@ -107,6 +108,6 @@ interface ColorAPI {
     @PUT("/profile")
     suspend fun modifyName(
         @Header("Authorization") header: String,
-        @Body body: String
+        @Body body: ModifyNameRequest
     ) : Response<Void>
 }

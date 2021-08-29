@@ -1,5 +1,6 @@
 package com.gram.color_android.data.repository.profile
 
+import com.gram.color_android.data.model.profile.ModifyNameRequest
 import com.gram.color_android.data.model.profile.ProfileResponse
 import com.gram.color_android.network.RetrofitClient
 import com.gram.color_android.network.SafeApiRequest
@@ -16,7 +17,7 @@ class ProfileRepositoryImpl : ProfileRepository, SafeApiRequest() {
         return safeApiCall { RetrofitClient.getFastAPI().profile(header, id, feel, filter, page) }
     }
 
-    override suspend fun modifyName(header: String, body: String): Response<Void> {
+    override suspend fun modifyName(header: String, body: ModifyNameRequest): Response<Void> {
         return safeApiCall { RetrofitClient.getFastAPI().modifyName(header, body) }
     }
 }

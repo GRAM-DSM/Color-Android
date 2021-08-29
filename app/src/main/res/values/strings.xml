@@ -81,7 +81,6 @@
     <string name="report_4">적합하지 않은 주제</string>
     <string name="report_remember">신고하기 전에 "생각" 하셨나요?</string>
     <string name="send_report">신고가 접수되었습니다.</string>
-
     <!--  Feed  -->
 
     <!--  Write  -->
@@ -98,4 +97,7 @@
     <string name="modify">변경</string>
     <string name="modify_cancel">취소</string>
     <string name="user_color">의 컬러</string>
+    <string name="modify_name_success">닉네임을 변경했습니다.</string>
+    <string name="do_not_change_name">닉네임을 변경할 수 없습니다.</string>
+
 </resources>
