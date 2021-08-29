@@ -1,9 +1,11 @@
 package com.gram.color_android.ui.feed.angry
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import co.lujun.androidtagview.ColorFactory
 import com.gram.color_android.R
 import com.gram.color_android.data.model.feed.PostListResponse
 import com.gram.color_android.network.set.FeelSet
@@ -44,9 +46,8 @@ class FeedRVAdapter(private val items : PostListResponse, private val feel : Fee
             view.feed_content_tv.text = item.content
             view.feed_like_cnt_tv.text = item.favorite_cnt.toString()
             view.feed_comment_cnt_tv.text = item.comment_cnt.toString()
-            if(item.hash_code != null) {
-                view.feed_tag_tv.text = item.hash_code.toString()
-            }
+            tagGroupAttr(view)
+            view.tag_group.tags = item.hash_code
             if(item.is_favorite){
                 view.feed_like_ib.isSelected = true
             }
@@ -68,6 +69,14 @@ class FeedRVAdapter(private val items : PostListResponse, private val feel : Fee
         }
     }
 
+    private fun tagGroupAttr(view: View){
+        view.tag_group.theme = ColorFactory.NONE
+        view.tag_group.backgroundColor = Color.WHITE
+        view.tag_group.tagTextColor = Color.WHITE
+        view.tag_group.tagBackgroundColor = Color.parseColor(getFeelColor(feel))
+        view.tag_group.tagBorderColor = Color.parseColor(getFeelColor(feel))
+    }
+
     private fun setLikeImage(view: View, feel: FeelSet) {
         when(feel) {
             FeelSet.ANGRY -> view.feed_like_ib.setImageResource(R.drawable.like_selector_angry)
@@ -77,6 +86,19 @@ class FeedRVAdapter(private val items : PostListResponse, private val feel : Fee
             FeelSet.SHAME -> view.feed_like_ib.setImageResource(R.drawable.like_selector_shame)
             FeelSet.LOVE -> view.feed_like_ib.setImageResource(R.drawable.like_selector_love)
         }
+    }
+
+    private fun getFeelColor(feel: FeelSet) : String{
+        val colors = arrayListOf("#FF7473", "#FDD692", "#3998DD", "#BDBDBD", "#353866", "#FEC9C9")
+        var position = when(feel){
+            FeelSet.ANGRY -> 0
+            FeelSet.HAPPY -> 1
+            FeelSet.SAD -> 2
+            FeelSet.BORED -> 3
+            FeelSet.SHAME -> 4
+            FeelSet.LOVE -> 5
+        }
+        return colors[position]
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

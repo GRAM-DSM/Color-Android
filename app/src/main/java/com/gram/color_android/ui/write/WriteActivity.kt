@@ -96,9 +96,9 @@ class WriteActivity : AppCompatActivity() {
     private fun nullCheck() = (feel != null && !write_content_et.text.toString().equals(""))
 
     private fun getTag() : MutableList<String> {
-        val hashTag: MutableList<String> = write_tag_et.text.toString().split("#") as MutableList<String>
+        val hashTag: MutableList<String> = write_tag_et.text.toString().split(" ") as MutableList<String>
         if (write_tag_et.text.toString() != "") {
-            hashTag.removeAt(0)
+            hashTag.removeAt(hashTag.size - 1)
         }
         return hashTag
     }
