@@ -3,6 +3,7 @@ package com.gram.color_android.ui.write
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper.loop
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -34,16 +35,18 @@ class WriteActivity : AppCompatActivity() {
         val intent = intent
         if (intent.hasExtra("content")) {
             write_content_et.setText(intent.getStringExtra("content"))
+           // write_tag_et.setText(getTag(intent.getStringArrayListExtra("tag")!!))
+            getTag(intent.getStringArrayListExtra("tag"))
             write_post_btn.setOnClickListener{
                 if(nullCheck()){
-                    val body = WriteRequest(write_content_et.text.toString(), feel.toString(), getTag())
+                    val body = WriteRequest(write_content_et.text.toString(), feel.toString(), tagRemoveLastIndex())
                     updatePost(prefs.accessToken!!, intent.getStringExtra("post_id")!!, body)
                 }
             }
         } else {
             write_post_btn.setOnClickListener {
                 if (nullCheck()) {
-                    val body = WriteRequest(write_content_et.text.toString(), feel.toString(), getTag())
+                    val body = WriteRequest(write_content_et.text.toString(), feel.toString(), tagRemoveLastIndex())
                     post(prefs.accessToken!!, body)
                 }
             }
@@ -95,11 +98,15 @@ class WriteActivity : AppCompatActivity() {
 
     private fun nullCheck() = (feel != null && !write_content_et.text.toString().equals(""))
 
-    private fun getTag() : MutableList<String> {
+    private fun tagRemoveLastIndex() : MutableList<String> {
         val hashTag: MutableList<String> = write_tag_et.text.toString().split(" ") as MutableList<String>
         if (write_tag_et.text.toString() != "") {
             hashTag.removeAt(hashTag.size - 1)
         }
         return hashTag
+    }
+
+    private fun getTag(arrayList : ArrayList<String>?) {
+        arrayList!!.forEach { write_tag_et.setText(it)  }
     }
 }

@@ -6,6 +6,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -190,7 +191,7 @@ class FeedFragment : Fragment(), OnBackPressedListener {
                         val intent = Intent(requireContext(), WriteActivity::class.java)
                         intent.apply {
                             intent.putExtra("content", item.content)
-                            intent.putExtra("tag", item.hash_code.toString())
+                            intent.putExtra("tag", item.hash_code as ArrayList)
                             intent.putExtra("post_id", item.id)
                         }
                         startActivity(intent)
