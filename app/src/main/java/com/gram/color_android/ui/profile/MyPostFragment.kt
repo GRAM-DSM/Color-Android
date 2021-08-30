@@ -1,9 +1,6 @@
 package com.gram.color_android.ui.profile
 
-import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,7 +18,7 @@ import com.gram.color_android.ui.feed.FeedActivity
 import com.gram.color_android.ui.feed.angry.CommentRVAdapter
 import com.gram.color_android.ui.feed.angry.FeedFragment
 import com.gram.color_android.ui.write.WriteActivity
-import com.gram.color_android.util.ColorApplication
+import com.gram.color_android.util.DialogUtil
 import com.gram.color_android.util.OnBackPressedListener
 import com.gram.color_android.util.SharedPreferencesHelper
 import com.gram.color_android.viewmodel.FeedViewModel
@@ -29,7 +26,6 @@ import com.gram.color_android.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.feed_comment_bottomsheet.*
 import kotlinx.android.synthetic.main.feed_item.view.*
 import kotlinx.android.synthetic.main.feed_more_bottomsheet_mine.*
-import kotlinx.android.synthetic.main.feed_post_delete.*
 import kotlinx.android.synthetic.main.fragment_my_post.*
 
 class MyPostFragment(private val feel : FeelSet) : Fragment(), OnBackPressedListener {
@@ -37,8 +33,8 @@ class MyPostFragment(private val feel : FeelSet) : Fragment(), OnBackPressedList
     private lateinit var adapter: ProfileRVAdapter
     private lateinit var commentAdapter: CommentRVAdapter
     private lateinit var feedDialog: BottomSheetDialog
-    private lateinit var commentDialog: BottomSheetDialog
     private lateinit var commentBottomSheet: BottomSheetDialog
+    private val dialogUtil = DialogUtil()
     private val profileViewModel = ProfileViewModel()
     private val feedViewModel = FeedViewModel()
     private val prefs = SharedPreferencesHelper.getInstance()
@@ -62,7 +58,6 @@ class MyPostFragment(private val feel : FeelSet) : Fragment(), OnBackPressedList
         swipeRefresh()
 
         feedDialog = BottomSheetDialog(requireContext())
-        commentDialog = BottomSheetDialog(requireContext())
         commentBottomSheet = BottomSheetDialog(requireContext())
 
         profileViewModel.profileLiveData.observe(viewLifecycleOwner, {
@@ -88,7 +83,7 @@ class MyPostFragment(private val feel : FeelSet) : Fragment(), OnBackPressedList
                     commentAdapter =
                         CommentRVAdapter(feedViewModel.commentListLiveData.value!!)
                     commentBottomSheet.feed_comment_rv.adapter = commentAdapter
-                    commentLongClick()
+                    dialogUtil.commentLongClick(commentAdapter, feedViewModel, requireContext(), id, feel)
                 }
                 FeedSet.WRITE_SUCCESS -> {
                     getCommentList(id)
@@ -106,7 +101,8 @@ class MyPostFragment(private val feel : FeelSet) : Fragment(), OnBackPressedList
                 feedDialog.delete_post_btn.setOnClickListener {
                     pos = position
                     id = profileViewModel.postListLiveData.value!!.posts[position].id
-                    showDeleteDialog(prefs.accessToken!!, id)
+                    dialogUtil.showDeletePost(requireContext(), prefs.accessToken!!, id)
+                    feedDialog.dismiss()
                 }
                 feedDialog.modify_post_btn.setOnClickListener {
                     feedDialog.dismiss()
@@ -159,34 +155,6 @@ class MyPostFragment(private val feel : FeelSet) : Fragment(), OnBackPressedList
         })
     }
 
-    private fun commentLongClick() {
-        commentAdapter.setOnItemLongClickListener(object :
-            CommentRVAdapter.OnItemLongClickListener {
-            override fun onItemLongClick(v: View, position: Int) {
-                val item =
-                    feedViewModel.commentListLiveData.value!!.commentContentResponseList[position]
-                commentDialog.setContentView(R.layout.comment_bottomsheet_mine)
-                commentDialog.show()
-            }
-        })
-    }
-
-    private fun showDeleteDialog(header: String, post_id: String) {
-        val deleteDialog = Dialog(requireContext())
-        deleteDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        deleteDialog.setContentView(R.layout.feed_post_delete)
-        feedDialog.dismiss()
-        deleteDialog.show()
-
-        deleteDialog.post_delete_dialog_cancel.setOnClickListener {
-            deleteDialog.dismiss()
-        }
-        deleteDialog.post_delete_dialog_delete.setOnClickListener {
-            feedViewModel.deletePost(header, post_id)
-            deleteDialog.dismiss()
-        }
-    }
-
     override fun onResume() {
         super.onResume()
         (activity as FeedActivity).setOnBackPressedListener(this)
@@ -196,7 +164,7 @@ class MyPostFragment(private val feel : FeelSet) : Fragment(), OnBackPressedList
         (activity as FeedActivity).replaceFragment(FeedFragment())
     }
 
-    private fun getPost() {
+    fun getPost() {
         profileViewModel.getProfile(
             prefs.accessToken!!,
             prefs.email!!,

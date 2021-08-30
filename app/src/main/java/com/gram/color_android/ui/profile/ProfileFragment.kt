@@ -15,12 +15,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.databinding.DataBindingUtil
 import com.google.android.material.tabs.TabLayoutMediator
 import com.gram.color_android.R
 import com.gram.color_android.data.model.profile.ModifyNameRequest
 import com.gram.color_android.data.model.profile.ProfileResponse
-import com.gram.color_android.databinding.FragmentProfileBinding
 import com.gram.color_android.network.set.FeelSet
 import com.gram.color_android.network.set.ProfileSet
 import com.gram.color_android.ui.feed.FeedActivity
@@ -35,22 +33,20 @@ class ProfileFragment : Fragment() {
     private lateinit var adapter : PostPagerAdapter
     private val prefs = SharedPreferencesHelper.getInstance()
     private val profileViewModel = ProfileViewModel()
-    private var dataBinding: FragmentProfileBinding? = null
     private var feel: FeelSet? = FeedActivity.getFeel()
     private var curView: TextView? = null
+    private lateinit var icon1 : Drawable
+    private lateinit var icon2 : Drawable
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dataBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
-        return dataBinding!!.root
+           return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataBinding!!.activity = ProfileFragment()
 
         profileViewModel.getProfile(prefs.accessToken!!, prefs.email!!, feel.toString(), "post", 1)
         profileViewModel.profileLiveData.observe(viewLifecycleOwner, {
@@ -70,15 +66,16 @@ class ProfileFragment : Fragment() {
             when(position) {
                 0 -> {
                     tab.setIcon(R.drawable.ic_my_page)
+                    icon1 = tab.icon!!
                     setTint(tab.icon!!)
                 }
                 1 -> {
                     tab.setIcon(R.drawable.ic_like_empty)
+                    icon2 = tab.icon!!
                     setTint(tab.icon!!)
                 }
             }
         }.attach()
-        profile_tablayout.setSelectedTabIndicatorColor(resources.getColor(getFeelColor(feel!!), null))
 
         profile_modify_name_iv.setOnClickListener{
             setEditText(true)
@@ -92,9 +89,27 @@ class ProfileFragment : Fragment() {
         profile_modify_btn.setOnClickListener{
             modifyName()
         }
+        profile_angry_tv.setOnClickListener{
+            selectFeel(profile_angry_select_tv, FeelSet.ANGRY)
+        }
+        profile_happy_tv.setOnClickListener{
+            selectFeel(profile_happy_select_tv, FeelSet.HAPPY)
+        }
+        profile_sad_tv.setOnClickListener{
+            selectFeel(profile_sad_select_tv, FeelSet.SAD)
+        }
+        profile_bored_tv.setOnClickListener{
+            selectFeel(profile_bored_select_tv, FeelSet.BORED)
+        }
+        profile_love_tv.setOnClickListener{
+            selectFeel(profile_love_select_tv, FeelSet.LOVE)
+        }
+        profile_shame_tv.setOnClickListener{
+            selectFeel(profile_shame_select_tv, FeelSet.SHAME)
+        }
     }
 
-    fun selectFeel(tv: TextView, feel: FeelSet) {
+    private fun selectFeel(tv: TextView, feel: FeelSet) {
         if (curView == null) {
             curView = tv
             curView!!.visibility = View.VISIBLE
@@ -104,6 +119,12 @@ class ProfileFragment : Fragment() {
             curView!!.visibility = View.VISIBLE
         }
         this.feel = feel
+        adapter = PostPagerAdapter(requireActivity(), feel)
+        profile_post_vp.adapter = adapter
+        adapter.notifyDataSetChanged()
+
+        setTint(icon1)
+        setTint(icon2)
     }
 
     private fun modifyName(){
@@ -172,6 +193,7 @@ class ProfileFragment : Fragment() {
     private fun setTint(drawable: Drawable){
         val wrappedDrawable = DrawableCompat.wrap(drawable)
         DrawableCompat.setTint(wrappedDrawable, resources.getColor(getFeelColor(feel!!), null))
+        profile_tablayout.setSelectedTabIndicatorColor(resources.getColor(getFeelColor(feel!!), null))
     }
 
     private fun setProfile(userInfo : ProfileResponse.UserInfo) {

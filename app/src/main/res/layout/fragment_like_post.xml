@@ -6,6 +6,7 @@
     tools:context=".ui.profile.LikePostFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/profile_like_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

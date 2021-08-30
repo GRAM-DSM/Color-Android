@@ -1,9 +1,11 @@
 package com.gram.color_android.ui.profile
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import co.lujun.androidtagview.ColorFactory
 import com.gram.color_android.R
 import com.gram.color_android.data.model.profile.ProfileResponse
 import com.gram.color_android.network.set.FeelSet
@@ -43,9 +45,10 @@ class ProfileRVAdapter(private val items : ProfileResponse, private val feel : F
             view.feed_content_tv.text = item.content
             view.feed_like_cnt_tv.text = item.favorite_cnt.toString()
             view.feed_comment_cnt_tv.text = item.comment_cnt.toString()
-
+            tagGroupAttr(view)
+            view.tag_group.tags = item.hash_tag
             if(item.is_favorite){
-                view.feed_like_ib.setImageResource(R.drawable.ic_like_fill_angry)
+                view.feed_like_ib.isSelected = true
             }
 
             setLikeImage(view, feel)
@@ -64,6 +67,13 @@ class ProfileRVAdapter(private val items : ProfileResponse, private val feel : F
             }
         }
     }
+    private fun tagGroupAttr(view: View){
+        view.tag_group.theme = ColorFactory.NONE
+        view.tag_group.backgroundColor = Color.WHITE
+        view.tag_group.tagTextColor = Color.WHITE
+        view.tag_group.tagBackgroundColor = Color.parseColor(getFeelColor(feel))
+        view.tag_group.tagBorderColor = Color.parseColor(getFeelColor(feel))
+    }
 
     private fun setLikeImage(view: View, feel: FeelSet) {
         when(feel) {
@@ -74,6 +84,19 @@ class ProfileRVAdapter(private val items : ProfileResponse, private val feel : F
             FeelSet.SHAME -> view.feed_like_ib.setImageResource(R.drawable.like_selector_shame)
             FeelSet.LOVE -> view.feed_like_ib.setImageResource(R.drawable.like_selector_love)
         }
+    }
+
+    private fun getFeelColor(feel: FeelSet) : String{
+        val colors = arrayListOf("#FF7473", "#FDD692", "#3998DD", "#BDBDBD", "#353866", "#FEC9C9")
+        var position = when(feel){
+            FeelSet.ANGRY -> 0
+            FeelSet.HAPPY -> 1
+            FeelSet.SAD -> 2
+            FeelSet.BORED -> 3
+            FeelSet.SHAME -> 4
+            FeelSet.LOVE -> 5
+        }
+        return colors[position]
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

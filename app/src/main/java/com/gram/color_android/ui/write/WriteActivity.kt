@@ -3,7 +3,6 @@ package com.gram.color_android.ui.write
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Looper.loop
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -35,7 +34,6 @@ class WriteActivity : AppCompatActivity() {
         val intent = intent
         if (intent.hasExtra("content")) {
             write_content_et.setText(intent.getStringExtra("content"))
-           // write_tag_et.setText(getTag(intent.getStringArrayListExtra("tag")!!))
             getTag(intent.getStringArrayListExtra("tag"))
             write_post_btn.setOnClickListener{
                 if(nullCheck()){
